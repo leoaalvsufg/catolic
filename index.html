@@ -1473,7 +1473,9 @@ const MYSTERIES_DATA = {
 let currentLang = 'pt';
 let currentCat = 'all';
 let currentView = 'all'; // 'all' | 'rosary' | 'favorites'
-let currentRosaryMystery = 'gozosos';
+// Dom=0,Seg=1,Ter=2,Qua=3,Qui=4,Sex=5,Sáb=6
+const MYSTERY_BY_DAY = ['gloriosos','gozosos','dolorosos','gloriosos','luminosos','dolorosos','gozosos'];
+let currentRosaryMystery = MYSTERY_BY_DAY[new Date().getDay()];
 let currentPrayerId = null;
 let detailLang = 'pt';
 let searchText = '';
@@ -1519,7 +1521,10 @@ function setView(v){
   if(v==='rosary'){
     prayerList.style.display='none';
     rosaryGuide.style.display='flex';
-    topbarTitle.innerHTML = '<span>O Rosário Completo</span>';
+    const todayKey = MYSTERY_BY_DAY[new Date().getDay()];
+    const todayName = MYSTERIES_DATA[todayKey];
+    const dn = todayName[currentLang]||todayName.pt;
+    topbarTitle.innerHTML = `📿 <span>O Rosário</span> <span style="font-size:11px;color:var(--crimson2);font-family:var(--font-body);font-style:italic;margin-left:6px">· ${dn} hoje</span>`;
     renderRosaryGuide();
   } else {
     prayerList.style.display='grid';
@@ -1752,15 +1757,18 @@ function navigatePrayer(dir){
 // =====================================================================
 function renderRosaryGuide(){
   const guide = document.getElementById('rosaryGuide');
+  const todayMystery = MYSTERY_BY_DAY[new Date().getDay()];
   const m = MYSTERIES_DATA[currentRosaryMystery];
   const l = currentLang;
 
-  // Build mystery selector
-  const tabs = Object.entries(MYSTERIES_DATA).map(([k,v])=>`
-    <button class="mys-tab ${k===currentRosaryMystery?'active':''}" onclick="selectMystery('${k}')">
-      ${v[l]||v.pt}
+  // Build mystery selector with "Hoje" badge
+  const tabs = Object.entries(MYSTERIES_DATA).map(([k,v])=>{
+    const isToday = k === todayMystery;
+    return `<button class="mys-tab ${k===currentRosaryMystery?'active':''}" onclick="selectMystery('${k}')">
+      ${isToday ? `<span style="font-size:8px;background:var(--crimson);color:white;padding:1px 5px;border-radius:8px;margin-right:4px;letter-spacing:0.05em">HOJE</span>` : ''}${v[l]||v.pt}
       <span class="mys-day">${v.day[l]||v.day.pt}</span>
-    </button>`).join('');
+    </button>`;
+  }).join('');
 
   // Helper to make a clickable prayer step
   const step = (icon, name, sub, prayerId, count='')=>`
