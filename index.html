@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Orações Católicas · Catholic Prayers · Orationes Catholicae</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #080f1e;
+  --navy2: #0d1a30;
+  --navy3: #122040;
+  --gold: #c9a84c;
+  --gold2: #e6c46a;
+  --gold3: #f0d080;
+  --cream: #f5ead8;
+  --cream2: #ede0c8;
+  --crimson: #8b1c1c;
+  --crimson2: #a52424;
+  --silver: #b8c0d0;
+  --panel: rgba(255,255,255,0.03);
+  --border: rgba(201,168,76,0.2);
+  --border2: rgba(201,168,76,0.4);
+  --shadow: 0 8px 32px rgba(0,0,0,0.5);
+  --radius: 12px;
+  --font-title: 'Cinzel', serif;
+  --font-body: 'EB Garamond', serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background: var(--navy);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 18px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(139,28,28,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 80% at 50% 50%, rgba(13,26,48,0.9) 0%, transparent 100%);
+  pointer-events:none;z-index:0;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--navy2)}
+::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:3px}
+
+/* LAYOUT */
+.app{display:grid;grid-template-columns:280px 1fr;height:100vh;overflow:hidden;position:relative;z-index:1}
+@media(max-width:768px){.app{grid-template-columns:1fr;height:calc(100vh - 62px);overflow:hidden}}
+
+/* SIDEBAR */
+.sidebar{
+  background: linear-gradient(180deg, rgba(13,26,48,0.98) 0%, rgba(8,15,30,0.98) 100%);
+  border-right: 1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+}
+@media(max-width:768px){
+  .sidebar{position:relative;height:auto;max-height:45vh;border-right:none;border-bottom:1px solid var(--border)}
+}
+
+.sidebar-logo{
+  padding:28px 24px 20px;
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+.logo-cross{font-size:28px;margin-bottom:6px;filter:drop-shadow(0 0 8px rgba(201,168,76,0.5))}
+.logo-title{
+  font-family:var(--font-title);font-size:15px;letter-spacing:0.15em;
+  color:var(--gold);font-weight:700;text-transform:uppercase;
+  text-shadow:0 0 20px rgba(201,168,76,0.4);
+}
+.logo-sub{font-size:11px;color:var(--silver);letter-spacing:0.08em;margin-top:3px;opacity:0.7}
+
+.search-wrap{padding:16px 16px 8px}
+.search-box{
+  width:100%;background:rgba(255,255,255,0.05);
+  border:1px solid var(--border);border-radius:8px;
+  padding:9px 14px 9px 36px;color:var(--cream);
+  font-family:var(--font-body);font-size:15px;outline:none;
+  position:relative;transition:border-color .2s,background .2s;
+}
+.search-box::placeholder{color:rgba(245,234,216,0.4)}
+.search-box:focus{border-color:var(--gold2);background:rgba(255,255,255,0.08)}
+.search-icon{
+  position:absolute;left:28px;top:50%;transform:translateY(-50%);
+  color:var(--silver);font-size:14px;pointer-events:none;
+}
+.search-rel{position:relative}
+
+.sidebar-stats{
+  display:flex;gap:8px;padding:8px 16px;
+}
+.stat-chip{
+  flex:1;background:rgba(201,168,76,0.08);border:1px solid var(--border);
+  border-radius:6px;padding:6px 8px;text-align:center;
+}
+.stat-n{font-family:var(--font-title);font-size:16px;color:var(--gold2);font-weight:700}
+.stat-l{font-size:10px;color:var(--silver);letter-spacing:0.05em;text-transform:uppercase}
+
+.cat-list{
+  flex:1;overflow-y:auto;padding:8px 12px 80px;
+}
+.cat-header{
+  font-family:var(--font-title);font-size:9px;letter-spacing:0.2em;
+  color:rgba(201,168,76,0.5);text-transform:uppercase;
+  padding:10px 8px 6px;margin-top:4px;
+}
+.cat-btn{
+  width:100%;display:flex;align-items:center;gap:10px;
+  padding:9px 12px;border-radius:8px;border:none;
+  background:transparent;color:var(--cream2);cursor:pointer;
+  font-family:var(--font-body);font-size:15px;text-align:left;
+  transition:all .15s;position:relative;
+}
+.cat-btn:hover{background:rgba(201,168,76,0.08);color:var(--gold3)}
+.cat-btn.active{background:rgba(201,168,76,0.12);color:var(--gold2)}
+.cat-btn.active::before{
+  content:'';position:absolute;left:0;top:20%;bottom:20%;
+  width:3px;background:var(--gold);border-radius:2px;
+}
+.cat-icon{font-size:16px;width:22px;text-align:center}
+.cat-name{flex:1;font-size:14px}
+.cat-count{font-size:11px;color:var(--silver);opacity:0.6;
+  background:rgba(255,255,255,0.06);padding:2px 7px;border-radius:20px}
+
+/* MAIN */
+.main{display:flex;flex-direction:column;overflow:hidden;height:100%}
+
+.topbar{
+  background:rgba(8,15,30,0.95);border-bottom:1px solid var(--border);
+  padding:16px 28px;display:flex;align-items:center;gap:16px;
+  position:sticky;top:0;z-index:50;flex-shrink:0;
+  backdrop-filter:blur(12px);flex-wrap:wrap;
+}
+.topbar-title{
+  flex:1;
+  font-family:var(--font-title);font-size:14px;color:var(--silver);
+  letter-spacing:0.1em;text-transform:uppercase;
+}
+.topbar-title span{color:var(--gold2)}
+
+.lang-tabs{display:flex;gap:4px;background:rgba(255,255,255,0.05);padding:4px;border-radius:8px;border:1px solid var(--border)}
+.lang-tab{
+  padding:6px 14px;border-radius:6px;border:none;background:transparent;
+  font-family:var(--font-title);font-size:11px;letter-spacing:0.1em;
+  color:var(--silver);cursor:pointer;transition:all .15s;text-transform:uppercase;
+}
+.lang-tab:hover{color:var(--gold2)}
+.lang-tab.active{background:var(--gold);color:var(--navy);font-weight:700}
+
+.sort-btn{
+  padding:7px 14px;background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:8px;color:var(--silver);font-family:var(--font-title);
+  font-size:10px;letter-spacing:0.1em;cursor:pointer;transition:all .15s;
+}
+.sort-btn:hover{border-color:var(--gold2);color:var(--gold2)}
+
+/* PRAYER LIST */
+.prayer-list{
+  flex:1;min-height:0;overflow-y:auto;padding:20px 28px 80px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:12px;align-content:start;
+}
+@media(max-width:900px){.prayer-list{grid-template-columns:1fr}}
+@media(max-width:768px){.prayer-list{padding:14px 14px 80px}}
+
+.prayer-card{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:var(--radius);padding:18px 20px;
+  cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+}
+.prayer-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,168,76,0.0),rgba(201,168,76,0.04));
+  opacity:0;transition:opacity .2s;
+}
+.prayer-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.prayer-card:hover::after{opacity:1}
+.prayer-card.selected{border-color:var(--gold);background:rgba(201,168,76,0.07)}
+
+.card-num{
+  font-family:var(--font-title);font-size:10px;color:var(--gold);
+  letter-spacing:0.15em;opacity:0.7;margin-bottom:4px;
+}
+.card-title{font-family:var(--font-title);font-size:16px;color:var(--cream);font-weight:600;margin-bottom:2px}
+.card-sub{font-size:13px;color:var(--silver);opacity:0.7;font-style:italic}
+.card-preview{
+  font-size:13px;color:rgba(245,234,216,0.5);margin-top:8px;
+  line-height:1.5;overflow:hidden;display:-webkit-box;
+  -webkit-line-clamp:2;-webkit-box-orient:vertical;
+}
+.card-tag{
+  display:inline-block;margin-top:10px;
+  background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);
+  border-radius:20px;padding:2px 10px;font-size:11px;color:var(--gold);
+  font-family:var(--font-title);letter-spacing:0.05em;
+}
+
+/* PRAYER DETAIL */
+.prayer-detail{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(5,10,20,0.95);backdrop-filter:blur(16px);
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:24px 16px;overflow-y:auto;
+  animation:fadeIn .2s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.detail-card{
+  width:100%;max-width:760px;
+  background:linear-gradient(160deg, rgba(13,26,48,0.99) 0%, rgba(8,15,30,0.99) 100%);
+  border:1px solid var(--border2);border-radius:16px;
+  overflow:hidden;box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.1);
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.detail-header{
+  background:linear-gradient(135deg, rgba(201,168,76,0.1) 0%, rgba(139,28,28,0.08) 100%);
+  border-bottom:1px solid var(--border);
+  padding:28px 32px 24px;position:relative;
+}
+.detail-close{
+  position:absolute;top:20px;right:20px;
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  background:rgba(255,255,255,0.05);color:var(--silver);
+  font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+}
+.detail-close:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.1)}
+
+.detail-num{
+  font-family:var(--font-title);font-size:10px;letter-spacing:0.2em;
+  color:var(--gold);text-transform:uppercase;opacity:0.8;margin-bottom:6px;
+}
+.detail-title{
+  font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gold2);
+  font-weight:700;line-height:1.2;margin-bottom:4px;
+  text-shadow:0 0 30px rgba(201,168,76,0.3);
+}
+.detail-subtitle{font-size:16px;color:var(--silver);font-style:italic;opacity:0.8}
+
+.detail-lang-tabs{
+  display:flex;gap:6px;padding:16px 32px;
+  background:rgba(0,0,0,0.2);border-bottom:1px solid var(--border);
+  flex-wrap:wrap;
+}
+.detail-lang-tab{
+  padding:7px 18px;border-radius:20px;border:1px solid var(--border);
+  background:transparent;color:var(--silver);cursor:pointer;
+  font-family:var(--font-title);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  transition:all .15s;
+}
+.detail-lang-tab:hover{border-color:var(--gold);color:var(--gold2)}
+.detail-lang-tab.active{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700}
+
+.detail-body{padding:28px 32px 20px}
+.prayer-text{
+  font-family:var(--font-body);font-size:20px;line-height:1.9;
+  color:var(--cream);white-space:pre-wrap;
+  letter-spacing:0.01em;
+}
+.prayer-text.latin{font-style:italic;color:var(--cream2)}
+
+.detail-audio{
+  border-top:1px solid var(--border);padding:20px 32px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.audio-play{
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--crimson));
+  border:none;color:white;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;box-shadow:0 4px 16px rgba(201,168,76,0.3);
+  flex-shrink:0;
+}
+.audio-play:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(201,168,76,0.4)}
+.audio-play.playing{background:linear-gradient(135deg,var(--crimson),var(--crimson2))}
+
+.audio-info{flex:1}
+.audio-label{font-family:var(--font-title);font-size:11px;letter-spacing:0.1em;color:var(--gold);margin-bottom:2px}
+.audio-lang{font-size:13px;color:var(--silver);opacity:0.7}
+
+.audio-bar{
+  flex:2;height:4px;background:rgba(255,255,255,0.1);
+  border-radius:2px;position:relative;min-width:100px;
+}
+.audio-progress{height:100%;background:var(--gold);border-radius:2px;transition:width .1s}
+
+.rate-select{
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:6px;padding:5px 10px;color:var(--silver);
+  font-family:var(--font-title);font-size:11px;cursor:pointer;outline:none;
+}
+.rate-select option{background:var(--navy2)}
+
+.detail-nav{
+  display:flex;gap:8px;padding:12px 32px 24px;
+}
+.nav-btn{
+  flex:1;padding:10px 16px;border-radius:8px;
+  border:1px solid var(--border);background:rgba(255,255,255,0.04);
+  color:var(--silver);font-family:var(--font-title);font-size:11px;
+  letter-spacing:0.1em;cursor:pointer;transition:all .15s;text-align:center;
+}
+.nav-btn:hover{border-color:var(--gold2);color:var(--gold2);background:rgba(201,168,76,0.06)}
+.nav-btn:disabled{opacity:0.3;cursor:not-allowed}
+
+/* ─── BOTTOM NAVIGATION ─────────────────────────────────────────── */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;height:62px;z-index:500;
+  background:rgba(6,12,24,0.97);
+  border-top:1px solid rgba(201,168,76,0.25);
+  display:flex;
+  backdrop-filter:blur(20px);
+  box-shadow:0 -4px 30px rgba(0,0,0,0.6);
+}
+.bnav-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;border:none;background:transparent;color:var(--silver);
+  cursor:pointer;font-family:var(--font-title);font-size:9px;
+  letter-spacing:0.08em;text-transform:uppercase;transition:all .2s;
+  position:relative;padding:0;
+}
+.bnav-btn:hover{color:var(--gold2)}
+.bnav-btn.active{color:var(--gold)}
+.bnav-btn.active::before{
+  content:'';position:absolute;bottom:0;left:20%;right:20%;
+  height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  border-radius:2px 2px 0 0;
+}
+.bnav-icon{font-size:21px;line-height:1;transition:transform .2s}
+.bnav-btn:hover .bnav-icon{transform:scale(1.1)}
+.bnav-btn.active .bnav-icon{transform:scale(1.05)}
+.bnav-label{font-size:9px}
+.fav-badge{
+  position:absolute;top:5px;right:calc(50% - 22px);
+  background:var(--crimson);color:white;
+  font-size:9px;min-width:15px;height:15px;
+  border-radius:8px;display:none;align-items:center;justify-content:center;
+  padding:0 3px;font-family:var(--font-title);font-weight:700;
+  box-shadow:0 2px 6px rgba(139,28,28,0.5);
+}
+.fav-badge.show{display:flex}
+
+/* ─── FAVORITE BUTTON ───────────────────────────────────────────── */
+.card-fav{
+  position:absolute;top:10px;right:10px;z-index:2;
+  background:none;border:none;cursor:pointer;
+  font-size:17px;color:var(--silver);opacity:0.3;
+  transition:all .15s;padding:5px;line-height:1;
+}
+.card-fav:hover{opacity:0.8;color:var(--crimson2);transform:scale(1.2)}
+.card-fav.is-fav{opacity:1;color:var(--crimson);filter:drop-shadow(0 0 5px rgba(200,50,50,0.4))}
+.detail-fav{
+  position:absolute;top:20px;right:62px;
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid var(--border);background:rgba(255,255,255,0.05);
+  color:var(--silver);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+}
+.detail-fav:hover{border-color:var(--crimson2);color:var(--crimson2);background:rgba(139,28,28,0.1)}
+.detail-fav.is-fav{border-color:var(--crimson);color:var(--crimson);background:rgba(139,28,28,0.15)}
+
+/* ─── ROSARY GUIDE ──────────────────────────────────────────────── */
+.rosary-guide{display:flex;flex-direction:column;height:100%}
+.mystery-selector{
+  display:flex;gap:6px;flex-wrap:wrap;
+  padding:16px 28px 14px;
+  border-bottom:1px solid var(--border);
+  background:rgba(0,0,0,0.2);flex-shrink:0;
+}
+.mys-tab{
+  padding:7px 14px;border-radius:20px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--silver);font-family:var(--font-title);
+  font-size:10px;letter-spacing:0.1em;cursor:pointer;
+  transition:all .15s;text-transform:uppercase;
+}
+.mys-tab:hover{border-color:var(--gold2);color:var(--gold2)}
+.mys-tab.active{background:rgba(201,168,76,0.15);border-color:var(--gold);color:var(--gold);font-weight:700}
+.mys-day{opacity:0.5;font-size:9px}
+.rosary-scroll{flex:1;min-height:0;overflow-y:auto;padding:12px 28px 80px}
+.rosary-section-head{
+  font-family:var(--font-title);font-size:10px;letter-spacing:0.2em;
+  color:var(--gold);text-transform:uppercase;opacity:0.7;
+  padding:16px 0 8px;
+  border-bottom:1px solid rgba(201,168,76,0.12);margin-bottom:6px;
+}
+.rosary-step{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 12px;border-radius:8px;border:1px solid transparent;
+  margin-bottom:3px;transition:all .15s;
+}
+.rosary-step.clickable{cursor:pointer}
+.rosary-step.clickable:hover{border-color:var(--border2);background:rgba(201,168,76,0.05);padding-left:16px}
+.rosary-step.instruction{border-left:2px solid rgba(201,168,76,0.2);padding-left:12px;cursor:default}
+.rosary-step.mystery-hdr{
+  background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(139,28,28,0.05));
+  border-color:rgba(201,168,76,0.18);margin-top:4px;cursor:default;
+}
+.step-icon{font-size:16px;width:24px;text-align:center;flex-shrink:0}
+.step-body{flex:1}
+.step-name{font-size:14px;color:var(--cream2)}
+.step-sub{font-size:11px;color:var(--silver);opacity:0.6;font-style:italic;margin-top:1px}
+.step-count{font-family:var(--font-title);font-size:11px;color:var(--gold);margin-left:6px}
+.step-arr{font-size:15px;color:var(--silver);opacity:0.35;transition:opacity .15s}
+.rosary-step.clickable:hover .step-arr{opacity:0.8;color:var(--gold2)}
+
+/* EMPTY STATE */
+.empty{
+  grid-column:1/-1;text-align:center;padding:60px 20px;
+  color:var(--silver);opacity:0.5;
+}
+.empty-icon{font-size:48px;margin-bottom:12px}
+.empty-text{font-family:var(--font-title);font-size:14px;letter-spacing:0.1em}
+
+/* HEADER DIVIDER */
+.ornament{
+  text-align:center;font-size:16px;color:var(--gold);
+  opacity:0.5;letter-spacing:0.3em;margin:4px 0;
+}
+
+/* HIGHLIGHTED */
+mark{background:rgba(201,168,76,0.2);color:var(--gold2);border-radius:2px;padding:0 2px}
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-cross">✝</div>
+      <div class="logo-title">Orações Católicas</div>
+      <div class="logo-sub">Catholic Prayers · Orationes Catholicae</div>
+    </div>
+
+    <div class="search-wrap">
+      <div class="search-rel">
+        <span class="search-icon">🔍</span>
+        <input class="search-box" type="text" id="searchInput" placeholder="Buscar oração · Search prayer…" oninput="filterPrayers()"/>
+      </div>
+    </div>
+
+    <div class="sidebar-stats">
+      <div class="stat-chip">
+        <div class="stat-n" id="totalCount">—</div>
+        <div class="stat-l">Orações</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-n">3</div>
+        <div class="stat-l">Idiomas</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-n">🎧</div>
+        <div class="stat-l">Áudio</div>
+      </div>
+    </div>
+
+    <div class="cat-list" id="catList"></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">Todas as <span>Orações</span></div>
+      <div class="lang-tabs">
+        <button class="lang-tab active" onclick="setGlobalLang('pt')" id="gtab-pt">PT</button>
+        <button class="lang-tab" onclick="setGlobalLang('en')" id="gtab-en">EN</button>
+        <button class="lang-tab" onclick="setGlobalLang('la')" id="gtab-la">LA</button>
+      </div>
+    </div>
+    <div class="prayer-list" id="prayerList"></div>
+    <div class="rosary-guide" id="rosaryGuide" style="display:none"></div>
+  </main>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="prayer-detail" id="detailModal" style="display:none" onclick="handleModalClick(event)">
+  <div class="detail-card" id="detailCard">
+    <div class="detail-header">
+      <button class="detail-close" onclick="closeDetail()">✕</button>
+      <button class="detail-fav" id="detailFav" onclick="toggleFavoriteModal()">♡</button>
+      <div class="detail-num" id="detailNum"></div>
+      <div class="detail-title" id="detailTitle"></div>
+      <div class="detail-subtitle" id="detailSubtitle"></div>
+    </div>
+    <div class="detail-lang-tabs">
+      <button class="detail-lang-tab" onclick="setDetailLang('pt')" id="dtab-pt">🇧🇷 Português</button>
+      <button class="detail-lang-tab" onclick="setDetailLang('en')" id="dtab-en">🇺🇸 English</button>
+      <button class="detail-lang-tab active" onclick="setDetailLang('la')" id="dtab-la">⛪ Latim</button>
+    </div>
+    <div class="detail-body">
+      <div class="prayer-text" id="detailText"></div>
+    </div>
+    <div class="detail-audio">
+      <button class="audio-play" id="audioPlay" onclick="toggleAudio()">▶</button>
+      <div class="audio-info">
+        <div class="audio-label">ÁUDIO · AUDIO · AUDIO</div>
+        <div class="audio-lang" id="audioLangLabel">Português (pt-BR)</div>
+      </div>
+      <div class="audio-bar"><div class="audio-progress" id="audioBar" style="width:0%"></div></div>
+      <select class="rate-select" id="rateSelect">
+        <option value="0.7">Lento</option>
+        <option value="0.85" selected>Normal</option>
+        <option value="1.0">Rápido</option>
+      </select>
+    </div>
+    <div class="detail-nav">
+      <button class="nav-btn" id="prevBtn" onclick="navigatePrayer(-1)">← Anterior</button>
+      <button class="nav-btn" id="nextBtn" onclick="navigatePrayer(1)">Próxima →</button>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="bnav-btn active" id="bnav-all" onclick="setView('all')">
+    <span class="bnav-icon">✝</span>
+    <span class="bnav-label">Orações</span>
+  </button>
+  <button class="bnav-btn" id="bnav-rosary" onclick="setView('rosary')">
+    <span class="bnav-icon">📿</span>
+    <span class="bnav-label">Rosário</span>
+  </button>
+  <button class="bnav-btn" id="bnav-favs" onclick="setView('favorites')">
+    <span class="bnav-icon">♥</span>
+    <span class="bnav-label">Favoritos</span>
+    <span class="fav-badge" id="favBadge"></span>
+  </button>
+  <button class="bnav-btn" id="bnav-cats" onclick="toggleSidebar()">
+    <span class="bnav-icon">☰</span>
+    <span class="bnav-label">Categorias</span>
+  </button>
+</nav>
+
+<script>
+// =====================================================================
+// PRAYER DATA — 100+ Catholic Prayers in EN / PT / LA
+// =====================================================================
+const CATEGORIES = [
+  { id:'all',    icon:'✝',  en:'All Prayers',       pt:'Todas as Orações',    la:'Omnes Orationes'         },
+  { id:'basic',  icon:'📖', en:'Basic Prayers',     pt:'Orações Básicas',     la:'Orationes Fundamentales' },
+  { id:'marian', icon:'🌹', en:'Marian Prayers',    pt:'Orações Marianas',    la:'Orationes Marianae'      },
+  { id:'mass',   icon:'🕯', en:'Mass Prayers',      pt:'Orações da Missa',    la:'Orationes Missae'        },
+  { id:'virtue', icon:'❤',  en:'Acts of Virtue',    pt:'Atos de Virtude',     la:'Actus Virtutum'          },
+  { id:'rosary', icon:'📿', en:'The Rosary',        pt:'O Rosário',           la:'Rosarium'                },
+  { id:'saints', icon:'⭐', en:'Prayers to Saints', pt:'Orações aos Santos',  la:'Ad Sanctos'              },
+  { id:'daily',  icon:'☀',  en:'Daily Prayers',     pt:'Orações Diárias',     la:'Orationes Quotidianae'   },
+  { id:'special',icon:'🙏', en:'Special Occasions', pt:'Ocasiões Especiais',  la:'Pro Variis'              },
+];
+
+const PRAYERS = [
+// ── BASIC ─────────────────────────────────────────────────────────────
+{id:1,cat:'basic',
+ title:{en:'Our Father',pt:'Pai Nosso',la:'Pater Noster'},
+ text:{
+  en:`Our Father, Who art in Heaven,\nhallowed be Thy name;\nThy Kingdom come,\nThy will be done on earth as it is in Heaven.\nGive us this day our daily bread;\nand forgive us our trespasses\nas we forgive those who trespass against us;\nand lead us not into temptation,\nbut deliver us from evil.\nAmen.`,
+  pt:`Pai nosso que estais no céu,\nsantificado seja o Vosso nome;\nvenha a nós o Vosso reino;\nseja feita a Vossa vontade,\nassim na terra como no céu.\nO pão nosso de cada dia nos dai hoje;\nperdoai-nos as nossas ofensas,\nassim como nós perdoamos\na quem nos tem ofendido;\ne não nos deixeis cair em tentação,\nmas livrai-nos do mal.\nAmém.`,
+  la:`Pater noster, qui es in caelis,\nsanctificetur nomen tuum;\nadveniat regnum tuum;\nfiat voluntas tua,\nsicut in caelo et in terra.\nPanem nostrum quotidianum da nobis hodie;\net dimitte nobis debita nostra,\nsicut et nos dimittimus\ndebitoribus nostris;\net ne nos inducas in tentationem;\nsed libera nos a malo.\nAmen.`}},
+
+{id:2,cat:'basic',
+ title:{en:'Hail Mary',pt:'Ave Maria',la:'Ave Maria'},
+ text:{
+  en:`Hail Mary, full of grace,\nthe Lord is with thee;\nblessed art thou amongst women,\nand blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death.\nAmen.`,
+  pt:`Ave Maria, cheia de graça,\no Senhor é convosco;\nbendita sois vós entre as mulheres,\ne bendito é o fruto do vosso ventre, Jesus.\nSanta Maria, Mãe de Deus,\norai por nós pecadores,\nagora e na hora da nossa morte.\nAmém.`,
+  la:`Ave Maria, gratia plena,\nDominus tecum;\nbedicta tu in mulieribus,\net benedictus fructus ventris tui, Iesus.\nSancta Maria, Mater Dei,\nora pro nobis peccatoribus,\nnunc et in hora mortis nostrae.\nAmen.`}},
+
+{id:3,cat:'basic',
+ title:{en:'Glory Be',pt:'Glória ao Pai',la:'Gloria Patri'},
+ text:{
+  en:`Glory be to the Father,\nand to the Son,\nand to the Holy Spirit;\nas it was in the beginning,\nis now, and ever shall be,\nworld without end.\nAmen.`,
+  pt:`Glória ao Pai,\nao Filho\ne ao Espírito Santo;\ncomo era no princípio,\nagora e sempre,\npor todos os séculos dos séculos.\nAmém.`,
+  la:`Gloria Patri,\net Filio,\net Spiritui Sancto;\nsicut erat in principio,\net nunc et semper,\net in saecula saeculorum.\nAmen.`}},
+
+{id:4,cat:'basic',
+ title:{en:"Apostles' Creed",pt:'Credo dos Apóstolos',la:'Symbolum Apostolorum'},
+ text:{
+  en:`I believe in God,\nthe Father almighty,\nCreator of heaven and earth,\nand in Jesus Christ, his only Son, our Lord,\nwho was conceived by the Holy Spirit,\nborn of the Virgin Mary,\nsuffered under Pontius Pilate,\nwas crucified, died and was buried;\nhe descended into hell;\non the third day he rose again from the dead;\nhe ascended into heaven,\nand is seated at the right hand of God the Father almighty;\nfrom there he will come to judge the living and the dead.\nI believe in the Holy Spirit,\nthe holy catholic Church,\nthe communion of saints,\nthe forgiveness of sins,\nthe resurrection of the body,\nand life everlasting.\nAmen.`,
+  pt:`Creio em Deus Pai todo-poderoso,\nCriador do céu e da terra;\ne em Jesus Cristo,\nseu único Filho, nosso Senhor;\nque foi concebido pelo poder do Espírito Santo;\nnasceu da Virgem Maria;\npadeceu sob Pôncio Pilatos,\nfoi crucificado, morto e sepultado;\ndesceu à mansão dos mortos;\nressuscitou ao terceiro dia;\nsubiu aos céus,\nestá sentado à direita de Deus Pai todo-poderoso,\ndonde há de vir a julgar os vivos e os mortos.\nCreio no Espírito Santo,\nna santa Igreja católica,\nna comunhão dos santos,\nna remissão dos pecados,\nna ressurreição da carne\ne na vida eterna.\nAmém.`,
+  la:`Credo in Deum Patrem omnipotentem,\nCreatorem caeli et terrae;\net in Iesum Christum,\nFilium eius unicum, Dominum nostrum;\nqui conceptus est de Spiritu Sancto,\nnatus ex Maria Virgine;\npassus sub Pontio Pilato,\ncrucifixus, mortuus et sepultus;\ndescendit ad inferos;\ntertia die resurrexit a mortuis;\nascendit ad caelos;\nsedet ad dexteram Dei Patris omnipotentis;\ninde venturus est iudicare vivos et mortuos.\nCredo in Spiritum Sanctum,\nsanctam Ecclesiam catholicam,\nsanctorum communionem,\nremissionem peccatorum,\ncarnis resurrectionem,\nvitam aeternam.\nAmen.`}},
+
+{id:5,cat:'basic',
+ title:{en:'Act of Contrition',pt:'Ato de Contrição',la:'Actus Contritionis'},
+ text:{
+  en:`O my God, I am heartily sorry\nfor having offended Thee,\nand I detest all my sins,\nbecause I dread the loss of heaven and the pains of hell;\nbut most of all because they offend Thee, my God,\nWho art all good and deserving of all my love.\nI firmly resolve, with the help of Thy grace,\nto confess my sins, to do penance,\nand to amend my life.\nAmen.`,
+  pt:`Meu Deus, estou arrependido\nde todos os meus pecados,\nnão só porque com eles mereço as penas do inferno,\nmas principalmente porque Vos ofendi,\nsumo Bem e meu extremoso Pai,\nque tanto me amais e tão digno sois de ser amado.\nTenho firme propósito,\ncom o auxílio da Vossa graça,\nde não Vos tornar a ofender,\ne de evitar as ocasiões próximas de pecado.\nAmém.`,
+  la:`Deus meus, ex toto corde poenitet me\nomnium meorum peccatorum,\neaque detestor,\nquia peccando, non solum poenas a Te iuste statutas\npromeritus sum,\nsed praesertim quia offendi Te,\nsummum bonum ac dignum\nqui super omnia diligaris.\nIdeo firmiter propono,\nadiuvante gratia Tua,\nde cetero me non peccaturum\npeccandique occasiones proximas fugiturum.\nAmen.`}},
+
+{id:6,cat:'basic',
+ title:{en:'Prayer to Guardian Angel',pt:'Oração ao Anjo da Guarda',la:'Ad Angelum Custodem'},
+ text:{
+  en:`Angel of God,\nmy guardian dear,\nto whom God's love commits me here,\never this day be at my side,\nto light and guard, to rule and guide.\nAmen.`,
+  pt:`Anjo de Deus,\nmeu zeloso guardador,\na quem a piedade divina\nme confiou:\nilumina-me, guarda-me,\nrege-me e governa-me.\nAmém.`,
+  la:`Angele Dei,\nqui custos es mei,\nme tibi commissum pietate superna,\nhac nocte (hodie) illumina, custodi,\nrege et guberna.\nAmen.`}},
+
+{id:7,cat:'basic',
+ title:{en:'Confiteor',pt:'Confesso',la:'Confiteor'},
+ text:{
+  en:`I confess to almighty God\nand to you, my brothers and sisters,\nthat I have greatly sinned\nin my thoughts and in my words,\nin what I have done\nand in what I have failed to do,\nthrough my fault,\nthrough my fault,\nthrough my most grievous fault;\ntherefore I ask blessed Mary ever-Virgin,\nall the Angels and Saints,\nand you, my brothers and sisters,\nto pray for me to the Lord our God.`,
+  pt:`Confesso a Deus Todo-Poderoso\ne a vós, irmãos e irmãs,\nque pequei muitas vezes\npor pensamentos e palavras,\natos e omissões,\npor minha culpa,\nminha culpa,\nminha tão grande culpa.\nPeço à Virgem Maria,\naos anjos, aos santos\ne a vós, irmãos e irmãs,\nque rogueis por mim\na Deus nosso Senhor.`,
+  la:`Confiteor Deo omnipotenti\net vobis, fratres,\nquia peccavi nimis\ncogitation, verbo, opere et omissione:\nmea culpa, mea culpa,\nmea maxima culpa.\nIdeo precor beatam Mariam semper Virginem,\nomnes Angelos et Sanctos,\net vos, fratres,\norare pro me\nad Dominum Deum nostrum.`}},
+
+{id:8,cat:'basic',
+ title:{en:'Grace Before Meals',pt:'Bênção da Mesa',la:'Benedictio Mensae'},
+ text:{
+  en:`Bless us, O Lord,\nand these Thy gifts,\nwhich we are about to receive\nfrom Thy bounty,\nthrough Christ our Lord.\nAmen.`,
+  pt:`Bendize-nos, Senhor,\ne a estes alimentos\nque vamos receber\nda Vossa bondade,\npor Cristo Senhor nosso.\nAmém.`,
+  la:`Benedic, Domine, nos\net haec tua dona\nquae de tua largitate\nsumus sumpturi,\nper Christum Dominum nostrum.\nAmen.`}},
+
+{id:9,cat:'basic',
+ title:{en:'Grace After Meals',pt:'Ação de Graças após a Refeição',la:'Gratiarum Actio Post Cibum'},
+ text:{
+  en:`We give Thee thanks\nfor all Thy benefits,\nO almighty God,\nwho livest and reignest for ever;\nand may the souls of the faithful departed,\nthrough the mercy of God,\nrest in peace.\nAmen.`,
+  pt:`Graças Te damos\npor todos os Teus benefícios,\nó Deus todo-poderoso,\nque vives e reinas para sempre;\ne as almas dos fiéis defuntos,\npela misericórdia de Deus,\ndescansem em paz.\nAmém.`,
+  la:`Agimus tibi gratias\npro universis beneficiis tuis,\nOmnipotens Deus,\nqui vivis et regnas in saecula saeculorum;\net animae fidelium defunctorum\nper misericordiam Dei\nrequiescant in pace.\nAmen.`}},
+
+{id:10,cat:'basic',
+ title:{en:'Morning Offering',pt:'Oferecimento da Manhã',la:'Oblatio Matutina'},
+ text:{
+  en:`O Jesus, through the Immaculate Heart of Mary,\nI offer you my prayers, works, joys and sufferings\nof this day in union with the Holy Sacrifice of the Mass\nthroughout the world.\nI offer them for all the intentions of your Sacred Heart:\nthe salvation of souls, reparation for sin,\nthe reunion of all Christians.\nI offer them for the intentions\nof our bishops and of all Apostles of Prayer,\nand in particular for those recommended\nby our Holy Father this month.\nAmen.`,
+  pt:`Ó Jesus, pelo Coração Imaculado de Maria,\nVos ofereço todas as minhas orações, obras,\njoias e sofrimentos deste dia,\nem união com o Sacrifício da Santa Missa\ncelebrado em todo o mundo.\nOferendo por todas as intenções\ndo Vosso Sagrado Coração:\na salvação das almas,\na reparação dos pecados\ne a união de todos os cristãos.\nOfereço em particular pela intenção apostólica\nrecomendada neste mês por nosso Santo Padre.\nAmém.`,
+  la:`O Iesu, per Cor Immaculatum Mariae,\noffero tibi orationes, opera,\nguadia et passiones diei huius\nin unione cum Sacrificio Missae\nper universum orbem celebratae.\nOffero pro omnibus intentionibus\nCordis Tui Sacratissimi:\npro salute animarum,\npro reparatione peccatorum\net pro unitate omnium christianorum.\nAmen.`}},
+
+{id:11,cat:'basic',
+ title:{en:'Evening Prayer',pt:'Oração da Noite',la:'Completorium'},
+ text:{
+  en:`Watch, O Lord,\nwith those who wake or watch or weep tonight,\nand give Your angels and saints\ncharge over those who sleep.\nTend Your sick ones, O Lord Christ.\nRest Your weary ones.\nBless Your dying ones.\nSoothe Your suffering ones.\nPity Your afflicted ones.\nShield Your joyous ones.\nAnd all for Your love's sake.\nAmen.`,
+  pt:`Velai, Senhor,\npor aqueles que velam, ou assistem, ou choram esta noite;\nedai a Vossos anjos e santos\ncuidado sobre aqueles que dormem.\nTendei carinhosamente Vossos enfermos, Senhor Cristo.\nDai repouso aos Vossos cansados.\nAbençoai os que estão à hora da morte.\nSuavizai os sofrimentos dos que padecem.\nPiedade para com os aflitos.\nProtegei os alegres.\nE isso tudo pelo Vosso amor.\nAmém.`,
+  la:`Custodi, Domine,\nvigiliantes, ne dormiant in morte;\ncustos meus, vide vigilias meas.\nTuere infirmos Tuos, Christe Domine.\nRecrea fessos.\nBenedic morituris.\nSolare dolentes.\nMiserere afflictis.\nProtege gaudentes.\nOmnia propter amorem Tuum.\nAmen.`}},
+
+{id:12,cat:'basic',
+ title:{en:'Eternal Rest',pt:'Eterno Descanso',la:'Requiem Aeternam'},
+ text:{
+  en:`Eternal rest grant unto them, O Lord,\nand let perpetual light shine upon them.\nMay they rest in peace.\nAmen.`,
+  pt:`Dai-lhes, Senhor, o eterno descanso\ne brilhe para eles a luz perpétua.\nDescansem em paz.\nAmém.`,
+  la:`Requiem aeternam dona eis, Domine,\net lux perpetua luceat eis.\nRequiescant in pace.\nAmen.`}},
+
+{id:13,cat:'basic',
+ title:{en:'Prayer Before a Crucifix',pt:'Oração Diante do Crucifixo',la:'Ad Crucem'},
+ text:{
+  en:`Look down upon me, good and gentle Jesus,\nwhile before Thy face I humbly kneel,\nand with burning soul\npray and beseech Thee\nto fix deep in my heart\nlively sentiments of faith, hope and charity,\ntrue contrition for my sins,\nand a firm purpose of amendment;\nwhile I contemplate\nwith great love and tender pity\nThy five wounds,\npondering over them within me,\ncalling to mind the words\nwhich David Thy prophet said of Thee,\nmy good Jesus:\n"They have pierced my hands and my feet;\nthey have numbered all my bones."\nAmen.`,
+  pt:`Olhai-me com bondade e benignidade, ó bom Jesus,\naqui ajoelhado humildemente diante de Vós,\ne com a alma ardente vos peço\nque imprimais no meu coração\nvivos sentimentos de fé, esperança e caridade,\nverdadeiro arrependimento dos meus pecados\ne firme propósito de emenda;\nenquanto contemplo, com grande amor e ternura,\nas vossas cinco chagas,\ntendo diante dos olhos\nas palavras que o profeta David disse de Vós,\nó Jesus meu:\n"Perfuraram minhas mãos e meus pés;\ncontaram todos os meus ossos."\nAmém.`,
+  la:`Aspice in me, bone et dulcis Iesu,\ndum coram facie tua\nme abiecto in genua\nferventi animo te oro atque obsecro,\nut imprimere velis cordi meo\nvivos fidei, spei et charitatis sensus,\nveram peccatorum meorum paenitentiam,\nfirmumque emendandi voluntatem;\ndum magno animi affectu et dolore\ntua quinque vulnera mecum ipse considero,\nillud prae oculis habens,\nquod iam in ore ponebat tuo David propheta\nde te, O bone Iesu:\n"Foderunt manus meas et pedes meos;\ndinnumeraverunt omnia ossa mea."\nAmen.`}},
+
+{id:14,cat:'basic',
+ title:{en:'Nicene Creed',pt:'Credo de Niceia',la:'Symbolum Nicaenum'},
+ text:{
+  en:`I believe in one God,\nthe Father almighty,\nmaker of heaven and earth,\nof all things visible and invisible.\nI believe in one Lord Jesus Christ,\nthe Only Begotten Son of God,\nborn of the Father before all ages.\nGod from God, Light from Light,\ntrue God from true God,\nbegotten, not made, consubstantial with the Father;\nthrough him all things were made.\nFor us men and for our salvation\nhe came down from heaven,\nand by the Holy Spirit was incarnate of the Virgin Mary,\nand became man.\nFor our sake he was crucified under Pontius Pilate,\nhe suffered death and was buried,\nand rose again on the third day\nin accordance with the Scriptures.\nHe ascended into heaven\nand is seated at the right hand of the Father.\nHe will come again in glory\nto judge the living and the dead\nand his kingdom will have no end.\nI believe in the Holy Spirit, the Lord, the giver of life,\nwho proceeds from the Father and the Son,\nwho with the Father and the Son is adored and glorified,\nwho has spoken through the prophets.\nI believe in one, holy, catholic and apostolic Church.\nI confess one Baptism for the forgiveness of sins\nand I look forward to the resurrection of the dead\nand the life of the world to come.\nAmen.`,
+  pt:`Creio em um só Deus,\nPai todo-poderoso,\ncriador do céu e da terra,\ndas coisas visíveis e invisíveis.\nCreio em um só Senhor, Jesus Cristo,\nFilho Unigênito de Deus,\ngerado pelo Pai antes de todos os séculos;\nDeus de Deus, Luz da Luz,\nDeus verdadeiro de Deus verdadeiro,\ngerado, não criado, consubstancial ao Pai.\nPor ele foram feitas todas as coisas.\nPor nós, homens, e para nossa salvação,\ndesceu dos céus e se encarnou\npelo Espírito Santo no seio da Virgem Maria\ne se fez homem.\nFoi crucificado por nós sob Pôncio Pilatos,\npadeceu e foi sepultado.\nRessuscitou ao terceiro dia,\ncomo predisseram as Escrituras.\nSubiu aos céus, onde está sentado\nà direita do Pai.\nE de novo há de vir em glória\npara julgar os vivos e os mortos;\ne o seu reino não terá fim.\nCreio no Espírito Santo,\nSenhor que dá a vida e que procede do Pai e do Filho,\ne com o Pai e o Filho é adorado e glorificado;\ne que falou pelos profetas.\nCreio na Igreja Una, Santa, Católica e Apostólica.\nProfesso um só Batismo para a remissão dos pecados.\nEspero a ressurreição dos mortos\ne a vida do século que há de vir.\nAmém.`,
+  la:`Credo in unum Deum,\nPatrem omnipotentem,\nfactorem caeli et terrae,\nvisibilium omnium et invisibilium.\nEt in unum Dominum Iesum Christum,\nFilium Dei unigenitum,\net ex Patre natum ante omnia saecula.\nDeum de Deo, lumen de lumine,\nDeum verum de Deo vero,\ngenitum, non factum, consubstantialem Patri;\nper quem omnia facta sunt.\nQui propter nos homines et propter nostram salutem\ndescendit de caelis.\nEt incarnatus est de Spiritu Sancto\nex Maria Virgine,\net homo factus est.\nCrucifixus etiam pro nobis sub Pontio Pilato,\npassus et sepultus est.\nEt resurrexit tertia die, secundum Scripturas.\nEt ascendit in caelum, sedet ad dexteram Patris.\nEt iterum venturus est cum gloria\niudicare vivos et mortuos:\ncuius regni non erit finis.\nEt in Spiritum Sanctum, Dominum et vivificantem:\nqui ex Patre Filioque procedit.\nQui cum Patre et Filio simul adoratur et conglorificatur:\nqui locutus est per prophetas.\nEt unam, sanctam, catholicam et apostolicam Ecclesiam.\nConfiteor unum baptisma in remissionem peccatorum.\nEt expecto resurrectionem mortuorum.\nEt vitam venturi saeculi.\nAmen.`}},
+
+{id:15,cat:'basic',
+ title:{en:'Spiritual Communion',pt:'Comunhão Espiritual',la:'Communio Spiritualis'},
+ text:{
+  en:`My Jesus, I believe that You are present\nin the Most Holy Sacrament.\nI love You above all things\nand I desire to receive You into my soul.\nSince I cannot at this moment\nreceive You sacramentally,\ncome at least spiritually into my heart.\nI embrace You as if You were already there,\nand unite myself wholly to You.\nNever permit me to be separated from You.\nAmen.`,
+  pt:`Meu Jesus, creio que estais\npresente no Santíssimo Sacramento.\nAmo-Vos sobre todas as coisas\ne desejo receber-Vos em minha alma.\nJá que não posso agora\nreceber-Vos sacramentalmente,\nvinde ao menos espiritualmente ao meu coração.\nAbraço-Vos como se já tivésseis vindo,\ne uno-me inteiramente a Vós.\nJamais permitais que me separe de Vós.\nAmém.`,
+  la:`Mi Iesu, credo te praesentes esse\nin Sanctissimo Sacramento.\nAmo te supra omnia\net desidero te in anima mea recipere.\nCum nunc sacramentaliter\nte recipere nequeam,\nveni saltem spiritualiter in cor meum.\nTe amplector quasi iam advenisses,\nmeque tibi totum unio.\nNe permittas me unquam a te separari.\nAmen.`}},
+
+// ── MARIAN ─────────────────────────────────────────────────────────────
+{id:16,cat:'marian',
+ title:{en:'Hail Holy Queen',pt:'Salve Rainha',la:'Salve Regina'},
+ text:{
+  en:`Hail, holy Queen, Mother of Mercy,\nhail, our life, our sweetness, and our hope.\nTo thee do we cry, poor banished children of Eve;\nto thee do we send up our sighs,\nmourning and weeping in this vale of tears.\nTurn then, most gracious advocate,\nthine eyes of mercy toward us,\nand after this our exile\nshow unto us the blessed fruit of thy womb, Jesus.\nO clement, O loving, O sweet Virgin Mary.\nAmen.`,
+  pt:`Salve, Rainha, Mãe de misericórdia,\nvida, doçura e esperança nossa, salve!\nA Vós bradamos, os degredados filhos de Eva;\na Vós suspiramos, gemendo e chorando\nneste vale de lágrimas.\nEia, pois, advogada nossa,\nesses Vossos olhos misericordiosos\na nós volvei;\ne depois deste desterro\nmostrai-nos Jesus, o bendito fruto\ndo vosso ventre.\nÓ clemente, ó piedosa, ó doce Virgem Maria!\nAmém.`,
+  la:`Salve, Regina, Mater misericordiae,\nvita, dulcedo et spes nostra, salve!\nAd te clamamus, exsules filii Hevae;\nad te suspiramus, gementes et flentes\nin hac lacrimarum valle.\nEia ergo, advocata nostra,\nillos tuos misericordes oculos\nad nos converte;\net Iesum, benedictum fructum ventris tui,\nnobis post hoc exsilium ostende.\nO clemens, o pia, o dulcis Virgo Maria.\nAmen.`}},
+
+{id:17,cat:'marian',
+ title:{en:'Memorare',pt:'Memorare',la:'Memorare'},
+ text:{
+  en:`Remember, O most gracious Virgin Mary,\nthat never was it known\nthat anyone who fled to thy protection,\nimplored thy help, or sought thy intercession\nwas left unaided.\nInspired by this confidence,\nI fly unto thee, O Virgin of virgins, my Mother;\nto thee do I come, before thee I stand,\nsinful and sorrowful.\nO Mother of the Word Incarnate,\ndespise not my petitions,\nbut in thy mercy hear and answer me.\nAmen.`,
+  pt:`Lembrai-vos, ó Santíssima Virgem Maria,\nque jamais se ouviu dizer\nque algum daqueles que recorreram\nà vossa proteção,\nimplorou o vosso socorro\nou buscou a vossa mediação\ntivesse sido abandonado.\nAnimado por este pensamento,\nrecorro a Vós, ó Mãe, Virgem das virgens,\na Vós venho, diante de Vós me apresento,\npecador, contrito.\nÓ Mãe do Verbo Encarnado,\nnão desprezeis minhas súplicas,\nantes, em vossa clemência,\nescutai-as e atendei-as.\nAmém.`,
+  la:`Memorare, O piissima Virgo Maria,\nnon esse auditum a saeculo\nquemquam ad tua currentem praesidia,\ntua implorantem auxilia,\ntua petentem suffragia,\nesse derelictum.\nEgo tali animatus confidentia,\nad te, Virgo Virginum, Mater, curro;\nad te venio, coram te gemens peccator assisto.\nNoli, Mater Verbi, verba mea despicere;\nsed audi propitia et exaudi.\nAmen.`}},
+
+{id:18,cat:'marian',
+ title:{en:'Angelus',pt:'Angelus',la:'Angelus'},
+ text:{
+  en:`V. The Angel of the Lord declared unto Mary.\nR. And she conceived of the Holy Spirit.\nHail Mary…\nV. Behold the handmaid of the Lord.\nR. Be it done unto me according to Thy word.\nHail Mary…\nV. And the Word was made flesh.\nR. And dwelt among us.\nHail Mary…\nV. Pray for us, O Holy Mother of God.\nR. That we may be made worthy of the promises of Christ.\n\nLet us pray:\nPour forth, we beseech Thee, O Lord, Thy grace into our hearts;\nthat we, to whom the Incarnation of Christ Thy Son\nwas made known by the message of an Angel,\nmay by His Passion and Cross be brought to the glory of His Resurrection.\nThrough the same Christ Our Lord.\nAmen.`,
+  pt:`V. O Anjo do Senhor anunciou a Maria.\nR. E ela concebeu pelo poder do Espírito Santo.\nAve Maria…\nV. Eis aqui a escrava do Senhor.\nR. Faça-se em mim segundo a Vossa palavra.\nAve Maria…\nV. E o Verbo se fez carne.\nR. E habitou entre nós.\nAve Maria…\nV. Rogai por nós, Santa Mãe de Deus.\nR. Para que sejamos dignos das promessas de Cristo.\n\nOremos:\nInfundi, Senhor, a Vossa graça em nossas almas;\npara que nós, que conhecemos a Encarnação de Cristo Vosso Filho\npelo anúncio do Anjo,\npossamos, pela sua Paixão e sua Cruz,\nchegar à glória da Ressurreição.\nPelo mesmo Cristo Nosso Senhor.\nAmém.`,
+  la:`V. Angelus Domini nuntiavit Mariae.\nR. Et concepit de Spiritu Sancto.\nAve Maria…\nV. Ecce Ancilla Domini.\nR. Fiat mihi secundum Verbum tuum.\nAve Maria…\nV. Et Verbum caro factum est.\nR. Et habitavit in nobis.\nAve Maria…\nV. Ora pro nobis, Sancta Dei Genitrix.\nR. Ut digni efficiamur promissionibus Christi.\n\nOremus:\nGratiam tuam, quaesumus Domine,\nmentibus nostris infunde;\nut qui angelo nuntiante\nChristi Filii tui incarnationem cognovimus,\nper passionem eius et crucem\nad resurrectionis gloriam perducamur.\nPer eundem Christum Dominum nostrum.\nAmen.`}},
+
+{id:19,cat:'marian',
+ title:{en:'Regina Caeli',pt:'Rainha do Céu',la:'Regina Caeli'},
+ text:{
+  en:`Queen of Heaven, rejoice, alleluia!\nFor He whom you did merit to bear, alleluia!\nHas risen as He said, alleluia!\nPray for us to God, alleluia!\n\nV. Rejoice and be glad, O Virgin Mary, alleluia!\nR. For the Lord has truly risen, alleluia!\n\nLet us pray:\nO God, who gave joy to the world\nthrough the resurrection of Thy Son, our Lord Jesus Christ,\ngrant, we beseech Thee,\nthat through the intercession of the Virgin Mary, His Mother,\nwe may obtain the joys of everlasting life.\nThrough the same Christ our Lord.\nAmen.`,
+  pt:`Alegra-te, Rainha do Céu! Aleluia!\nPois aquele que merestes conter, Aleluia!\nComo disse, ressuscitou, Aleluia!\nOra a Deus por nós, Aleluia!\n\nV. Alegra-te e exulta, Virgem Maria, Aleluia!\nR. Pois o Senhor verdadeiramente ressuscitou, Aleluia!\n\nOremos:\nÓ Deus, que pelo meio da Ressurreição\nde Teu Filho Nosso Senhor Jesus Cristo\nalegraste o mundo inteiro,\nconcedei-nos, pedimos,\nalcançar as alegrias da vida eterna,\npela intercessão de Sua Mãe, a Virgem Maria.\nPelo mesmo Cristo Nosso Senhor.\nAmém.`,
+  la:`Regina caeli, laetare, alleluia!\nQua meruisti portare, alleluia!\nResurrexit sicut dixit, alleluia!\nOra pro nobis Deum, alleluia!\n\nV. Gaude et laetare, Virgo Maria, alleluia!\nR. Quia surrexit Dominus vere, alleluia!\n\nOremus:\nDeus, qui per resurrectionem Filii tui\nDomini nostri Iesu Christi\nmundum laetificare dignatus es:\npraesta, quaesumus,\nut per eius Genetricem Virginem Mariam\nperpetua capere gaudia.\nPer eundem Christum Dominum nostrum.\nAmen.`}},
+
+{id:20,cat:'marian',
+ title:{en:'The Magnificat',pt:'Magnificat',la:'Magnificat'},
+ text:{
+  en:`My soul proclaims the greatness of the Lord,\nmy spirit rejoices in God my Savior\nfor he has looked with favor on his humble servant.\nFrom this day all generations will call me blessed:\nthe Almighty has done great things for me,\nand holy is his Name.\nHe has mercy on those who fear him\nin every generation.\nHe has shown the strength of his arm,\nhe has scattered the proud in their conceit.\nHe has cast down the mighty from their thrones,\nand has lifted up the humble.\nHe has filled the hungry with good things,\nand the rich he has sent away empty.\nHe has come to the help of his servant Israel\nfor he has remembered his promise of mercy,\nthe promise he made to our fathers,\nto Abraham and his children for ever.\nAmen.`,
+  pt:`A minha alma glorifica o Senhor,\ne o meu espírito exulta em Deus, meu Salvador!\nPorque ele olhou para a humildade de sua serva.\nDoravante todas as gerações me chamarão bem-aventurada,\nporque o Todo-Poderoso fez grandes coisas em meu favor.\nSeu nome é santo,\ne sua misericórdia se estende de geração em geração\nsobre aqueles que o temem.\nMostrou o poder do seu braço,\ndispersou os orgulhosos em seus pensamentos.\nDerrubou os poderosos de seus tronos\ne exaltou os humildes.\nEncheu de bens os famintos\ne despediu os ricos com as mãos vazias.\nAmparou Israel, seu servo,\nlembrado da sua misericórdia —\ncomo tinha prometido a nossos pais —\nem favor de Abraão e de seus descendentes para sempre.\nAmém.`,
+  la:`Magnificat anima mea Dominum,\net exsultavit spiritus meus\nin Deo salutari meo.\nQua respexit humilitatem ancillae suae;\necce enim ex hoc beatam me dicent\nomnes generationes.\nQua fecit mihi magna qui potens est,\net sanctum nomen eius,\net misericordia eius in progenies et progenies\ntimentibus eum.\nFecit potentiam in brachio suo,\ndispersit superbos mente cordis sui.\nDeposuit potentes de sede\net exaltavit humiles.\nEsurientes implevit bonis\net divites dimisit inanes.\nSuscepit Israel puerum suum,\nrecordatus misericordiae suae,\nsicut locutus est ad patres nostros,\nAbraham et semini eius in saecula.\nAmen.`}},
+
+{id:21,cat:'marian',
+ title:{en:'Sub Tuum Praesidium',pt:'Sob Vossa Proteção',la:'Sub Tuum Praesidium'},
+ text:{
+  en:`We fly to your protection,\nO Holy Mother of God;\ndo not despise our petitions\nin our necessities,\nbut deliver us always\nfrom all dangers,\nO glorious and blessed Virgin.\nAmen.`,
+  pt:`Sob vossa proteção nos acolhemos,\nSanta Mãe de Deus;\nnão desprezeis as nossas súplicas\nem nossas necessidades,\nmas livrai-nos sempre\nde todos os perigos,\nó Virgem gloriosa e bendita.\nAmém.`,
+  la:`Sub tuum praesidium confugimus,\nSancta Dei Genitrix;\nnostras deprecationes ne despicias\nin necessitatibus,\nsed a periculis cunctis\nlibera nos semper,\nVirgo gloriosa et benedicta.\nAmen.`}},
+
+{id:22,cat:'marian',
+ title:{en:'Prayer to Our Lady of Fatima',pt:'Oração a Nossa Senhora de Fátima',la:'Ad Dominam Nostram Fatimensis'},
+ text:{
+  en:`O Most Holy Virgin Mary, Queen of the Most Holy Rosary,\nyou were pleased to appear to the children of Fatima\nand reveal a glorious message.\nWe implore you, inspire in our hearts\na fervent love for the recitation of the Rosary.\nBy meditating on its mysteries\nmay we receive its fruits\nand obtain peace for the world,\nthe conversion of sinners,\nand the favor we ask of you.\nAmen.`,
+  pt:`Ó Santíssima Virgem Maria, Rainha do Santo Rosário,\nvós que vos dignastes aparecer em Fátima\ne revelar a três pastorinhos ricas mensagens do Céu;\nolhai misericordiosa para nossa súplica\ne acendei em nossos corações\no amor fervoroso da oração do Rosário.\nPela meditação dos seus mistérios\nalcançai-nos frutos de graça\nna cura de todos os males que afligem o mundo,\na conversão dos pecadores\ne o favor especial que te pedimos.\nAmém.`,
+  la:`O Sanctissima Virgo Maria,\nRegina Sanctissimi Rosarii,\nquae in Fatima apparere dignata es\net tribus pastoribus\nmessagium caeleste revelare:\nrespectu nostrae supplicationis\namoris fervorem Rosarii\nin cordibus nostris accende.\nPer illius mysteria considerando\ngratiae fructus nobis impetres\npro mundi salute\npeccatorumque conversione.\nAmen.`}},
+
+{id:23,cat:'marian',
+ title:{en:'Prayer to Our Lady of Guadalupe',pt:'Oração a Nossa Senhora de Guadalupe',la:'Ad Dominam Nostram Guadalupensem'},
+ text:{
+  en:`Our Lady of Guadalupe,\nmystical rose,\nmake intercession for holy Church,\nprotect the Sovereign Pontiff,\nhelp all those who invoke thee\nin their necessities,\nand since thou art the ever-Virgin Mary\nand Mother of the true God,\nobtain for us from thy most holy Son\nthe grace of keeping our faith,\nsweet hope in the midst of the bitterness of life,\nburing charity, and the precious gift of final perseverance.\nAmen.`,
+  pt:`Nossa Senhora de Guadalupe,\nrosa mística,\nintercedei pela Santa Igreja,\nprotegei o Soberano Pontífice,\najudai todos quantos vos invocam\nnecessidades,\ne como sois a sempre Virgem Maria\ne Mãe do verdadeiro Deus,\nobtendes de vosso Santíssimo Filho\na graça de conservarmos a fé,\na doce esperança no meio das amarguras da vida,\na caridade ardente\ne o precioso dom da perseverança final.\nAmém.`,
+  la:`Domina Nostra Guadalupensis,\nrosa mystica,\npro sancta Ecclesia intercede,\nSummum Pontificem protege,\nomnibus te invocantibus in necessitatibus succurre;\nquoniam tu es semper Virgo Maria\net Mater veri Dei,\na Filio tuo Sanctissimo nobis impetres\ngratiam fidei servandae,\ndulcis spei in amaritudinibus vitae,\ncaritatem ardentem\net donum perseverantiae finalis.\nAmen.`}},
+
+{id:24,cat:'marian',
+ title:{en:"Three Hail Mary's",pt:'Três Ave-Marias',la:'Tres Ave Mariae'},
+ text:{
+  en:`O Mary, my Mother, I offer you\nthese three Hail Marys in honor of\nthe great privilege which God gave you\nin making you the Immaculate Virgin.\nGuard and protect my purity of soul and body.\nAve Maria (×3)`,
+  pt:`Ó Maria, minha Mãe, ofereço-te\nestas três Ave-Marias em honra\ndo grande privilégio que Deus te concedeu\nao te fazer Virgem Imaculada.\nGuarda e protege a minha pureza de alma e de corpo.\nAve Maria (×3)`,
+  la:`O Maria, Mater mea, tibi offero\nhas tres Ave Marias in honorem\nmagni privilegii quod Deus tibi contulit\nte Virginem Immaculatam faciendo.\nPuritatem animae et corporis mei\ncustodi et protege.\nAve Maria (×3)`}},
+
+{id:25,cat:'marian',
+ title:{en:'Consecration to Mary',pt:'Consagração a Maria',la:'Consecratio Mariae'},
+ text:{
+  en:`O Virgin Mary, my Mother,\nI consecrate myself to your Immaculate Heart\nwith all that I am and all that I have.\nReceive my heart, receive my soul,\nmy thoughts, my words, my actions,\nmy joys and my sorrows.\nLead me ever closer to your Son Jesus.\nAmen.`,
+  pt:`Ó Virgem Maria, Minha Mãe,\nconsagro-me ao Vosso Coração Imaculado\ncom tudo o que sou e tudo o que tenho.\nRecebei meu coração, recebei minha alma,\nmeus pensamentos, minhas palavras, minhas ações,\nminhas alegrias e meus sofrimentos.\nConduzis-me sempre mais perto de Vosso Filho Jesus.\nAmém.`,
+  la:`O Virgo Maria, Mater mea,\nCordi tuo Immaculato me consecro\ncum omnibus quae sum et quae habeo.\nCor meum recipe, animam meam recipe,\ncogitata, verba, opera mea,\ngaudia et dolores meos.\nMe semper propius ad Filium tuum Iesum duc.\nAmen.`}},
+
+{id:26,cat:'marian',
+ title:{en:'Litany of the Blessed Virgin (excerpt)',pt:'Ladainha de Nossa Senhora (excerto)',la:'Litaniae Lauretanae (pars)'},
+ text:{
+  en:`Lord, have mercy.\nChrist, have mercy.\nLord, have mercy.\nChrist, hear us.\nChrist, graciously hear us.\n\nHoly Mary — pray for us.\nHoly Mother of God — pray for us.\nHoly Virgin of virgins — pray for us.\nMother of Christ — pray for us.\nMother of divine grace — pray for us.\nMother most pure — pray for us.\nMother most chaste — pray for us.\nMother inviolate — pray for us.\nMother undefiled — pray for us.\nMother most amiable — pray for us.\nMother most admirable — pray for us.\nMother of good counsel — pray for us.\nMother of our Creator — pray for us.\nMother of our Savior — pray for us.\nVirgin most prudent — pray for us.\nQueen of Angels — pray for us.\nQueen of Saints — pray for us.\nQueen of Peace — pray for us.\n\nLamb of God, who takes away the sins of the world — spare us, O Lord.\nLamb of God, who takes away the sins of the world — graciously hear us, O Lord.\nLamb of God, who takes away the sins of the world — have mercy on us.\nAmen.`,
+  pt:`Senhor, tende piedade de nós.\nCristo, tende piedade de nós.\nSenhor, tende piedade de nós.\nCristo, ouvi-nos.\nCristo, escutai-nos com bondade.\n\nSanta Maria — rogai por nós.\nSanta Mãe de Deus — rogai por nós.\nSanta Virgem das Virgens — rogai por nós.\nMãe de Cristo — rogai por nós.\nMãe da Graça Divina — rogai por nós.\nMãe Puríssima — rogai por nós.\nMãe Castíssima — rogai por nós.\nMãe Inviolada — rogai por nós.\nMãe Imaculada — rogai por nós.\nMãe Amabilíssima — rogai por nós.\nMãe Admirável — rogai por nós.\nMãe do Bom Conselho — rogai por nós.\nMãe do Criador — rogai por nós.\nMãe do Salvador — rogai por nós.\nVirgem Prudentíssima — rogai por nós.\nRainha dos Anjos — rogai por nós.\nRainha dos Santos — rogai por nós.\nRainha da Paz — rogai por nós.\n\nCordeiro de Deus, que tirais o pecado do mundo — poupai-nos, Senhor.\nCordeiro de Deus, que tirais o pecado do mundo — escutai-nos com bondade, Senhor.\nCordeiro de Deus, que tirais o pecado do mundo — tende piedade de nós.\nAmém.`,
+  la:`Kyrie eleison.\nChriste eleison.\nKyrie eleison.\nChriste audi nos.\nChriste exaudi nos.\n\nSancta Maria — ora pro nobis.\nSancta Dei Genitrix — ora pro nobis.\nSancta Virgo Virginum — ora pro nobis.\nMater Christi — ora pro nobis.\nMater Divinae Gratiae — ora pro nobis.\nMater purissima — ora pro nobis.\nMater castissima — ora pro nobis.\nMater inviolata — ora pro nobis.\nMater intemerata — ora pro nobis.\nMater amabilis — ora pro nobis.\nMater admirabilis — ora pro nobis.\nMater boni consilii — ora pro nobis.\nMater Creatoris — ora pro nobis.\nMater Salvatoris — ora pro nobis.\nVirgo prudentissima — ora pro nobis.\nRegina Angelorum — ora pro nobis.\nRegina Sanctorum omnium — ora pro nobis.\nRegina pacis — ora pro nobis.\n\nAgnus Dei, qui tollis peccata mundi — parce nobis, Domine.\nAgnus Dei, qui tollis peccata mundi — exaudi nos, Domine.\nAgnus Dei, qui tollis peccata mundi — miserere nobis.\nAmen.`}},
+
+// ── MASS ─────────────────────────────────────────────────────────────
+{id:27,cat:'mass',
+ title:{en:'Kyrie Eleison',pt:'Senhor, Tende Piedade',la:'Kyrie Eleison'},
+ text:{
+  en:`Lord, have mercy. Lord, have mercy.\nChrist, have mercy. Christ, have mercy.\nLord, have mercy. Lord, have mercy.`,
+  pt:`Senhor, tende piedade. Senhor, tende piedade.\nCristo, tende piedade. Cristo, tende piedade.\nSenhor, tende piedade. Senhor, tende piedade.`,
+  la:`Kyrie eleison. Kyrie eleison.\nChriste eleison. Christe eleison.\nKyrie eleison. Kyrie eleison.`}},
+
+{id:28,cat:'mass',
+ title:{en:'Gloria (Mass)',pt:'Glória (Missa)',la:'Gloria in Excelsis'},
+ text:{
+  en:`Glory to God in the highest,\nand on earth peace to people of good will.\nWe praise you,\nwe bless you,\nwe adore you,\nwe glorify you,\nwe give you thanks for your great glory,\nLord God, heavenly King,\nO God, almighty Father.\nLord Jesus Christ, Only Begotten Son,\nLord God, Lamb of God, Son of the Father,\nyou take away the sins of the world, have mercy on us;\nyou take away the sins of the world, receive our prayer;\nyou are seated at the right hand of the Father,\nhave mercy on us.\nFor you alone are the Holy One,\nyou alone are the Lord,\nyou alone are the Most High, Jesus Christ,\nwith the Holy Spirit,\nin the glory of God the Father.\nAmen.`,
+  pt:`Glória a Deus nas alturas\ne paz na terra aos homens que ele ama.\nSeñor Deus, Rei dos céus,\nDeus Pai todo-poderoso,\nnós Vos louvamos, nós Vos bendizemos,\nnós Vos adoramos, nós Vos glorificamos,\nnós Vos damos graças por Vossa imensa glória.\nSenhor Jesus Cristo, Filho Unigênito,\nSenhor Deus, Cordeiro de Deus, Filho do Pai!\nVós que tirais o pecado do mundo,\ntende piedade de nós;\nVós que tirais o pecado do mundo,\nacolhei a nossa súplica;\nVós que estais à direita do Pai,\ntende piedade de nós.\nPois só Vós sois o Santo,\nsó Vós, o Senhor,\nsó Vós, o Altíssimo, Jesus Cristo,\ncom o Espírito Santo,\nna glória de Deus Pai.\nAmém.`,
+  la:`Gloria in excelsis Deo\net in terra pax hominibus bonae voluntatis.\nLaudamus te,\nbenedicimus te,\nadoramus te,\nglorificamus te,\ngratias agimus tibi propter magnam gloriam tuam,\nDomine Deus, Rex caelestis,\nDeus Pater omnipotens.\nDomine Fili unigenite, Iesu Christe,\nDomine Deus, Agnus Dei, Filius Patris,\nqui tollis peccata mundi, miserere nobis;\nqui tollis peccata mundi, suscipe deprecationem nostram;\nqui sedes ad dexteram Patris, miserere nobis.\nQuoniam tu solus Sanctus,\ntu solus Dominus,\ntu solus Altissimus, Iesu Christe,\ncum Sancto Spiritu,\nin gloria Dei Patris.\nAmen.`}},
+
+{id:29,cat:'mass',
+ title:{en:'Sanctus',pt:'Santo',la:'Sanctus'},
+ text:{
+  en:`Holy, Holy, Holy Lord God of hosts.\nHeaven and earth are full of your glory.\nHosanna in the highest.\nBlessed is he who comes in the name of the Lord.\nHosanna in the highest.`,
+  pt:`Santo, Santo, Santo, Senhor, Deus do universo!\nOs céus e a terra proclamam a Vossa glória.\nHosana nas alturas!\nBendito o que vem em nome do Senhor.\nHosana nas alturas!`,
+  la:`Sanctus, Sanctus, Sanctus\nDominus Deus Sabaoth.\nPleni sunt caeli et terra gloria tua.\nHosanna in excelsis.\nBenedictus qui venit in nomine Domini.\nHosanna in excelsis.`}},
+
+{id:30,cat:'mass',
+ title:{en:'Agnus Dei',pt:'Cordeiro de Deus',la:'Agnus Dei'},
+ text:{
+  en:`Lamb of God, you take away the sins of the world,\nhave mercy on us.\nLamb of God, you take away the sins of the world,\nhave mercy on us.\nLamb of God, you take away the sins of the world,\ngrant us peace.`,
+  pt:`Cordeiro de Deus, que tirais o pecado do mundo,\ntende piedade de nós.\nCordeiro de Deus, que tirais o pecado do mundo,\ntende piedade de nós.\nCordeiro de Deus, que tirais o pecado do mundo,\ndai-nos a paz.`,
+  la:`Agnus Dei, qui tollis peccata mundi,\nmiserere nobis.\nAgnus Dei, qui tollis peccata mundi,\nmiserere nobis.\nAgnus Dei, qui tollis peccata mundi,\ndona nobis pacem.`}},
+
+{id:31,cat:'mass',
+ title:{en:'Lord, I Am Not Worthy',pt:'Senhor, Não Sou Digno',la:'Domine, Non Sum Dignus'},
+ text:{
+  en:`Lord, I am not worthy\nthat you should enter under my roof,\nbut only say the word\nand my soul shall be healed.`,
+  pt:`Senhor, não sou digno\nde que entreis em minha morada,\nmas dizei uma só palavra\ne serei salvo.`,
+  la:`Domine, non sum dignus,\nut intres sub tectum meum;\nsed tantum dic verbo,\net sanabitur anima mea.`}},
+
+{id:32,cat:'mass',
+ title:{en:'Prayer After Communion',pt:'Ação de Graças após a Comunhão',la:'Post Communionem Gratiarum Actio'},
+ text:{
+  en:`Lord Jesus Christ,\nlet this holy Communion\nnot be for me a reason for condemnation,\nbut let it be for me\na saving remedy for soul and body.\nMay I always cleave to your commandments\nand never be separated from you.\nAmen.`,
+  pt:`Senhor Jesus Cristo,\nfaz que esta Sagrada Comunhão\nnão seja para mim ocasião de condenação,\nmas remédio salutar\npara a alma e para o corpo.\nFaze com que eu me una sempre\naos Teus mandamentos\ne jamais me separe de Ti.\nAmém.`,
+  la:`Domine Iesu Christe,\nhoc Sanctissimum Sacramentum\nnon sit mihi in iudicium,\nsed pro salute animae et corporis.\nSemper tibi adhaeream\nnec a te separar.\nAmen.`}},
+
+{id:33,cat:'mass',
+ title:{en:'Collect for Peace (Mass)',pt:'Coleta pela Paz',la:'Collecta pro Pace'},
+ text:{
+  en:`O God, from whom all holy desires,\nall good counsels, and all just works do proceed,\ngive to Thy servants that peace\nwhich the world cannot give;\nthat our hearts may be set to obey Thy commandments,\nand also that by Thee\nwe, being defended from the fear of our enemies,\nmay pass our time in rest and quietness.\nThrough Jesus Christ our Lord.\nAmen.`,
+  pt:`Ó Deus, de quem procedem\ntodos os santos desejos,\ntodos os retos propósitos\ne todas as obras justas:\ndai aos Vossos servos aquela paz\nque o mundo não pode dar;\nfazei que nossos corações obedeçam\naos Vossos mandamentos\ne que, livres do temor dos inimigos,\npossamos viver em paz e tranquilidade.\nPor Jesus Cristo nosso Senhor.\nAmém.`,
+  la:`Deus, a quo sancta desideria,\nrecta consilia et iusta sunt opera,\nda servis tuis illam,\nquam mundus dare non potest, pacem;\nut et corda nostra mandatis tuis dedita\net, hostium sublata formidine,\ntempora sint tua protectione tranquilla.\nPer Iesum Christum Dominum nostrum.\nAmen.`}},
+
+// ── ACTS OF VIRTUE ──────────────────────────────────────────────────
+{id:34,cat:'virtue',
+ title:{en:'Act of Faith',pt:'Ato de Fé',la:'Actus Fidei'},
+ text:{
+  en:`O my God, I firmly believe\nthat Thou art one God in three Divine Persons,\nFather, Son, and Holy Spirit.\nI believe that Thy Divine Son became man\nand died for our sins,\nand that He will come to judge the living and the dead.\nI believe these and all the truths\nwhich the Holy Catholic Church teaches,\nbecause Thou hast revealed them,\nwho canst neither deceive nor be deceived.\nAmen.`,
+  pt:`Meu Deus, creio firmemente\ntudo quanto a Santa Igreja Católica crê e ensina,\nporque Vós, que sois a verdade que não pode enganar nem ser enganada,\nrevelastes tudo isso à vossa Igreja.\nCreio em especial que sois\ntres Pessoas distintas num só Deus;\nque o Filho de Deus se fez homem,\nmorreu por nossos pecados\ne ressuscitou e há de vir julgar os vivos e os mortos.\nAmém.`,
+  la:`O Deus meus, firmiter credo\nte esse unum Deum in tribus Personis divinis,\nPatrem, Filium et Spiritum Sanctum.\nCredo Filium Dei divinum factum esse hominem\nmortemque pro peccatis nostris oppetiisse;\neumque venturum esse ad iudicandos vivos et mortuos.\nHaec omnia et quidquid sancta Ecclesia catholica\ndocet, firmiter credo,\nquia tu id revelasti, qui falli nec fallere potes.\nAmen.`}},
+
+{id:35,cat:'virtue',
+ title:{en:'Act of Hope',pt:'Ato de Esperança',la:'Actus Spei'},
+ text:{
+  en:`O Lord God, I hope by Thy grace\nfor the pardon of all my sins\nand after this life to attain everlasting happiness,\nfor Thou hast promised it\nwho art infinitely powerful, faithful, kind,\nand merciful.\nIn this hope I intend to live and die.\nAmen.`,
+  pt:`Meu Deus, espero, com plena confiança,\nalcançar, por Vossa graça e misericórdia,\nperdão dos meus pecados\ne a vida eterna que Vós prometestes,\npor meio de Jesus Cristo Nosso Senhor,\na todos aqueles que praticam\no bem nesta vida.\nAmém.`,
+  la:`O Domine Deus, spero per gratiam tuam\nremissionem omnium peccatorum meorum\net post hanc vitam aeternam felicitatem,\nquia tu promisisti,\nqui es infinite potens, fidelis, benignus\net misericors.\nIn hac spe vivere et mori intendo.\nAmen.`}},
+
+{id:36,cat:'virtue',
+ title:{en:'Act of Charity',pt:'Ato de Caridade',la:'Actus Caritatis'},
+ text:{
+  en:`O Lord God, I love Thee\nabove all things\nand I love my neighbor for the love of Thee\nbecause Thou art the highest, infinite, and perfect Good,\nworthy of all my love.\nIn this love I intend to live and die.\nAmen.`,
+  pt:`Meu Deus, amo-Vos sobre todas as coisas,\npelo que sois em Si mesmo\ne porque sois o infinito Bem\ne o nosso eterno Prêmio.\nAmo também o meu próximo\ncomo a mim mesmo por amor de Vós.\nAmém.`,
+  la:`O Domine Deus, amo te\nsuper omnia\net proximum meum propter te diligo,\nquia tu es summum, infinitum et perfectum Bonum,\nomnium amore dignissimum.\nIn hoc amore vivere et mori propono.\nAmen.`}},
+
+{id:37,cat:'virtue',
+ title:{en:'Act of Adoration',pt:'Ato de Adoração',la:'Actus Adorationis'},
+ text:{
+  en:`O my God, I adore Thee\nas my Creator, my Lord, and my Sovereign Good.\nI adore Thee with all my heart,\nwith all my soul, with all my strength.\nI acknowledge Thee as the source of all being,\nall truth, and all goodness.\nTo Thee be honor and glory for ever.\nAmen.`,
+  pt:`Ó meu Deus, prostro-me diante de Vós\ne Vos adoro como meu Criador,\nmeu Senhor e meu Soberano Bem.\nAdoro-Vos de todo o coração,\ncom toda a minha alma e todas as minhas forças.\nReconheço-Vos como a fonte de todo ser,\nde toda verdade e de toda bondade.\nA Vós seja honra e glória para sempre.\nAmém.`,
+  la:`O Deus meus, te adoro\nut Creatorem meum, Dominum et summum Bonum.\nTe toto corde, tota anima,\ntotis viribus adoro.\nTe agnosco fontem omnis esse,\nomnis veritatis et omnis bonitatis.\nTibi honor et gloria in saecula.\nAmen.`}},
+
+{id:38,cat:'virtue',
+ title:{en:'Act of Thanksgiving',pt:'Ato de Ação de Graças',la:'Actus Gratiarum Actionis'},
+ text:{
+  en:`O my God, I thank You\nfor all the benefits You have granted me,\nfor the life You have given me,\nfor the creation of my soul,\nfor my Redemption, and for all Your gifts.\nWith all my heart I thank You\nfor all things seen and unseen,\nknown and unknown.\nAmen.`,
+  pt:`Ó meu Deus, dou-Vos graças\npor todos os benefícios que me concedestes,\npela vida que me destes,\npela criação de minha alma,\npela Redenção e por todos os Vossos dons.\nDe todo o coração Vos agradeço\npor todas as coisas,\nvisíveis e invisíveis, sabidas e ignoradas.\nAmém.`,
+  la:`O Deus meus, tibi gratias ago\npro omnibus beneficiis mihi conlatis,\npro vita mihi data,\npro creatione animae meae,\npro Redemptione omnibusque donis tuis.\nEx toto corde tibi gratias ago\npro omnibus rebus visibilibus et invisibilibus,\nnotis et ignotis.\nAmen.`}},
+
+{id:39,cat:'virtue',
+ title:{en:'Act of Humility',pt:'Ato de Humildade',la:'Actus Humilitatis'},
+ text:{
+  en:`O Lord, grant me the grace of humility,\nthat I may know myself as I truly am\nbefore Your infinite greatness.\nLet me never think more highly of myself\nthan I ought to think,\nbut let me think soberly\naccording to the measure of faith\nYou have given me.\nAmen.`,
+  pt:`Senhor, concedei-me a graça da humildade,\npara que eu me conheça como verdadeiramente sou\ndiante de Vossa grandeza infinita.\nNão me deixeis pensar de mim\nmais do que devo pensar,\nmas fazei que pense de mim\ncomo convém, com sobriedade,\nconforme a medida da fé\nque me concedestes.\nAmém.`,
+  la:`Domine, da mihi gratiam humilitatis,\nut me ipsam cognoscam\nprout vere sum coram tua infinita maiestate.\nNe altius de me sentiam\nquam oportet sentire,\nsed sentiam ut sobrie cogitem,\niuxta mensuram fidei\nquam dedisti mihi.\nAmen.`}},
+
+{id:40,cat:'virtue',
+ title:{en:'Act of Oblation (St. Ignatius)',pt:'Suscipe (Santo Inácio)',la:'Suscipe'},
+ text:{
+  en:`Take, Lord, and receive all my liberty,\nmy memory, my understanding,\nand my entire will,\nall that I have and all that I possess.\nThou hast given all to me;\nto Thee, O Lord, I return it.\nAll is Thine, dispose of it\nwholly according to Thy will.\nGive me only Thy love and Thy grace,\nfor that is enough for me.\nAmen.`,
+  pt:`Tomai, Senhor, e recebei\ntoda a minha liberdade,\nminha memória, meu entendimento\ne toda a minha vontade,\ntudo o que tenho e possuo.\nVós mo destes; a Vós, Senhor, o torno.\nTudo é Vosso; disponde a Vosso inteiro bel-prazer.\nDai-me somente o Vosso amor e graça,\nque isso me basta.\nAmém.`,
+  la:`Suscipe, Domine, universam meam libertatem,\nmemoriam, intellectum atque voluntatem omnem.\nQuidquid habeo vel possideo mihi largitus es;\nid tibi totum restituo\nac tuae prorsus voluntati trado gubernandum.\nAmorem tui solum cum gratia tua mihi dones,\net dives sum satis, nec aliud quidquam ultra posco.\nAmen.`}},
+
+{id:41,cat:'virtue',
+ title:{en:'Anima Christi',pt:'Anima Christi',la:'Anima Christi'},
+ text:{
+  en:`Soul of Christ, sanctify me.\nBody of Christ, save me.\nBlood of Christ, inebriate me.\nWater from the side of Christ, wash me.\nPassion of Christ, strengthen me.\nO good Jesus, hear me.\nWithin Thy wounds, hide me.\nSeperate me not from Thee.\nFrom the wicked foe, defend me.\nAt the hour of my death, call me\nand bid me come to Thee,\nthat with Thy saints I may praise Thee\nfor ever and ever.\nAmen.`,
+  pt:`Alma de Cristo, santifica-me.\nCorpo de Cristo, salva-me.\nSangue de Cristo, inebria-me.\nÁgua do lado de Cristo, purifica-me.\nPaixão de Cristo, fortifica-me.\nÓ bom Jesus, ouvi-me.\nNas Tuas chagas, esconde-me.\nNão me deixes separar de Ti.\nDo inimigo maldoso, defende-me.\nNa hora da minha morte, chama-me\ne manda-me ir a Ti,\npara que com os Teus santos Te louvarei\npor todos os séculos dos séculos.\nAmém.`,
+  la:`Anima Christi, sanctifica me.\nCorpus Christi, salva me.\nSanguis Christi, inebria me.\nAqua lateris Christi, lava me.\nPassio Christi, conforta me.\nO bone Iesu, exaudi me.\nIntra tua vulnera absconde me.\nNe permittas me separari a te.\nAb hoste maligno defende me.\nIn hora mortis meae voca me\net iube me venire ad te,\nut cum Sanctis tuis laudem te\nin saecula saeculorum.\nAmen.`}},
+
+// ── ROSARY ──────────────────────────────────────────────────────────
+{id:42,cat:'rosary',
+ title:{en:'Opening Prayer of the Rosary',pt:'Oração Inicial do Rosário',la:'Initium Rosarii'},
+ text:{
+  en:`O God, whose only begotten Son,\nby His life, death, and resurrection,\nhas purchased for us the rewards of eternal salvation,\ngrant, we beseech Thee,\nthat meditating on these mysteries\nof the Most Holy Rosary of the Blessed Virgin Mary,\nwe may imitate what they contain\nand obtain what they promise.\nThrough Christ our Lord.\nAmen.`,
+  pt:`Ó Deus, Vosso Filho Unigênito,\npela Sua Vida, Morte e Ressurreição,\nnos mereceu a graça da salvação eterna.\nConcedei-nos, pedimos,\nque meditando nos mistérios\ndo Santíssimo Rosário da Virgem Maria,\npossamos imitar o que eles contêm\ne alcançar o que prometem.\nPelo mesmo Cristo Nosso Senhor.\nAmém.`,
+  la:`Deus, cuius unigenitus Filius\nper vitam, mortem et resurrectionem suam\nnobis salutis aeternae praemia comparavit,\nconcede, quaesumus,\nut haec mysteria sanctissimo\nBeatae Virginis Mariae Rosario recolentes,\net imitemur quod continent\net quod promittunt assequamur.\nPer Christum Dominum nostrum.\nAmen.`}},
+
+{id:43,cat:'rosary',
+ title:{en:'Fatima Prayer',pt:'Oração de Fátima',la:'Oratio Fatimensis'},
+ text:{
+  en:`O my Jesus, forgive us our sins,\nsave us from the fires of hell.\nLead all souls to Heaven,\nespecially those most in need of Your Mercy.\nAmen.`,
+  pt:`Ó meu Jesus, perdoai-nos,\nlivrai-nos do fogo do inferno,\nlevai as almas todas para o Céu,\nespecialmente as que mais precisarem de Vossa misericórdia.\nAmém.`,
+  la:`O mi Iesu, dimitte nobis debita nostra,\nlibera nos ab igne inferni,\naduc in caelum omnes animas,\npraesertim eas quae misericordiae tuae maxime indigent.\nAmen.`}},
+
+{id:44,cat:'rosary',
+ title:{en:'Joyful Mysteries Intention',pt:'Mistérios Gaudosos',la:'Mysteria Gaudiosa'},
+ text:{
+  en:`The Five Joyful Mysteries:\n1. The Annunciation\n2. The Visitation\n3. The Nativity\n4. The Presentation in the Temple\n5. The Finding in the Temple\n\nWe offer these Joyful Mysteries\nin honor of the Incarnation of Our Lord\nand the joys of the Blessed Virgin Mary.\nMay they increase in us the virtue of humility.\nAmen.`,
+  pt:`Os Cinco Mistérios Gaudosos:\n1. A Anunciação\n2. A Visitação\n3. O Nascimento de Jesus\n4. A Apresentação no Templo\n5. O Encontro do Menino Jesus no Templo\n\nOfertamos estes Mistérios Gaudosos\nem honra da Encarnação de Nosso Senhor\ne das alegrias da Virgem Maria.\nAlcancem-nos a virtude da humildade.\nAmém.`,
+  la:`Quinque Mysteria Gaudiosa:\n1. Annuntiatio\n2. Visitatio\n3. Nativitas\n4. Praesentatio in Templo\n5. Inventio in Templo\n\nHaec Mysteria Gaudiosa offerimus\nin honorem Incarnationis Domini nostri\net gaudiorum Beatae Virginis Mariae.\nVirtutem humilitatis in nobis augant.\nAmen.`}},
+
+{id:45,cat:'rosary',
+ title:{en:'Sorrowful Mysteries Intention',pt:'Mistérios Dolorosos',la:'Mysteria Dolorosa'},
+ text:{
+  en:`The Five Sorrowful Mysteries:\n1. The Agony in the Garden\n2. The Scourging at the Pillar\n3. The Crowning with Thorns\n4. The Carrying of the Cross\n5. The Crucifixion\n\nWe offer these Sorrowful Mysteries\nin honor of the Passion of Our Lord Jesus Christ.\nMay they increase in us the virtue of contrition.\nAmen.`,
+  pt:`Os Cinco Mistérios Dolorosos:\n1. A Agonia no Horto das Oliveiras\n2. A Flagelação\n3. A Coroação de Espinhos\n4. Carregar a Cruz\n5. A Crucificação\n\nOfertamos estes Mistérios Dolorosos\nem honra da Paixão de Nosso Senhor Jesus Cristo.\nAlcancem-nos a virtude da contrição.\nAmém.`,
+  la:`Quinque Mysteria Dolorosa:\n1. Agonia in Horto\n2. Flagellatio\n3. Coronatio Spinis\n4. Baiulatio Crucis\n5. Crucifixio\n\nHaec Mysteria Dolorosa offerimus\nin honorem Passionis Domini nostri Iesu Christi.\nVirtutem contritionis in nobis augant.\nAmen.`}},
+
+{id:46,cat:'rosary',
+ title:{en:'Glorious Mysteries Intention',pt:'Mistérios Gloriosos',la:'Mysteria Gloriosa'},
+ text:{
+  en:`The Five Glorious Mysteries:\n1. The Resurrection\n2. The Ascension\n3. The Descent of the Holy Spirit\n4. The Assumption of Mary\n5. The Coronation of Mary\n\nWe offer these Glorious Mysteries\nin honor of the Resurrection of Our Lord\nand the glory of the Blessed Virgin Mary.\nMay they increase in us the virtue of faith.\nAmen.`,
+  pt:`Os Cinco Mistérios Gloriosos:\n1. A Ressurreição\n2. A Ascensão\n3. A Vinda do Espírito Santo\n4. A Assunção de Maria\n5. A Coroação de Maria\n\nOfertamos estes Mistérios Gloriosos\nem honra da Ressurreição de Nosso Senhor\ne da glória da Virgem Maria.\nAlcancem-nos a virtude da fé.\nAmém.`,
+  la:`Quinque Mysteria Gloriosa:\n1. Resurrectio\n2. Ascensio\n3. Adventus Spiritus Sancti\n4. Assumptio Mariae\n5. Coronatio Mariae\n\nHaec Mysteria Gloriosa offerimus\nin honorem Resurrectionis Domini nostri\net gloriae Beatae Virginis Mariae.\nVirtutem fidei in nobis augant.\nAmen.`}},
+
+{id:47,cat:'rosary',
+ title:{en:'Luminous Mysteries Intention',pt:'Mistérios Luminosos',la:'Mysteria Luminosa'},
+ text:{
+  en:`The Five Luminous Mysteries:\n1. The Baptism in the Jordan\n2. The Wedding at Cana\n3. The Proclamation of the Kingdom\n4. The Transfiguration\n5. The Institution of the Eucharist\n\nWe offer these Luminous Mysteries\nin honor of the public life of Our Lord Jesus Christ.\nMay they increase in us the virtue of hope.\nAmen.`,
+  pt:`Os Cinco Mistérios Luminosos:\n1. O Batismo no Jordão\n2. As Bodas de Caná\n3. O Anúncio do Reino\n4. A Transfiguração\n5. A Instituição da Eucaristia\n\nOfertamos estes Mistérios Luminosos\nem honra da vida pública de Nosso Senhor Jesus Cristo.\nAlcancem-nos a virtude da esperança.\nAmém.`,
+  la:`Quinque Mysteria Luminosa:\n1. Baptismus in Iordane\n2. Nuptiae Canenses\n3. Proclamatio Regni\n4. Transfiguratio\n5. Institutio Eucharistiae\n\nHaec Mysteria Luminosa offerimus\nin honorem vitae publicae Domini nostri Iesu Christi.\nVirtutem spei in nobis augant.\nAmen.`}},
+
+{id:48,cat:'rosary',
+ title:{en:'Divine Mercy Chaplet',pt:'Coroa da Misericórdia Divina',la:'Corona Divinae Misericordiae'},
+ text:{
+  en:`Begin with: Our Father, Hail Mary, Apostles' Creed\n\nFor each group of ten:\nOn the Our Father beads:\n"Eternal Father, I offer you the Body and Blood,\nSoul and Divinity of Your dearly beloved Son,\nour Lord Jesus Christ,\nin atonement for our sins\nand those of the whole world."\n\nOn the Hail Mary beads:\n"For the sake of His sorrowful Passion,\nhave mercy on us and on the whole world."\n\nConclusion (3 times):\n"Holy God, Holy Mighty One,\nHoly Immortal One,\nhave mercy on us and on the whole world."\nAmen.`,
+  pt:`Inicia com: Pai Nosso, Ave Maria, Credo\n\nPara cada dezena:\nNas contas do Pai Nosso:\n"Pai Eterno, ofereço-Vos o Corpo e Sangue,\nAlma e Divindade de Vosso Amabilíssimo Filho,\nNosso Senhor Jesus Cristo,\nem propiciação de nossos pecados\ne os do mundo inteiro."\n\nNas contas da Ave Maria:\n"Pelas dolorosas chagas de Jesus,\ntende misericórdia de nós e do mundo inteiro."\n\nConclusão (3 vezes):\n"Santo Deus, Santo Forte,\nSanto Imortal,\ntende misericórdia de nós e do mundo inteiro."\nAmém.`,
+  la:`Incipe: Pater noster, Ave Maria, Symbolum\n\nPro quaque decada:\nIn granis Pater noster:\n"Pater aeterne, offero tibi Corpus et Sanguinem,\nAnimam et Divinitatem\nDilectissimi Filii tui,\nDomini nostri Iesu Christi,\nin expiatione peccatorum nostrorum\net totius mundi."\n\nIn granis Ave Maria:\n"Pro dolorosa eius Passione,\nmiserere nobis et totius mundi."\n\nConclusion (ter):\n"Sanctus Deus, Sanctus Fortis,\nSanctus Immortalis,\nmiserere nobis et totius mundi."\nAmen.`}},
+
+// ── SAINTS ──────────────────────────────────────────────────────────
+{id:49,cat:'saints',
+ title:{en:'Prayer to St. Michael',pt:'Oração a São Miguel Arcanjo',la:'Ad Sanctum Michaelem'},
+ text:{
+  en:`Saint Michael the Archangel,\ndefend us in battle.\nBe our protection against the wickedness\nand snares of the devil.\nMay God rebuke him, we humbly pray;\nand do Thou, O Prince of the Heavenly Host,\nby the power of God,\ncast into hell Satan\nand all the evil spirits\nwho prowl throughout the world\nseeking the ruin of souls.\nAmen.`,
+  pt:`São Miguel Arcanjo,\ndefendei-nos no combate,\nfazei-nos livres das ciladas\ne das armadilhas do demônio.\nImploramos a Deus que o submeta.\nE Vós, príncipe da milícia celestial,\npelao poder divino,\nprecipitai no inferno Satanás\ne os outros espíritos malignos\nque vagueiam pelo mundo\npara perdição das almas.\nAmém.`,
+  la:`Sancte Michael Archangele,\ndefende nos in proelio;\ncontra nequitiam et insidias diaboli esto praesidium.\nImperet illi Deus, supplices deprecamur:\ntuque, Princeps militiae caelestis,\nSatanam aliosque spiritus malignos,\nqui ad perditionem animarum pervagantur in mundo,\ndivina virtute in infernum detrude.\nAmen.`}},
+
+{id:50,cat:'saints',
+ title:{en:'Prayer to St. Joseph',pt:'Oração a São José',la:'Ad Sanctum Iosephum'},
+ text:{
+  en:`O Blessed Joseph,\nhappy man, to whom it was given\nnot only to see and to hear that God\nwhom many a king had longed to see, yet saw not;\nto hear, yet heard not;\nbut also to carry Him in your arms,\nto embrace Him, to clothe Him,\nand guard and defend Him.\nPray for us, O Blessed Joseph,\nthat we may be made worthy\nof the promises of Christ.\nAmen.`,
+  pt:`Ó São José bem-aventurado,\nfeliz varão a quem foi dado\nnão só ver e ouvir aquele Deus\nque tantos reis desejaram ver e não viram,\nouvir e não ouviram,\nmas também carregá-lo nos braços,\nabraçá-lo, vesti-lo\ne protegê-lo e guardá-lo.\nOrai por nós, São José,\npara que sejamos dignos\ndas promessas de Cristo.\nAmém.`,
+  la:`O Ioseph beate,\nfelix homo, cui datum est\nnon solum Deum illum videre et audire,\nquem multi reges videre cupiverunt nec viderunt,\naudire nec audierunt,\nverum etiam in ulnis portare,\namplecti, vestire,\ncustodire et protegere.\nOra pro nobis, Sancte Ioseph,\nut digni efficiamur\npromissionibus Christi.\nAmen.`}},
+
+{id:51,cat:'saints',
+ title:{en:'Prayer to St. Francis',pt:'Oração de São Francisco',la:'Oratio Sancti Francisci'},
+ text:{
+  en:`Lord, make me an instrument of your peace:\nwhere there is hatred, let me sow love;\nwhere there is injury, pardon;\nwhere there is doubt, faith;\nwhere there is despair, hope;\nwhere there is darkness, light;\nand where there is sadness, joy.\n\nO Divine Master, grant that I may not\nso much seek to be consoled as to console,\nto be understood as to understand,\nto be loved as to love.\nFor it is in giving that we receive,\nit is in pardoning that we are pardoned,\nand it is in dying\nthat we are born to eternal life.\nAmen.`,
+  pt:`Senhor, fazei-me instrumento de Vossa paz.\nOnde houver ódio, que eu leve o amor;\nonde houver ofensa, o perdão;\nonde houver discórdia, a union;\nonde houver dúvida, a fé;\nonde houver erro, a verdade;\nonde houver desespero, a esperança;\nonde houver tristeza, a alegria;\nonde houver trevas, a luz.\n\nMestre Divino, fazei que eu procure\nmais consolar do que ser consolado,\nmais compreender do que ser compreendido,\nmais amar do que ser amado.\nPois é dando que se recebe,\né perdoando que se é perdoado\ne é morrendo que se vive para a vida eterna.\nAmém.`,
+  la:`Domine, fac me instrumentum pacis tuae:\nubi odium, amorem seminem;\nubi iniuria, veniam;\nubi discordia, unitatem;\nubi dubium, fidem;\nubi error, veritatem;\nubi desperatio, spem;\nubi tristitia, laetitiam;\nubi tenebrae, lucem.\n\nDivine Magister, effice ut non tam\nquaeram consolari quam consolari,\nintellegi quam intellegere,\namari quam amare.\nNam in dando accipitur,\nin ignoscendo ignosco,\net in moriendo\nad vitam aeternam nascimur.\nAmen.`}},
+
+{id:52,cat:'saints',
+ title:{en:'Prayer to St. Anthony',pt:'Oração a Santo Antônio',la:'Ad Sanctum Antonium'},
+ text:{
+  en:`O wonderful St. Anthony,\ngentle and powerful in your intercession,\nyou are the patron of lost things\nand the special advocate\nfor those in need of a miracle.\nGrant us your aid in this our hour of need.\nTouch our hearts and lead us\nback to what we have lost,\nwhether it be material things,\nor something more precious:\nour health, our hope,\nor our love for God.\nAmen.`,
+  pt:`Ó maravilhoso Santo Antônio,\nsuave e poderoso na vossa intercessão,\nvós sois o patrono das coisas perdidas\ne o defensor especial\ndaqueles que precisam de um milagre.\nConcedei-nos o vosso auxílio nesta hora de necessidade.\nTocai nossos corações e conduzi-nos\nde volta ao que perdemos,\nseja coisa material,\nsejar algo mais precioso:\nnossa saúde, nossa esperança\nou nosso amor por Deus.\nAmém.`,
+  la:`O mirande Sancte Antoni,\nmitis et potens in intercessione tua,\ntu es patronus rerum amissarum\net advocatus specialis\neorum qui miraculum necessitatibus indigent.\nDa nobis auxilium tuum in hac necessitate.\nCor nostrum tange et rededuc nos\nad id quod amisimus,\nsive res materiales sint,\nsive aliquid pretiosius:\nvaletudo, spes,\nvel amor Dei.\nAmen.`}},
+
+{id:53,cat:'saints',
+ title:{en:'Prayer to St. Therese of Lisieux',pt:'Oração a Santa Teresinha',la:'Ad Sanctam Teresiam Parvu'},
+ text:{
+  en:`O Little Flower of Jesus,\nask God today to grant the graces\nI need so much.\nYou promised to let fall\na shower of roses when you died.\nPlease, dear Little Flower,\npick for me the roses I need most\nand drop them down as favors,\nnot only for my temporal needs,\nbut above all for my immortal soul.\nAmen.`,
+  pt:`Ó Flor pequenina de Jesus,\npedi a Deus hoje que me conceda as graças\nde que tanto necessito.\nVós prometestes enviar do Céu\numa chuva de rosas ao morrer.\nPor favor, querida Florzinha,\nescolhei para mim as rosas de que mais preciso\ne deixai-as cair como favores,\nnão somente para minhas necessidades temporais,\nmas sobretudo para minha alma imortal.\nAmém.`,
+  la:`O Flos parvule Iesu,\nroga Deum hodie ut gratias mihi concedas\nde quibus tam vehementer egeo.\nPromisisti te imbrem rosarum\nmittere post mortem tuam.\nOro te, cara Flos parvule,\nrosas quas maxime indigeo elige pro me\net eas ut beneficia demitte,\nnon solum pro necessitatibus temporalibus,\nverum etiam praecipue pro anima mea immortali.\nAmen.`}},
+
+{id:54,cat:'saints',
+ title:{en:'Prayer to St. Augustine',pt:'Oração de Santo Agostinho',la:'Oratio Sancti Augustini'},
+ text:{
+  en:`Breathe in me, O Holy Spirit,\nthat my thoughts may all be holy.\nAct in me, O Holy Spirit,\nthat my work, too, may be holy.\nDraw my heart, O Holy Spirit,\nthat I love but what is holy.\nStrengthen me, O Holy Spirit,\nto defend all that is holy.\nGuard me, then, O Holy Spirit,\nthat I always may be holy.\nAmen.`,
+  pt:`Respirai em mim, Espírito Santo,\npara que todos os meus pensamentos sejam santos.\nAgisté em mim, Espírito Santo,\npara que o meu trabalho também seja santo.\nAtraí meu coração, Espírito Santo,\npara que eu ame somente o que é santo.\nFortificai-me, Espírito Santo,\npara que defenda tudo o que é santo.\nGuardai-me, Espírito Santo,\npara que eu sempre possa ser santo.\nAmém.`,
+  la:`Spira in me, Spiritus Sancte,\nut omnes cogitationes meae sanctae sint.\nAge in me, Spiritus Sancte,\nut opus meum quoque sanctum sit.\nAttrahe cor meum, Spiritus Sancte,\nut quod sanctum est solum amem.\nRobora me, Spiritus Sancte,\nut quod sanctum est defendant.\nCustodi me, Spiritus Sancte,\nut semper sanctus esse possim.\nAmen.`}},
+
+{id:55,cat:'saints',
+ title:{en:'Prayer to St. Thomas Aquinas (Before Study)',pt:'Oração de São Tomás de Aquino',la:'Oratio S. Thomae Aquinatis'},
+ text:{
+  en:`Creator of all things,\ntrue source of light and wisdom,\nlofty origin of all being,\ngraciously let a ray of your brilliance\npenetrate into the darkness of my understanding\nand take from me the double darkness\nin which I have been born,\nan obscurity of both sin and ignorance.\nGive me a sharp sense of understanding,\na retentive memory,\nand the ability to grasp things correctly and fundamentally.\nAmen.`,
+  pt:`Criador de todas as coisas,\nverdadeira fonte de luz e sabedoria,\neleva origem de todo ser,\ndignai-Vos infundir nos escuros de meu entendimento\num raio de Vossa claridade,\ne afastai de mim as duplas trevas\nem que nasci:\na obscuridade do pecado e da ignorância.\nDai-me agudeza para entender,\ncapacidade para reter,\ne habilidade para aprender as coisas\ncomo são verdadeiramente.\nAmém.`,
+  la:`Creator omnium rerum,\nvera lux et sapientia,\nalte omnium rerum origo,\ndignare mentis meae tenebras\nraio claritatis tuae illuminare,\net duplices, quibus natus sum, tenebras\na me auferre:\npeccati scilicet et ignorantiae.\nDa mihi acumen intelligendi,\nretinendi capacitatem\net rerum vere intelligendarum habilitem.\nAmen.`}},
+
+{id:56,cat:'saints',
+ title:{en:'Prayer to St. Padre Pio',pt:'Oração a Padre Pio',la:'Ad Sanctum Pium ex Pietrelcina'},
+ text:{
+  en:`Dear Padre Pio,\nyou bore the wounds of Christ\nand spent your life in prayer and sacrifice\nfor the salvation of souls.\nFrom your place in Heaven,\nobtain for me the graces I need most.\nI trust in your powerful intercession\nand in the mercy of God.\nAmen.`,
+  pt:`Querido Padre Pio,\nvós carrastes as chagas de Cristo\ne passastes a vida em oração e sacrifício\npela salvação das almas.\nDo lugar que ocupais no Céu,\ninterecedei por mim e pedi as graças de que mais necessito.\nConfio na vossa poderosa intercessão\ne na misericórdia de Deus.\nAmém.`,
+  la:`Care Sancte Pie,\ntua stigmata Christi gerebas\nvitamque tuam in oratione et sacrificio\npro salute animarum transegisti.\nEx loco tuo in caelo,\nobtine mihi gratias quas maxime indigeo.\nPotenti intercessioni tuae\net misericordiae Dei confido.\nAmen.`}},
+
+{id:57,cat:'saints',
+ title:{en:'Prayer to St. Jude',pt:'Oração a São Judas Tadeu',la:'Ad Sanctum Iudam Thaddaeum'},
+ text:{
+  en:`O most holy apostle, St. Jude,\nfaithful servant and friend of Jesus,\nthe name of the traitor who delivered\nyour beloved Master into the hands of His enemies\nhas caused you to be forgotten by many.\nBut the Church honors and invokes you universally\nas the patron of hopeless cases\nand of things despaired of.\nPray for me, that finally I may receive\nthe consolations and the help of Heaven.\nAmen.`,
+  pt:`Ó glorioso apóstolo São Judas Tadeu,\nfiel servo e amigo de Jesus,\no nome do traidor que entregou\nvosso amado Mestre nas mãos dos inimigos\nvos fez ser esquecido por muitos.\nMas a Igreja vos honra e invoca universalmente\ncomo patrono dos casos desesperados.\nOrai por mim, para que eu finalmente receba\nas consolações e o auxílio do Céu.\nAmém.`,
+  la:`O Sanctissime Apostole Iuda Thaddaee,\nfidelis serve et amice Iesu,\nnomen proditoris,\nqui dilectum Magistrum tuum\nin hostium manus tradidit,\nte in oblivionem a multis abduxit.\nSed Ecclesia te universaliter honorat et invocat\nut patronum desperatorum casuum.\nOra pro me,\nut tandem consolationes et auxilium caeli recipiam.\nAmen.`}},
+
+{id:58,cat:'saints',
+ title:{en:'Prayer to St. Rita',pt:'Oração a Santa Rita de Cássia',la:'Ad Sanctam Ritam'},
+ text:{
+  en:`O holy patroness of those in need,\nSaint Rita,\nyour pleadings before your Divine Lord are irresistible;\nthrough the favors you obtained,\nmiracles seem to be the proof\nof your great power with God.\nConfidently I come to you,\nbecause I am desperate for your help.\nO dear Saint Rita,\nintercede on my behalf.\nAmen.`,
+  pt:`Ó Santa padroeira dos necessitados,\nSanta Rita de Cássia,\nvossas súplicas diante do Senhor são irresistíveis;\npelos favores que obtivestes,\nos milagres parecem ser a prova\ndo grande poder que tendes junto a Deus.\nVenho a Vós confiante,\npois preciso desesperadamente do vosso auxílio.\nÓ querida Santa Rita,\nintercedei por mim.\nAmém.`,
+  la:`O sancta patrocina egenorum,\nSancta Rita,\npreces tuae apud Dominum tuum divinum irresistibiles sunt;\nper beneficia quae impetravisti,\nmiracula quasi probatio sunt\nmagnae potentiae tuae apud Deum.\nConfidenter ad te venio,\nquia auxilio tuo desperatissime indigeo.\nO cara Sancta Rita,\nintercessione tua pro me adi Deum.\nAmen.`}},
+
+{id:59,cat:'saints',
+ title:{en:'Prayer to the Holy Family',pt:'Oração à Sagrada Família',la:'Ad Sacram Familiam'},
+ text:{
+  en:`Jesus, Mary, and Joseph,\nin you we contemplate\nthe splendor of true love;\nto you we turn with trust.\nHoly Family of Nazareth,\nmake our families too\nplaces of communion and prayer,\nauthentic schools of the Gospel\nand small domestic churches.\nHoly Family of Nazareth,\nmay families never again\nexperience violence, rejection and division;\nmay all who have been hurt or scandalized\nfind ready comfort and healing.\nAmen.`,
+  pt:`Jesus, Maria e José,\nem Vós contemplamos o esplendor do verdadeiro amor;\na Vós nos voltamos com confiança.\nSagrada Família de Nazaré,\nfazei de nossas famílias\nlugares de comunhão e de oração,\nautênticas escolas do Evangelho\ne pequenas Igrejas domésticas.\nSagrada Família de Nazaré,\nque as famílias nunca mais vivam\na violência, a rejeição e a divisão;\nque todos os que foram feridos ou escandalizados\nencontrem pronto consolo e cura.\nAmém.`,
+  la:`Iesu, Maria et Ioseph,\nin vobis splendorem veri amoris contemplamur;\nad vos cum fiducia convertimus.\nSancta Familia Nazaretana,\nfac familias nostras quoque\nloca communionis et orationis,\nauthenticas scholas Evangelii\net parvas Ecclesias domesticas.\nSancta Familia Nazaretana,\nut familiae violentiam, reiectionem et divisionem\nnunquam amplius patiantur;\nut omnes qui vulnerati vel scandalizati sunt\nsolatium et curationem promptam inveniant.\nAmen.`}},
+
+{id:60,cat:'saints',
+ title:{en:'Prayer to All Saints',pt:'Oração a Todos os Santos',la:'Ad Omnes Sanctos'},
+ text:{
+  en:`O all ye holy saints of God,\nyou who are already enjoying\nthe blessed vision of God,\nremember us before the Throne of the Most High.\nPray for the Church,\npray for sinners,\npray for those in purgatory,\npray for all who need God's grace.\nMay your intercession hasten the day\nwhen we too shall be gathered\ninto the company of the blessed in Heaven.\nAmen.`,
+  pt:`Ó todos os Santos de Deus,\nvós que já estais gozando\nda bem-aventurada visão de Deus,\nlembrai-vos de nós diante do Trono do Altíssimo.\nOrai pela Igreja,\norai pelos pecadores,\norai pelos que estão no Purgatório,\norai por todos os que necessitam da graça de Deus.\nQue a vossa intercessão apresse o dia\nem que nós também seremos reunidos\nà vossa companhia no Céu.\nAmém.`,
+  la:`O omnes Sancti Dei,\nvos qui iam beatam Dei visionem fruitini estis,\nmemento nostri ante Thronum Altissimi.\nOrate pro Ecclesia,\norate pro peccatoribus,\norate pro animabus in purgatorio,\norate pro omnibus qui gratia Dei indigent.\nIntercessio vestra festinet diem\nqua nos quoque in societa beatorum in caelo congregabimur.\nAmen.`}},
+
+// ── DAILY ───────────────────────────────────────────────────────────
+{id:61,cat:'daily',
+ title:{en:'Morning Prayer',pt:'Oração da Manhã',la:'Oratio Matutina'},
+ text:{
+  en:`Lord God, almighty Father,\nwho have brought me safely to the beginning of this day,\ndefend me today by your mighty power\nthat I may not fall into any sin,\nbut that all my words may so proceed\nand all my thoughts and actions be so directed\nas to be always just in your sight.\nThrough Christ our Lord.\nAmen.`,
+  pt:`Senhor Deus, Pai todo-poderoso,\nque me conduzistes em segurança\naté o início deste dia,\ndefendei-me hoje com vosso poder\npara que não caia em nenhum pecado,\nmas que todas as minhas palavras procedam\ne todos os meus pensamentos e ações sejam dirigidos\npara que sejam sempre justos a Vossos olhos.\nPelo Cristo Nosso Senhor.\nAmém.`,
+  la:`Domine Deus, Pater omnipotens,\nqui me salvo perduces ad huius diei principium,\nme hodie potentia tua munitum conserva,\nne in ullum incidam peccatum,\nsed cuncta verba mea sic procedant\ncunctaeque cogitationes et actiones meae sic dirigantur\nut tibi semper iusta sint.\nPer Christum Dominum nostrum.\nAmen.`}},
+
+{id:62,cat:'daily',
+ title:{en:'Night Prayer (Compline)',pt:'Oração da Noite (Completas)',la:'Completorium'},
+ text:{
+  en:`Be present, O merciful God,\nand protect us through the silent hours of this night,\nso that we who are wearied\nby the changes and chances of this fleeting world\nmay repose upon Thy eternal changelessness;\nthrough Jesus Christ our Lord.\nAmen.`,
+  pt:`Sede presente, ó Deus misericordioso,\ne protegei-nos durante as horas silenciosas desta noite,\npara que nós, fatigados pelas vicissitudes\ndeste mundo passageiro,\npossamos repousar sobre a Vossa eterna imutabilidade;\npor Jesus Cristo Nosso Senhor.\nAmém.`,
+  la:`Adesto, Deus miserator,\net per horas silentes noctis huius\nnos protege;\nut nos qui mutatione et casibus\nhuius labentis mundi fessi sumus\nsuper aeternam tuam immuabilitatem requiescamus;\nper Iesum Christum Dominum nostrum.\nAmen.`}},
+
+{id:63,cat:'daily',
+ title:{en:'Prayer Before Study',pt:'Oração Antes do Estudo',la:'Ante Studium'},
+ text:{
+  en:`Come, Holy Spirit,\nfill the hearts of your faithful\nand enkindle in them the fire of your love.\nSend forth your Spirit and they shall be created,\nand You shall renew the face of the earth.\n\nO God, who by the light of the Holy Spirit\ndid instruct the hearts of the faithful,\ngrant that by the same Holy Spirit\nwe may be truly wise\nand ever rejoice in His consolations.\nThrough Christ our Lord.\nAmen.`,
+  pt:`Vinde, Espírito Santo,\nenchei os corações dos Vossos fiéis\ne acendei neles o fogo do Vosso amor.\nEnviai o Vosso Espírito e serão criados,\ne Vós renovareis a face da terra.\n\nÓ Deus, que iluminastes os corações dos fiéis\npela luz do Espírito Santo,\nconcedei-nos que pela virtude do mesmo Espírito\npossamos saber o que é reto\ne sempre nos regozijemos\ncom o Seu consolo.\nPelo Cristo Nosso Senhor.\nAmém.`,
+  la:`Veni, Sancte Spiritus,\nreple tuorum corda fidelium,\net tui amoris in eis ignem accende.\nEmitte Spiritum tuum et creabuntur,\net renovabis faciem terrae.\n\nDeus, qui corda fidelium\nSancti Spiritus illustratione docuisti,\nda nobis in eodem Spiritu\nrecta sapere,\net de eius semper consolatione gaudere.\nPer Christum Dominum nostrum.\nAmen.`}},
+
+{id:64,cat:'daily',
+ title:{en:"Prayer for Peace (St. Francis)",pt:'Oração pela Paz (São Francisco)',la:'Pro Pace'},
+ text:{
+  en:`Lord, make me an instrument of your peace.\nWhere there is hatred, let me sow love;\nwhere there is injury, pardon;\nwhere there is doubt, faith;\nwhere there is despair, hope;\nwhere there is darkness, light;\nand where there is sadness, joy.\nGrant that I may not so much seek\nto be consoled as to console;\nto be understood as to understand;\nto be loved as to love.\nFor it is in giving that we receive;\nit is in pardoning that we are pardoned;\nand it is in dying that we are born to eternal life.\nAmen.`,
+  pt:`Senhor, fazei de mim\num instrumento de Vossa paz.\nOnde houver ódio, que eu leve o amor;\nondes houver ofensa, o perdão;\nondes houver discórdia, a union;\nondes houver dúvida, a fé;\nondes houver desespero, a esperança;\nondes houver tristeza, a alegria;\nondes houver trevas, a luz.\nÓ Mestre Divino,\nfazei que eu procure mais\nconsolar do que ser consolado;\ncompreender do que ser compreendido;\namar do que ser amado.\nPois é dando que se recebe;\né perdoando que se é perdoado;\ne é morrendo que se vive para a vida eterna.\nAmém.`,
+  la:`Domine, fac me instrumentum pacis tuae.\nUbi odium, amorem seminem;\nubi iniuria, veniam;\nubi discordia, unitatem;\nubi dubium, fidem;\nubi desperatio, spem;\nubi tristitia, laetitiam;\nubi tenebrae, lucem.\nO Domine Divine,\neffice, ne tam quaeram\nconsolari quam consolari;\nintellegere quam intellegi;\namari quam amare.\nNam in dando accipitur;\nin ignoscendo ignosco;\net in moriendo ad vitam aeternam nascimur.\nAmen.`}},
+
+{id:65,cat:'daily',
+ title:{en:'Te Deum',pt:'Te Deum',la:'Te Deum'},
+ text:{
+  en:`We praise Thee, O God;\nwe acknowledge Thee to be the Lord.\nAll the earth doth worship Thee,\nthe Father everlasting.\nTo Thee all Angels cry aloud,\nthe Heavens and all the Powers therein.\nTo Thee Cherubim and Seraphim\ncontinually do cry:\nHoly, Holy, Holy,\nLord God of Sabaoth;\nHeaven and earth are full\nof the majesty of Thy glory.\nThe glorious company of the Apostles praise Thee.\nThe goodly fellowship of the Prophets praise Thee.\nThe noble army of Martyrs praise Thee.\nThe holy Church throughout all the world doth acknowledge Thee.\nAmen.`,
+  pt:`A Vós, ó Deus, louvamos;\na Vós confessamos como Senhor.\nVos adora toda a terra,\nPai eterno.\nA Vós todos os Anjos aclamam,\nos Céus e todas as potências;\nOs Querubins e os Serafins\nvos proclamam sem cessar:\nSanto, Santo, Santo,\nSenhor Deus dos exércitos.\nOs céus e a terra estão cheios\nda majestade de Vossa glória.\nA vós aclamam o coro glorioso dos Apóstolos,\ne a família dos Profetas;\ne o exército dos Mártires.\nA Igreja Santa, em toda a terra, Vos confessa.\nAmém.`,
+  la:`Te Deum laudamus;\nte Dominum confitemur.\nTe aeternum Patrem\nomnis terra veneratur.\nTibi omnes Angeli,\ntibi Caeli et universae Potestates;\ntibi Cherubim et Seraphim\nincessabili voce proclamant:\nSanctus, Sanctus, Sanctus,\nDominus Deus Sabaoth.\nPleni sunt Caeli et terra\nmaiestatis gloriae tuae.\nTe gloriosus Apostolorum chorus,\nte Prophetarum laudabilis numerus;\nte Martyrum candidatus laudat exercitus.\nTe per orbem terrarum sancta confitetur Ecclesia.\nAmen.`}},
+
+// ── SPECIAL ─────────────────────────────────────────────────────────
+{id:66,cat:'special',
+ title:{en:'Prayer for Healing',pt:'Oração pela Cura',la:'Pro Sanitate'},
+ text:{
+  en:`Lord Jesus,\nyou who healed many in your earthly life,\nlook with mercy on those who suffer,\nespecially those dear to us.\nTouch them with your healing hand,\nrelieve their pain and restore their health,\nif it be your will.\nGive them patience and courage\nin the face of illness.\nStrengthen those who care for them.\nAnd above all, grant us all\nthe healing of our souls.\nAmen.`,
+  pt:`Senhor Jesus,\nVós que curastes muitos durante Vossa vida terrena,\nolhai com misericórdia para os que sofrem,\nespecialmente para aqueles que nos são queridos.\nTomai-os com Vossa mão curadora,\nalivieis as suas dores e restaurei a sua saúde,\nse for a Vossa vontade.\nDai-lhes paciência e coragem\ndiante da doença.\nFortificai os que deles cuidam.\nE, sobretudo, concedei a todos nós\na cura das nossas almas.\nAmém.`,
+  la:`Domine Iesu,\nqui in vita terrena multos sanavisti,\nmisericorditer respice in eos qui patiuntur,\npraesertim in caros nostros.\nEos manu sanante tange,\ndolores allevia et sanitatem restitue,\nsi voluntas tua sit.\nPatientia et animo eos in adversis aegritudinis munia.\nRobora eos qui eorum curam agunt.\nEt super omnia, nobis omnibus\nsanationem animarum concede.\nAmen.`}},
+
+{id:67,cat:'special',
+ title:{en:'Prayer for the Dead',pt:'Oração pelos Mortos',la:'Pro Defunctis'},
+ text:{
+  en:`O God, the Creator and Redeemer of all the faithful,\ngrant to the souls of Thy departed servants\nfull remission of all their sins;\nthat through the help of pious supplications\nthey may obtain the pardon\nthey have always desired.\nWho lives and reigns for ever and ever.\nAmen.`,
+  pt:`Ó Deus, Criador e Redentor de todos os fiéis,\nconcedei às almas dos Vossos servos defuntos\na plena remissão de todos os seus pecados;\npara que, com o auxílio das nossas piedosas súplicas,\nalcancem o perdão\nque sempre desejaram.\nVós que viveis e reinais por todos os séculos dos séculos.\nAmém.`,
+  la:`Deus, conditor et redemptor omnium fidelium,\nanimabus famulorum famularumque tuarum\nremissionem cunctorum tribue peccatorum;\nut indulgentiam quam semper optaverunt,\npiis supplicationibus consequantur.\nQui vivis et regnas in saecula saeculorum.\nAmen.`}},
+
+{id:68,cat:'special',
+ title:{en:'Prayer for the Church',pt:'Oração pela Igreja',la:'Pro Ecclesia'},
+ text:{
+  en:`O Lord Jesus Christ,\nwho said to your apostles:\n"Peace I leave with you, my peace I give you."\nDo not look upon our sins,\nbut upon the faith of your Church,\nand grant her that peace and unity\nwhich is in accord with your will.\nWho live and reign for ever and ever.\nAmen.`,
+  pt:`Senhor Jesus Cristo,\nque dissestes a vossos apóstolos:\n"Deixo-vos a paz, dou-vos a minha paz."\nNão olheis para os nossos pecados,\nmas para a fé de vossa Igreja\ne concedei-lhe a paz e a unidade\nconforme a Vossa vontade.\nVós que viveis e reinais\npor todos os séculos dos séculos.\nAmém.`,
+  la:`Domine Iesu Christe,\nqui apostolis tuis dixisti:\n"Pacem relinquo vobis, pacem meam do vobis."\nNe respicias peccata nostra,\nsed fidem Ecclesiae tuae;\neique pacem et unitatem largiri dignare\nsecundum voluntatem tuam.\nQui vivis et regnas in saecula saeculorum.\nAmen.`}},
+
+{id:69,cat:'special',
+ title:{en:'Prayer for Vocations',pt:'Oração pelas Vocações',la:'Pro Vocationibus'},
+ text:{
+  en:`Lord of the harvest,\nsend forth laborers into your harvest.\nSow in young hearts\nthe seeds of holiness.\nGive them the grace to hear your call\nand the courage to follow it.\nRaise up holy priests, men and women consecrated to you,\nand missionary disciples\nwho will proclaim your Kingdom\nto the ends of the earth.\nAmen.`,
+  pt:`Senhor da messe,\nenviai operários para a Vossa messe.\nSemeai nos corações jovens\nas sementes da santidade.\nDai-lhes a graça de escutar o Vosso chamado\ne a coragem de segui-lo.\nSuscitai santos sacerdotes,\nhomens e mulheres consagrados a Vós,\ne discípulos missionários\nque proclamem o Vosso Reino\naté os confins da terra.\nAmém.`,
+  la:`Domine messis,\noperarios in messem tuam mitte.\nSemina in corda iuvenum\ngerminam sanctitatis.\nDa eis gratiam vocem tuam audiendi\net animum eam sequendi.\nSanctos sacerdotes suscita,\nviros et mulieres tibi consecratos,\net discipulos missionarios\nqui Regnum tuum\nusque ad fines terrae proclament.\nAmen.`}},
+
+{id:70,cat:'special',
+ title:{en:'Prayer for Marriage',pt:'Oração pelo Matrimônio',la:'Pro Matrimonio'},
+ text:{
+  en:`O God, who in creating human nature\ndidst wondrously dignify it\nand still more wondrously restore it,\ngrant that we may share in the divinity\nof Christ, who humbled himself\nto share in our humanity.\nBless this marriage,\nshower this couple with your graces;\nand be ever present in their home.\nAmen.`,
+  pt:`Ó Deus, que ao criar a natureza humana\na adornastes admiravelmente\ne ainda mais admiravelmente a restaurastes,\nconcedei-nos participar da divindade\nde Cristo, que se humilhou\npara participar da nossa humanidade.\nAbençoai este casamento,\ncobrais este casal com vossas graças;\ne estai sempre presentes em seu lar.\nAmém.`,
+  la:`O Deus, qui humanam naturam\nadmirabiliter condidisti\net mirabilius reformasti,\nda nobis divinitatis tuae esse consortes,\nqui humanitatis nostrae\nfieri dignatus es particeps.\nHoc matrimonium benedic,\nhoc coniugium gratiis tuis perfunde;\net in domo eorum semper adesto.\nAmen.`}},
+
+{id:71,cat:'special',
+ title:{en:'Prayer for Children',pt:'Oração pelas Crianças',la:'Pro Pueris'},
+ text:{
+  en:`Lord Jesus, who said\n"Let the little children come to me\nand do not hinder them,\nfor the kingdom of heaven belongs to such as these,"\nwatch over the children of the world.\nProtect the innocent, feed the hungry,\ncomfort those who suffer.\nGive parents wisdom and love\nto guide their children in your ways.\nAmen.`,
+  pt:`Senhor Jesus, que dissestes:\n"Deixai as crianças virem a mim\ne não as impediais,\npois delas é o Reino dos Céus,"\nvelais pelas crianças do mundo.\nProtegeis os inocentes, alimentais os famintos,\nconsolais os que sofrem.\nDai aos pais sabedoria e amor\npara guiarem seus filhos nos Vossos caminhos.\nAmém.`,
+  la:`Domine Iesu, qui dixisti:\n"Sinite parvulos venire ad me\nnec prohibueritis eos;\ntalium enim est regnum caelorum,"\ncustodia super pueros mundi.\nInnocentes protege, esurientes pasce,\npatientes consola.\nParentibus sapientiam et amorem da\nquo filios suos in viis tuis ducant.\nAmen.`}},
+
+{id:72,cat:'special',
+ title:{en:'Prayer for the Nation',pt:'Oração pela Pátria',la:'Pro Patria'},
+ text:{
+  en:`Almighty God,\nyou have given us this good land\nas our heritage.\nMay we always prove ourselves a people\nmindful of your favors\nand glad to do your will.\nBless our land with honest industry,\nsound learning, and an honorable way of life.\nPreserve our unity in the spirit of peace and charity.\nAmen.`,
+  pt:`Deus Todo-Poderoso,\nVós nos destes esta boa terra\ncomo herança.\nFazei que sejamos sempre um povo\ngratos pelos Vossos favores\ne ávidos de fazer Vossa vontade.\nAbençoai nossa terra com trabalho honesto,\nbom aprendizado e modo de vida honrado.\nPreservai nossa unidade no espírito de paz e caridade.\nAmém.`,
+  la:`Deus omnipotens,\nterram hanc bonam nobis\nin haereditatem dedisti.\nEffice ut semper simus populus\nbeneficiorum tuorum memor\net voluntati tuae faciendae promptus.\nTerram nostram industria honesta,\ndoctrina sana et vita honesta bene dono.\nUnitatem nostram in spiritu pacis et caritatis serva.\nAmen.`}},
+
+{id:73,cat:'special',
+ title:{en:'Prayer for Perseverance',pt:'Oração pela Perseverança',la:'Pro Perseverantia'},
+ text:{
+  en:`O Lord God,\nyou have called me to walk in the way of faith.\nGrant me the gift of perseverance:\nthat I may remain faithful to you\nuntil the end of my life;\nthat I may never abandon\nyour holy grace;\nand that I may finally attain\nthe eternal happiness you have promised.\nAmen.`,
+  pt:`Senhor Deus,\nVós me chamastes a caminhar na via da fé.\nConcedei-me o dom da perseverança:\npara que permaneça fiel a Vós\naté o fim da minha vida;\npara que nunca abandone\na Vossa santa graça;\ne para que finalmente alcance\na eterna felicidade que me prometestes.\nAmém.`,
+  la:`Domine Deus,\nme vocavisti ut in via fidei ambulerem.\nDa mihi donum perseverantiae:\nut tibi fidelis maneat\nusque ad finem vitae meae;\nut gratiam tuam sanctam\nnunquam derelinquam;\nut felicitatem aeternam quam promisisti\ndenique assequar.\nAmen.`}},
+
+{id:74,cat:'special',
+ title:{en:'Prayer for Conversion',pt:'Oração pela Conversão',la:'Pro Conversione'},
+ text:{
+  en:`Lord, our God,\ncreator and author of life,\nyou desire that all come to know you\nand be saved.\nWe pray for all those who have not yet heard your word\nor who have turned from you.\nSend your Spirit to soften their hearts,\nlead them to seek you,\nand grant them the grace\nof conversion and faith.\nAmen.`,
+  pt:`Senhor, nosso Deus,\nCriador e Autor da vida,\nVós desejais que todos vos conheçam\ne sejam salvos.\nOramos por todos os que ainda não ouviram Vossa palavra\nou que se afastaram de Vós.\nEnviai Vosso Espírito para amolecer seus corações,\nconduzis-os a buscar-Vos\ne concedei-lhes a graça\nda conversão e da fé.\nAmém.`,
+  la:`Domine Deus noster,\nconditor et auctor vitae,\nvis ut omnes te cognoscant\net salvi fiant.\nOremus pro omnibus qui verbum tuum\nnondum audierunt\nvel qui a te aversi sunt.\nMitte Spiritum tuum ut eorum corda mollescat,\ntribue eis te quaerere\net gratiam conversionis et fidei concede.\nAmen.`}},
+
+{id:75,cat:'special',
+ title:{en:"St. Patrick's Breastplate",pt:'Couraça de São Patrício',la:'Lorica Sancti Patricii'},
+ text:{
+  en:`I arise today\nthrough a mighty strength:\nthe invocation of the Trinity,\nthrough belief in the Threeness,\nthrough confession of the Oneness\nof the Creator of creation.\n\nChrist be with me, Christ within me,\nChrist behind me, Christ before me,\nChrist beside me, Christ to win me,\nChrist to comfort and restore me.\nChrist beneath me, Christ above me,\nChrist in quiet, Christ in danger,\nChrist in hearts of all that love me,\nChrist in mouth of friend and stranger.\nAmen.`,
+  pt:`Levanto-me hoje\natravés de um poder poderoso:\na invocação da Trindade,\ncrer na Trindade,\nconfessar a Unidade\ndo Criador da criação.\n\nCristo comigo, Cristo dentro de mim,\nCristo atrás de mim, Cristo à minha frente,\nCristo ao meu lado, Cristo para me ganhar,\nCristo para me consolar e restaurar.\nCristo abaixo de mim, Cristo acima de mim,\nCristo na quietude, Cristo no perigo,\nCristo nos corações de todos que me amam,\nCristo na boca do amigo e do estranho.\nAmém.`,
+  la:`Surgo hodie\nper potentiam validam:\ninvocationem Trinitatis,\nfidem in Trinitatem,\nprofessionem unitatis\nConditoris creationis.\n\nChristus mecum, Christus in me,\nChristus post me, Christus ante me,\nChristus iuxta me, Christus mihi vincere,\nChristus mihi solari et restituere.\nChristus sub me, Christus supra me,\nChristus in silentio, Christus in periculo,\nChristus in cordibus omnium me amantium,\nChristus in ore amici et advenae.\nAmen.`}},
+
+{id:76,cat:'special',
+ title:{en:'O Salutaris Hostia',pt:'Ó Hóstia Salvadora',la:'O Salutaris Hostia'},
+ text:{
+  en:`O saving Victim, opening wide\nthe gate of Heaven to man below;\nour foes press hard on every side;\nThine aid supply, Thy strength bestow.\nTo Thy great Name be endless praise,\nimmortal Godhead, One in Three!\nOh grant us endless length of days\nin our true native land with Thee.\nAmen.`,
+  pt:`Ó Hóstia salvadora,\nque abriste aos mortais as portas do céu;\nassolam-nos as guerras inimigas;\ndai-nos o vosso socorro.\nAo Vosso nome seja louvor perpétuo;\nDeus imortal, uno e trino!\nConcedei-nos a vida sem término\nnossa pátria verdadeira convosco.\nAmém.`,
+  la:`O salutaris Hostia,\nquae caeli pandis ostium,\nbella premunt hostilia;\nda robur, fer auxilium.\nUni trinoque Domino\nsit sempiterna gloria,\nqui vitam sine termino\nnobis donet in patria.\nAmen.`}},
+
+{id:77,cat:'special',
+ title:{en:'Tantum Ergo',pt:'Tantum Ergo',la:'Tantum Ergo'},
+ text:{
+  en:`Down in adoration falling,\nLo! the sacred Host we hail,\nLo! o'er ancient forms departing,\nnewer rites of grace prevail;\nfaith for all defects supplying\nwhere the feeble senses fail.\nTo the everlasting Father,\nand the Son Who reigns on high\nwith the Holy Ghost proceeding\nforth from each eternally,\nbe salvation, honor, blessing,\nmight, and endless majesty.\nAmen.`,
+  pt:`Curvemo-nos todos, pois,\ne ao grande Sacramento\nprestemos adoração;\ne a antigo documento\nceda o novo testamento;\nà fé, o juízo humano.\nAo Pai eterno e ao Filho\nloor e jubilação,\nglória também ao Santo\nEspírito, que os dois procedem;\ne os três uma igual salvação,\nbenedição e poder.\nAmém.`,
+  la:`Tantum ergo Sacramentum\nveneremur cernui,\net antiquum documentum\nnovo cedat ritui;\npraestet fides supplementum\nsensuum defectui.\nGenitóri, Genitóque\nlaus et jubilatio,\nsalus, honor, virtus quoque\nsit et benedictio;\nprocedenti ab utroque\ncompar sit laudatio.\nAmen.`}},
+
+{id:78,cat:'special',
+ title:{en:'Prayer for Unity',pt:'Oração pela Unidade',la:'Pro Unitate'},
+ text:{
+  en:`O Lord Jesus Christ,\nwho said to your apostles:\n"Peace I leave with you, my peace I give to you,"\ngrant to your Church unity and peace.\nBring together what is divided,\nstrengthen what is weak,\nrenew what has grown old.\nMay all who believe in you be one,\nso that the world may believe\nthat you were sent by the Father.\nAmen.`,
+  pt:`Senhor Jesus Cristo,\nque dissestes a Vossos apóstolos:\n"Deixo-vos a paz, dou-vos a minha paz,"\ndai à Vossa Igreja unidade e paz.\nReuni o que está dividido,\nfortificai o que está fraco,\nrenovai o que envelheceu.\nFazei que todos os que crêem em Vós sejam um,\npara que o mundo creia\nque Vós fostes enviado pelo Pai.\nAmém.`,
+  la:`Domine Iesu Christe,\nqui apostolis dixisti:\n"Pacem relinquo vobis, pacem meam do vobis,"\nEcclesiae tuae unitatem et pacem da.\nQuod divisum est congrega,\nquod infirmum est robora,\nquod vetus est renova.\nFac ut omnes qui in te credunt unum sint,\nut mundus credat\nte a Patre missum esse.\nAmen.`}},
+
+{id:79,cat:'special',
+ title:{en:'Examination of Conscience Prayer',pt:'Oração para o Exame de Consciência',la:'Ad Examen Conscientiae'},
+ text:{
+  en:`Come, Holy Spirit,\nlight of my soul.\nHelp me to see clearly\nthe state of my soul before God.\nShow me where I have fallen short,\nwhere I have sinned in thought, word, or deed,\nwhere I have failed to do good.\nGive me true sorrow for my sins\nand a firm purpose of amendment.\nPrepare me to receive Your mercy\nin the Sacrament of Reconciliation.\nAmen.`,
+  pt:`Vinde, Espírito Santo,\nluz da minha alma.\nAjudai-me a ver claramente\no estado da minha alma perante Deus.\nMostrai-me onde falhei,\nonde pequei em pensamentos, palavras ou obras,\nonde deixei de fazer o bem.\nDai-me verdadeiro arrependimento pelos meus pecados\ne firme propósito de emenda.\nPreparai-me para receber Vossa misericórdia\nno Sacramento da Reconciliação.\nAmém.`,
+  la:`Veni, Sancte Spiritus,\nlux animae meae.\nDa mihi clare videre\nstatum animae meae coram Deo.\nOstende ubi defeci,\nubi peccavi cogitatione, verbo vel opere,\nubi bonum omisi.\nVeram paenitentiam mihi da\net firmum emendationis propositum.\nPraepara me ut misericordiam tuam\nin Sacramento Reconciliationis recipiam.\nAmen.`}},
+
+{id:80,cat:'special',
+ title:{en:'Final Blessing / Ite Missa Est',pt:'Ida e Bênção Final',la:'Ite Missa Est'},
+ text:{
+  en:`Priest: The Mass is ended, go in peace.\nPeople: Thanks be to God.\n\nMay almighty God bless you,\nthe Father, and the Son,\nand the Holy Spirit.\nAmen.\n\nGo and announce the Gospel of the Lord.\nOr: Go in peace, glorifying the Lord by your life.\nOr: Go in peace.\nThanks be to God.`,
+  pt:`Sacerdote: Ide, a missa está encerrada.\nPovo: Graças a Deus.\n\nO Deus Todo-Poderoso vos abençoe:\nPai, Filho e Espírito Santo.\nAmém.\n\nIde anunciar o Evangelho do Senhor.\nOu: Ide em paz, glorificando o Senhor com a vossa vida.\nOu: Ide em paz.\nGraças a Deus.`,
+  la:`Sacerdos: Ite missa est.\nPopulus: Deo gratias.\n\nBenedicat vos omnipotens Deus,\nPater et Filius\net Spiritus Sanctus.\nAmen.\n\nIte ad Evangelium Domini annuntiandum.\nVel: Ite in pace, glorificando vita vestra Dominum.\nVel: Ite in pace.\nDeo gratias.`}},
+
+{id:81,cat:'mass',
+ title:{en:'Eucharistic Prayer (Preface Dialogue)',pt:'Prefácio Eucarístico',la:'Praefatio Eucharistica'},
+ text:{
+  en:`Priest: The Lord be with you.\nPeople: And with your spirit.\nPriest: Lift up your hearts.\nPeople: We lift them up to the Lord.\nPriest: Let us give thanks to the Lord our God.\nPeople: It is right and just.\n\nIt is truly right and just,\nour duty and our salvation,\nalways and everywhere to give you thanks,\nLord, holy Father,\nalmighty and eternal God,\nthrough Christ our Lord.`,
+  pt:`Sacerdote: O Senhor esteja convosco.\nPovo: Ele está no meio de nós.\nSacerdote: Corações ao alto.\nPovo: O nosso coração está em Deus.\nSacerdote: Demos graças ao Senhor nosso Deus.\nPovo: É nosso dever e nossa salvação.\n\nÉ verdadeiramente nosso dever,\ne caminho de salvação,\ngratificar-Vos em todo tempo e lugar,\nSenhor, Pai Santo,\nDeus Todo-Poderoso e Eterno,\npor Cristo Nosso Senhor.`,
+  la:`Sacerdos: Dominus vobiscum.\nPopulus: Et cum spiritu tuo.\nSacerdos: Sursum corda.\nPopulus: Habemus ad Dominum.\nSacerdos: Gratias agamus Domino Deo nostro.\nPopulus: Dignum et iustum est.\n\nVere dignum et iustum est,\naequum et salutare,\nnos tibi semper et ubique gratias agere:\nDomine, sancte Pater,\nomnipoens aeterne Deus,\nper Christum Dominum nostrum.`}},
+
+{id:82,cat:'mass',
+ title:{en:'Lamb of God (Extended)',pt:'Cordeiro de Deus (Completo)',la:'Agnus Dei (Plena)'},
+ text:{
+  en:`Behold the Lamb of God,\nbehold him who takes away the sins of the world.\nBlessed are those called to the supper of the Lamb.\n\nLord, I am not worthy\nthat you should enter under my roof,\nbut only say the word\nand my soul shall be healed.\n\nLamb of God, you take away the sins of the world,\nhave mercy on us.\nLamb of God, you take away the sins of the world,\nhave mercy on us.\nLamb of God, you take away the sins of the world,\ngrant us peace.`,
+  pt:`Eis o Cordeiro de Deus,\neis aquele que tira o pecado do mundo.\nBem-aventurados os convidados para a ceia do Senhor.\n\nSenhor, não sou digno\nde que entreis em minha morada,\nmas dizei uma só palavra\ne serei salvo.\n\nCordeiro de Deus, que tirais o pecado do mundo,\ntende piedade de nós.\nCordeiro de Deus, que tirais o pecado do mundo,\ntende piedade de nós.\nCordeiro de Deus, que tirais o pecado do mundo,\ndai-nos a paz.`,
+  la:`Ecce Agnus Dei,\necce qui tollit peccata mundi.\nBeati qui ad cenam Agni vocati sunt.\n\nDomine, non sum dignus,\nut intres sub tectum meum,\nsed tantum dic verbo,\net sanabitur anima mea.\n\nAgnus Dei, qui tollis peccata mundi,\nmiserere nobis.\nAgnus Dei, qui tollis peccata mundi,\nmiserere nobis.\nAgnus Dei, qui tollis peccata mundi,\ndona nobis pacem.`}},
+
+{id:83,cat:'daily',
+ title:{en:'Prayer for the Pope',pt:'Oração pelo Papa',la:'Pro Summo Pontifice'},
+ text:{
+  en:`O Lord, source of eternal life and truth,\ngive to your shepherd, our Pope,\na spirit of courage and right judgment,\na spirit of knowledge and love.\nBy governing with fidelity those entrusted to his care,\nmay he, as successor to the Apostle Peter\nand Vicar of Christ,\nbuild your Church into a sacrament of unity, love, and peace.\nAmen.`,
+  pt:`Senhor, fonte da vida eterna e da verdade,\ndai a Vosso pastor, nosso Papa,\num espírito de coragem e discernimento,\num espírito de conhecimento e amor.\nGoverrnado com fidelidade os que lhe são confiados,\npossa ele, como sucessor do Apóstolo Pedro\ne Vigário de Cristo,\nconstruir Vossa Igreja como sacramento de unidade,\namor e paz.\nAmém.`,
+  la:`Domine, fons vitae aeternae et veritatis,\nda pastori tuo, Summo Pontifici nostro,\nspiritum fortitudinis et recti iudicii,\nspiritum scientiae et amoris.\nIn fidelitate gubernando creditos sibi,\nut successor Apostoli Petri\net Vicarius Christi\nEcclesiam tuam in sacramentum\nunitatis, amoris et pacis aedificet.\nAmen.`}},
+
+{id:84,cat:'special',
+ title:{en:'Prayer for the Sick',pt:'Oração pelos Doentes',la:'Pro Infirmis'},
+ text:{
+  en:`Most merciful Jesus, lover of souls,\nI pray You, by the agony of Your most Sacred Heart\nand by the sorrows of Your Immaculate Mother,\ncleanse in Your Blood the sinners of the whole world\nwho are now in their agony\nand who are to die today.\nHeart of Jesus, once in agony, have mercy on the dying.\nHave mercy also on all who are sick in body or soul.\nAmen.`,
+  pt:`Misericordiosíssimo Jesus, amante das almas,\npesso-Vos, pela agonia do Vosso Santíssimo Coração\ne pela dor de Vossa Mãe Imaculada,\npurificai no Vosso Sangue\nos pecadores de todo o mundo\nque agora estão em agonia e morrerão hoje.\nCoração de Jesus, que tantas angústias sofreu,\ntende piedade dos agonizantes.\nTende piedade também de todos os que sofrem\nem corpo ou em alma.\nAmém.`,
+  la:`Iesu misericordiosissime, amator animarum,\nrogo te per agoniam Cordis tui Sacratissimi\net per dolores Matris tuae Immaculatae,\nlava in Sanguine tuo peccatores totius mundi\nqui nunc in agonia sunt et hodie morituri sunt.\nCor Iesu, in agonia positu, miserere morientium.\nMiserere quoque omnibus qui in corpore vel anima aegrotant.\nAmen.`}},
+
+{id:85,cat:'special',
+ title:{en:'Prayer for the Dying',pt:'Oração pelos Moribundos',la:'Pro Moribundis'},
+ text:{
+  en:`Go forth, Christian soul,\nfrom this world\nin the name of God the almighty Father,\nwho created you,\nin the name of Jesus Christ, Son of the living God,\nwho suffered for you,\nin the name of the Holy Spirit,\nwho was poured out upon you.\nGo forth, faithful Christian!\nMay you live in peace this day,\nmay your home be with God in Zion,\nwith Mary, the virgin Mother of God,\nwith Joseph and all the angels and saints.\nAmen.`,
+  pt:`Parte desta vida, alma cristã,\nem nome de Deus Pai Todo-Poderoso,\nque te criou;\nem nome de Jesus Cristo, Filho do Deus vivo,\nque sofreu por ti;\nem nome do Espírito Santo,\nque foi derramado sobre ti.\nParte, cristão fiel!\nViva em paz neste dia;\nseja a tua morada em Deus, em Sião,\ncom Maria, Mãe virgem de Deus,\ncom José e com todos os anjos e santos.\nAmém.`,
+  la:`Proficiscere, anima Christiana, de hoc mundo!\nIn nomine Dei Patris omnipotentis,\nqui te creavit;\nin nomine Iesu Christi, Filii Dei vivi,\nqui pro te passus est;\nin nomine Spiritus Sancti,\nqui in te effusus est.\nProficiscere, Christiane!\nIn pace sis hodie;\nsit locus tuus in Deo, in Sion,\ncum Maria, Matre Dei Virgine,\ncum Ioseph et omnibus Angelis et Sanctis.\nAmen.`}},
+
+// round up to 100+
+{id:86,cat:'marian',
+ title:{en:'Immaculate Conception Prayer',pt:'Oração à Imaculada Conceição',la:'Ad Immaculatam Conceptionem'},
+ text:{
+  en:`O God, who by the Immaculate Conception of the Virgin\nprepared a worthy dwelling for Your Son,\ngrant, we pray, that as You preserved her\nfrom every stain of sin,\nso, through her intercession,\nwe, too, may be cleansed and admitted to Your presence.\nThrough our Lord Jesus Christ, Your Son,\nwho lives and reigns with You\nin the unity of the Holy Spirit,\none God, for ever and ever.\nAmen.`,
+  pt:`Ó Deus, que pela Imaculada Conceição da Virgem\npreparastes uma digna morada para o Vosso Filho,\nconcedei-nos, pedimos,\nque, como a preservastes de toda mancha de pecado,\nassim também, por Sua intercessão,\npossamos ser purificados e admitidos à Vossa presença.\nPelo nosso Senhor Jesus Cristo, Vosso Filho,\nque convosco vive e reina\nna unidade do Espírito Santo,\nDeus, por todos os séculos dos séculos.\nAmém.`,
+  la:`Deus, qui per Immaculatam Virginis Conceptionem\ndignum Filio tuo habitaculum praeparasti,\nquaesumus ut qui ex morte eiusdem Filii tui praevisa\neam ab omni labe praeservasti,\nnos quoque mundos eius intercessione\nad te pervenire concedas.\nPer Dominum nostrum Iesum Christum Filium tuum,\nqui tecum vivit et regnat\nin unitate Spiritus Sancti,\nDeus per omnia saecula saeculorum.\nAmen.`}},
+
+{id:87,cat:'basic',
+ title:{en:'Act of Spiritual Communion (St. Alphonsus)',pt:'Comunhão Espiritual de São Afonso',la:'Communio Spiritualis S. Alfonsi'},
+ text:{
+  en:`My Jesus, I believe that You are present\nin the Most Holy Sacrament.\nI love You above all things\nand I desire to receive You into my soul.\nSince I cannot at this moment\nreceive You sacramentally,\ncome at least spiritually into my heart.\nI embrace You as if You were already there\nand unite myself wholly to You.\nNever permit me to be separated from You.\nAmen.`,
+  pt:`Meu Jesus, acredito que estais presente\nno Santíssimo Sacramento.\nAmo-Vos sobre todas as coisas\ne desejo receber-Vos em minha alma.\nJá que não posso neste momento\nreceber-Vos sacramentalmente,\nvinde ao menos espiritualmente ao meu coração.\nAbraço-Vos como se já tivésseis vindo\ne uno-me inteiramente a Vós.\nJamais permitais que me separe de Vós.\nAmém.`,
+  la:`Mi Iesu, credo te in Sanctissimo Sacramento praesentem esse.\nTe amo super omnia et animam meam tibi desidero.\nSacramentaliter te suscipere cum modo non possim,\nveni saltem spiritualiter in cor meum.\nTe amplecto, quasi iam adveneris,\nmeque tibi penitus unio.\nPermitte ne umquam a te separar.\nAmen.`}},
+
+{id:88,cat:'daily',
+ title:{en:'De Profundis (Psalm 130)',pt:'De Profundis (Salmo 130)',la:'De Profundis (Psalmus 129)'},
+ text:{
+  en:`Out of the depths I cry to You, O Lord;\nLord, hear my voice!\nLet Your ears be attentive\nto the voice of my supplication.\nIf You, O Lord, mark our iniquities,\nLord, who can stand?\nBut with You there is forgiveness,\nthat You may be revered.\nI trust in the Lord;\nmy soul trusts in His word.\nMore than sentinels wait for the dawn,\nlet Israel wait for the Lord.\nFor with the Lord there is kindness\nand with Him full redemption;\nAnd He will redeem Israel\nfrom all their iniquities.\nEternal rest grant unto them, O Lord,\nand let perpetual light shine upon them.\nAmen.`,
+  pt:`Das profundezas clamo a Vós, Senhor;\nSenhor, ouvi a minha voz!\nEstejam os Vossos ouvidos atentos\nà voz da minha súplica.\nSe guardardes, Senhor, as nossas faltas,\nquem poderá subsistir?\nMas em Vós encontra-se o perdão,\npara que Vos possamos temer.\nConfio no Senhor,\nminha alma confia em Sua palavra.\nMinha alma espera o Senhor\nmais do que os guardas esperam a aurora.\nPois com o Senhor há misericórdia\ne plena redenção;\nEle redimirá Israel\nde todas as suas iniquidades.\nEterno descanso concedei a eles, Senhor,\ne a luz perpétua brilhe sobre eles.\nAmém.`,
+  la:`De profundis clamavi ad te, Domine;\nDomine, audi vocem meam!\nFiant aures tuae intendentes\nin vocem deprecationis meae.\nSi iniquitates observaveris, Domine,\nDomine, quis sustinebit?\nSed apud te propitiatio est,\nut timearis.\nSustinui te, Domine;\nsustinuit anima mea in verbum eius.\nSperavit anima mea in Domino\nmagis quam custodes in aurora.\nQua apud Dominum misericordia\net copiosa apud eum redemptio;\net ipse redimet Israel\nex omnibus iniquitatibus eius.\nRequiem aeternam dona eis, Domine,\net lux perpetua luceat eis.\nAmen.`}},
+
+{id:89,cat:'saints',
+ title:{en:'Prayer to St. Christopher',pt:'Oração a São Cristóvão',la:'Ad Sanctum Christophorum'},
+ text:{
+  en:`O glorious Saint Christopher,\nyou have inherited a name\nthat reminds us that you once carried Christ.\nCarry us also through all our trials and tribulations,\nguide us in our travels, both physical and spiritual,\nand help us to bear our crosses\nwith patience and fortitude\nas we journey toward our eternal home.\nAmen.`,
+  pt:`Ó glorioso São Cristóvão,\nvós herdiastes um nome\nque nos lembra que outrora carregastes Cristo.\nCarregai-nos também por todas as nossas provações,\nguiai-nos em nossas viagens, tanto físicas quanto espirituais,\ne ajudai-nos a carregar nossas cruzes\ncom paciência e fortaleza\nenquanto caminhamos para nossa morada eterna.\nAmém.`,
+  la:`O gloriose Sancte Christophore,\ntuo nomine haereditavisti\nquod nos admonet te olim Christum portavisse.\nNos quoque per omnes tribulationes porta,\nter in itineribus sive corporalibus sive spiritualibus duc,\net nos in crucibus portandis\npatientia et fortitudine adiuva\ndum ad patriam aeternam pergimus.\nAmen.`}},
+
+{id:90,cat:'special',
+ title:{en:'Prayer for Divine Guidance',pt:'Oração para a Orientação Divina',la:'Pro Divina Directione'},
+ text:{
+  en:`O Lord God,\nyou are the source of all wisdom and truth.\nAs I face the decisions before me,\ngrant me clarity of mind,\npurity of heart,\nand strength of will\nto discern Your will.\nLet your Holy Spirit be my guide,\nthat all I do may be according to Your perfect plan.\nAmen.`,
+  pt:`Senhor Deus,\nVós sois a fonte de toda sabedoria e verdade.\nDiante das decisões que tenho de tomar,\nconcedei-me clareza de mente,\npureza de coração\ne força de vontade\npara discernir a Vossa vontade.\nSeja o Vosso Espírito Santo meu guia,\npara que tudo o que faça esteja de acordo\ncom o Vosso plano perfeito.\nAmém.`,
+  la:`Domine Deus,\ntu es fons omnis sapientiae et veritatis.\nDum decisiones ante me sunt,\nda mihi claritatem mentis,\npuritatem cordis\net robur voluntatis\nut voluntatem tuam discernam.\nSit Spiritus tuus Sanctus dux meus,\nut omnia quae facio\niuxta perfectum consilium tuum sint.\nAmen.`}},
+
+{id:91,cat:'rosary',
+ title:{en:'Rosary Closing Prayer',pt:'Oração Final do Rosário',la:'Ad Finem Rosarii'},
+ text:{
+  en:`O God, whose Only-begotten Son\nby His life, death, and resurrection\nhas purchased for us the rewards of eternal salvation,\ngrant we beseech Thee\nthat meditating upon these mysteries\nof the most holy Rosary of the Blessed Virgin Mary,\nwe may imitate what they contain\nand obtain what they promise.\nThrough Christ our Lord.\nAmen.`,
+  pt:`Ó Deus, cujo Filho Unigênito\npela Sua vida, morte e ressurreição\nnos mereceu as recompensas da salvação eterna,\nconcedei-nos, pedimos,\nque, meditando sobre esses mistérios\ndo Santíssimo Rosário da Bem-Aventurada Virgem Maria,\npossamos imitar o que eles contêm\ne obter o que prometem.\nPelo Cristo Nosso Senhor.\nAmém.`,
+  la:`Deus, cuius unigenitus Filius\nper vitam, mortem et resurrectionem suam\nnobis salutis aeternae praemia comparavit,\nconcede quaesumus\nut haec mysteria Sanctissimo Rosario\nBeatae Mariae Virginis recolentes,\net imitemur quod continent\net quod promittunt assequamur.\nPer Christum Dominum nostrum.\nAmen.`}},
+
+{id:92,cat:'basic',
+ title:{en:"Lord's Prayer (Traditional)",pt:'Padre-Nosso (Tradicional)',la:'Pater Noster (Classicus)'},
+ text:{
+  en:`Our Father, which art in heaven,\nHallowed be thy Name.\nThy Kingdom come.\nThy will be done in earth,\nAs it is in heaven.\nGive us this day our daily bread.\nAnd forgive us our trespasses,\nAs we forgive them that trespass against us.\nAnd lead us not into temptation,\nBut deliver us from evil.\nFor thine is the kingdom,\nthe power, and the glory,\nFor ever and ever.\nAmen.`,
+  pt:`Pai nosso que estais no Céu,\nsantificado seja o Vosso nome.\nVenha o Vosso reino,\nseja feita a Vossa vontade,\nassim na terra como no Céu.\nO pão nosso de cada dia nos dai hoje.\nPerdoai-nos as nossas ofensas,\nassim como nós perdoamos\na quem nos tem ofendido.\nE não nos deixeis cair em tentação,\nmas livrai-nos do mal.\nPois Vosso é o reino,\no poder e a glória,\npara sempre.\nAmém.`,
+  la:`Pater noster, qui es in caelis,\nsanctificetur nomen tuum.\nAdveniat regnum tuum.\nFiat voluntas tua,\nsicut in caelo et in terra.\nPanem nostrum quotidianum da nobis hodie.\nEt dimitte nobis debita nostra,\nsicut et nos dimittimus\ndebitoribus nostris.\nEt ne nos inducas in tentationem,\nsed libera nos a malo.\nQuia tuum est regnum,\net potestas et gloria,\nin saecula.\nAmen.`}},
+
+{id:93,cat:'daily',
+ title:{en:'Prayer for the Souls in Purgatory',pt:'Oração pelas Almas do Purgatório',la:'Pro Animabus Purgatorii'},
+ text:{
+  en:`O God of mercy and compassion,\nlook with pity on the souls of the faithful\nwho have departed this life in Your grace,\nbut who are still detained in Purgatory.\nGrant them the full payment of their debt,\nthat they may be released\nand come swiftly to that place of perfect rest and peace,\nwhere You live and reign for ever and ever.\nAmen.`,
+  pt:`Ó Deus de misericórdia e compaixão,\nolhai com piedade pelas almas dos fiéis\nque partiram desta vida na Vossa graça,\nmas que ainda estão detidas no Purgatório.\nConcedei-lhes o pleno pagamento de sua dívida,\npara que possam ser libertadas\ne virem rapidamente ao lugar de descanso e paz perfeitos,\nonde Vós viveis e reinais por todos os séculos dos séculos.\nAmém.`,
+  la:`Deus misericordiae et pietatis,\nrespice propitius animas fidelium\nqui de hac vita in gratia tua transierunt,\nqui tamen adhuc in purgatorio detinentur.\nDa eis plenam solutionem debiti,\nut liberentur\net velociter ad locum perfectae quietis et pacis perveniant\nubi tu vivis et regnas in saecula saeculorum.\nAmen.`}},
+
+{id:94,cat:'marian',
+ title:{en:'Hail Holy Queen (Long Version)',pt:'Salve Rainha (Versão Longa)',la:'Salve Regina (Plena)'},
+ text:{
+  en:`Hail, holy Queen, Mother of mercy,\nour life, our sweetness, and our hope!\nTo thee do we cry, poor banished children of Eve;\nto thee do we send up our sighs,\nmourning and weeping in this valley of tears.\nTurn, then, most gracious Advocate,\nthine eyes of mercy toward us;\nand after this, our exile,\nshow unto us the blessed fruit of thy womb, Jesus.\nO clement, O loving, O sweet Virgin Mary!\n\nPray for us, O Holy Mother of God,\nthat we may be made worthy\nof the promises of Christ.\nAmen.`,
+  pt:`Salve, Rainha, Mãe de misericórdia,\nvida, doçura e esperança nossa, salve!\nA Vós bradamos, os degredados filhos de Eva;\na Vós suspiramos, gemendo e chorando\nneste vale de lágrimas.\nEia, pois, advogada nossa,\nesses Vossos olhos misericordiosos a nós volvei;\ne depois deste desterro,\nmostrai-nos Jesus, o bendito fruto do vosso ventre.\nÓ clemente, ó piedosa, ó doce sempre Virgem Maria!\n\nRogai por nós, Santa Mãe de Deus,\npara que sejamos dignos das promessas de Cristo.\nAmém.`,
+  la:`Salve, Regina, Mater misericordiae,\nvita, dulcedo et spes nostra, salve!\nAd te clamamus, exsules filii Hevae;\nad te suspiramus, gementes et flentes\nin hac lacrimarum valle.\nEia ergo, Advocata nostra,\nillos tuos misericordes oculos ad nos converte;\net Iesum, benedictum fructum ventris tui,\nnobis post hoc exsilium ostende.\nO clemens, O pia, O dulcis Virgo Maria!\n\nOra pro nobis, Sancta Dei Genitrix,\nut digni efficiamur promissionibus Christi.\nAmen.`}},
+
+{id:95,cat:'special',
+ title:{en:'Novena Prayer (General)',pt:'Oração de Novena (Geral)',la:'Oratio Novenalis'},
+ text:{
+  en:`O Lord, I come before you\nfor nine days of prayer,\ntrusting in Your mercy and love.\nYou know my needs before I speak them.\nGrant me the grace to pray with faith,\nto wait with patience,\nand to accept Your will with joy.\nHear my petition (mention intention)\nif it is according to Your will.\nAnd above all, grant me the grace\nto love You and serve You always.\nAmen.`,
+  pt:`Ó Senhor, venho diante de Vós\npara nove dias de oração,\nconfiando em Vossa misericórdia e amor.\nVós conheceis minhas necessidades antes que as diga.\nConcedei-me a graça de orar com fé,\nde aguardar com paciência\ne de aceitar a Vossa vontade com alegria.\nEscutai minha petição (mencionar intenção)\nse for de acordo com Vossa vontade.\nE, sobretudo, concedei-me a graça\nde Vos amar e servir sempre.\nAmém.`,
+  la:`Domine, coram te venio\npro novem diebus orationis,\nin misericordia et amore tuo confidens.\nNecessitates meas antequam eas dico nosti.\nDa mihi gratiam fide orandi,\npatienter expectandi\net voluntatem tuam cum laetitia accipiendi.\nAudi petitionem meam (intentionem dices)\nsi secundum voluntatem tuam sit.\nEt super omnia, da mihi gratiam\nte amare et tibi semper servire.\nAmen.`}},
+
+{id:96,cat:'saints',
+ title:{en:'Prayer to St. Anne',pt:'Oração a Santa Ana',la:'Ad Sanctam Annam'},
+ text:{
+  en:`Good Saint Anne,\nmother of the Blessed Virgin Mary\nand grandmother of Our Lord Jesus Christ,\nI come to you with confidence.\nYou know the joys and sorrows of family life.\nIntercede for my family,\nfor all parents and grandparents,\nand for all who are searching\nfor the meaning of their lives.\nObtain for us the grace to love God\nwith our whole heart.\nAmen.`,
+  pt:`Boa Santa Ana,\nmãe da Santíssima Virgem Maria\ne avó de Nosso Senhor Jesus Cristo,\nvenho a Vós com confiança.\nConheceis as alegrias e tristezas da vida familiar.\nIntercedei pela minha família,\npor todos os pais e avós,\ne por todos que buscam\no sentido de suas vidas.\nAlcancei-nos a graça de amar a Deus\nde todo o coração.\nAmém.`,
+  la:`Bona Sancta Anna,\nMater Beatae Virginis Mariae\net Avia Domini nostri Iesu Christi,\nad te cum fiducia accedo.\nGaudia et dolores vitae familiaris nosti.\nPro familia mea intercede,\npro parentibus et avis omnibus,\net pro omnibus qui\nsensus vitae suae quaerunt.\nGratiam nobis impetres\nut Deum toto corde amemus.\nAmen.`}},
+
+{id:97,cat:'daily',
+ title:{en:'Prayer for God\'s Presence',pt:'Oração pela Presença de Deus',la:'Pro Praesentia Dei'},
+ text:{
+  en:`Lord God,\nhelpme to be aware of Your presence\nthroughout this day.\nIn the midst of my busyness,\nlet me pause to remember You.\nIn my joys, let me thank You.\nIn my sorrows, let me trust You.\nIn my decisions, let me seek Your wisdom.\nNever let me forget that I am Your child\nand that You are always with me.\nAmen.`,
+  pt:`Senhor Deus,\najudai-me a estar consciente da Vossa presença\ndurante todo este dia.\nNo meio da minha agitação,\nfazei-me parar para me lembrar de Vós.\nNas minhas alegrias, deixai-me agradecer-Vos.\nNas minhas tristezas, deixai-me confiar em Vós.\nNas minhas decisões, deixai-me buscar Vossa sabedoria.\nNunca me deixeis esquecer que sou Vosso filho\ne que estais sempre comigo.\nAmém.`,
+  la:`Domine Deus,\nadiuva me praesentiam tuam\nper totum hunc diem agnoscere.\nIn medio occupationum mearum,\nme sistere iube ut tui meminerim.\nIn gaudiis meis, gratias tibi agam.\nIn doloribus meis, tibi confidam.\nIn decisionibus meis, sapientiam tuam quaeram.\nNumquam me oblivisci sine me sis filium tuum esse\net te semper mecum esse.\nAmen.`}},
+
+{id:98,cat:'saints',
+ title:{en:'Prayer to St. Peter',pt:'Oração a São Pedro',la:'Ad Sanctum Petrum'},
+ text:{
+  en:`O glorious Apostle Saint Peter,\nwho by the special grace of God\nand the singular privilege of Christ\nwas constituted the foundation and head of the Church,\nI humbly implore your powerful intercession.\nObtain for me a living and steadfast faith,\na burning love for God and neighbor,\nand the courage to profess my faith openly.\nAmen.`,
+  pt:`Ó glorioso Apóstolo São Pedro,\nque pela graça especial de Deus\ne pelo singular privilégio de Cristo\nfostes constituído fundamento e cabeça da Igreja,\nhumblement imploro vossa poderosa intercessão.\nAlcancei-me uma fé viva e firme,\num amor ardente a Deus e ao próximo\ne a coragem de professar minha fé abertamente.\nAmém.`,
+  la:`O gloriose Apostole Sancte Petre,\nqui speciali gratia Dei\net singulari Christi privilegio\nfundamentum et caput Ecclesiae constitutus es,\npotentiam intercessionem tuam humiliter imploro.\nFidem vivam et stabilem,\namorem ardentem Dei et proximi\net animum fidei meae aperte profitendae nobis impetres.\nAmen.`}},
+
+{id:99,cat:'special',
+ title:{en:'Prayer Before a Journey',pt:'Oração Antes de uma Viagem',la:'Ante Iter'},
+ text:{
+  en:`Lord God, you guided Abraham and Sarah\non all their wanderings;\nyou led Moses and the Hebrew people\nthrough the desert.\nBless me as I begin this journey.\nBe with me along the way,\nguard me from all dangers,\nbring me safely to my destination,\nand home again in Your own good time.\nAmen.`,
+  pt:`Senhor Deus, Vós guiastes Abraão e Sara\nem todos os seus caminhos;\nconduzistes Moisés e o povo hebreu\npelo deserto.\nAbençoai-me ao iniciar esta viagem.\nEstai comigo ao longo do caminho,\nguardai-me de todos os perigos,\nconduzis-me em segurança ao meu destino\ne de volta ao lar a seu devido tempo.\nAmém.`,
+  la:`Domine Deus, qui Abraham et Saram\nin omnibus peregrinationibus duxisti;\nqui Moysen et populum Hebraeum\nper desertum duxisti.\nBenedic mihi dum iter incipiam.\nMecum per viam sis,\na periculis omnibus me tege,\nad destinationem tuto me perducas\net domum iterum suo tempore.\nAmen.`}},
+
+{id:100,cat:'special',
+ title:{en:'Prayer of Consecration (Final Blessing)',pt:'Oração de Consagração Final',la:'Consecratio Finalis'},
+ text:{
+  en:`Lord Jesus Christ,\nI consecrate to You this day\nmy mind and its thoughts,\nmy heart and its affections,\nmy will and its decisions,\nmy body and its actions,\nmy soul and all that I am.\nMay everything I think and say and do today\nbe for Your glory and in accord with Your will.\nMary, my Mother, protect me.\nMy Guardian Angel, guide me.\nAll the saints, pray for me.\nAmen.`,
+  pt:`Senhor Jesus Cristo,\nconsagro-Vos neste dia\nminha mente e seus pensamentos,\nmeu coração e seus afetos,\nminha vontade e suas decisões,\nmeu corpo e suas ações,\nminha alma e tudo o que sou.\nQue tudo o que pensar, disser e fizer hoje\nseja para Vossa glória e em conformidade com Vossa vontade.\nMaria, minha Mãe, protegei-me.\nMeu Anjo da Guarda, guiai-me.\nTodos os santos, orai por mim.\nAmém.`,
+  la:`Domine Iesu Christe,\nhidie tibi consacro\nmentem meam et cogitationes eius,\ncor meum et affectus eius,\nvoluntatem meam et decisiones eius,\ncorpus meum et actiones eius,\nanimam meam et quidquid sum.\nOmnia quae hodie cogito, dico et facio\nsin ad gloriam tuam et secundum voluntatem tuam.\nMaria, Mater mea, me protege.\nAngele Custode mi, me duc.\nOmnes Sancti, orate pro me.\nAmen.`}},
+
+// Bonus prayers 101-110
+{id:101,cat:'virtue',
+ title:{en:'Act of Contrition (Short)',pt:'Ato de Contrição (Curto)',la:'Actus Contritionis Brevis'},
+ text:{
+  en:`O my God, I am sorry for my sins\nbecause I have offended You.\nI know I should love You above all things.\nHelp me to do penance,\nto do better,\nand to avoid anything\nthat might lead me to sin.\nAmen.`,
+  pt:`Ó meu Deus, estou arrependido dos meus pecados\nporquanto Vos ofendi.\nSei que devo Vos amar acima de todas as coisas.\nAjudai-me a fazer penitência,\na melhorar,\ne a evitar tudo\nque me possa levar ao pecado.\nAmém.`,
+  la:`O Deus meus, doleo pro peccatis meis\nquia te offendi.\nScio me te supra omnia amare debere.\nAdiuva me poenitentiam agere,\nmelius facere,\net omnia vitare\nquae me ad peccandum inducere possint.\nAmen.`}},
+
+{id:102,cat:'rosary',
+ title:{en:'Mysteries of Light Meditation',pt:'Meditação dos Mistérios Luminosos',la:'Meditatio Mysteriorum Luminosorum'},
+ text:{
+  en:`Lord Jesus,\nas we meditate on the Mysteries of Light,\nwe recall your Baptism in the Jordan,\nwhere the Father declared you His beloved Son.\nWe remember Cana,\nwhere your Mother's intercession began your signs.\nWe contemplate your proclamation of the Kingdom,\nyour Transfiguration on the mountain,\nand the gift of yourself in the Eucharist.\nMay these Luminous Mysteries\nilluminate our path to You.\nAmen.`,
+  pt:`Senhor Jesus,\nao meditarmos nos Mistérios Luminosos,\nrecordamos Vosso Batismo no Jordão,\nonde o Pai Vos proclamou Seu Filho amado.\nRecordamos Caná,\nonde a intercessão de Vossa Mãe iniciou Vossos sinais.\nContemplamos Vosso anúncio do Reino,\nVossa Transfiguração no monte,\ne o dom de Vós mesmos na Eucaristia.\nQue estes Mistérios Luminosos\niluminem nosso caminho até Vós.\nAmém.`,
+  la:`Domine Iesu,\ndum Mysteria Luminosa meditamur,\nBaptismum tuum in Iordane recolimus,\nubi Pater te Filium suum dilectum proclamavit.\nCanam meminimus,\nubi intercessio Matris tuae signa tua inchoavit.\nRegni tui proclamationem contemplamur,\nTransfigurationem tuam in monte,\net donum tui ipsius in Eucharistia.\nHaec Mysteria Luminosa\nviam nostram ad te illuminent.\nAmen.`}},
+
+{id:103,cat:'saints',
+ title:{en:'Prayer to Our Lady of Aparecida',pt:'Oração a Nossa Senhora Aparecida',la:'Ad Dominam Nostram Aparecidensem'},
+ text:{
+  en:`Our Lady Aparecida,\nMother of God and our Mother,\nyou were found by simple fishermen\nand have blessed Brazil with your presence.\nLook with love upon your people.\nProtect our families,\nstrengthen the faith of your children,\nand intercede for us before your Son Jesus.\nMay Brazil always be\nunder your mantle of protection.\nAmen.`,
+  pt:`Nossa Senhora Aparecida,\nMãe de Deus e nossa Mãe,\nfostes encontrada por simples pescadores\ne abençoastes o Brasil com Vossa presença.\nOlhai com amor para o Vosso povo.\nProtegeis nossas famílias,\nfortaleceis a fé de Vossos filhos\ne intercedei por nós diante de Vosso Filho Jesus.\nQue o Brasil esteja sempre\nsob Vosso manto de proteção.\nAmém.`,
+  la:`Domina Nostra Aparecidensis,\nMater Dei et Mater nostra,\na piscatoribus simplicibus inventa es\net Brasiliam praesentia tua benedixisti.\nCum amore respice in populum tuum.\nFamilias nostras protege,\nfidem filiorum tuorum robora\net pro nobis apud Filium tuum Iesum intercede.\nSit Brasilia semper\nsub pallio tuo protectionis.\nAmen.`}},
+
+{id:104,cat:'daily',
+ title:{en:'Prayer for Generosity',pt:'Oração pela Generosidade',la:'Pro Generositate'},
+ text:{
+  en:`Teach us, Lord,\nto serve You as You deserve;\nto give and not to count the cost;\nto fight and not to heed the wounds;\nto toil and not to seek for rest;\nto labor and not to ask for reward,\nsave that of knowing\nthat we do Your will.\nAmen.`,
+  pt:`Ensinai-nos, Senhor,\na servi-Vos como mereceis;\na dar sem contar o custo;\na combater sem atender às feridas;\na trabalhar sem buscar repouso;\na servir sem pedir recompensa,\nsenão a de saber\nque fazemos Vossa vontade.\nAmém.`,
+  la:`Doce nos, Domine,\ntibi servire sicut mereris;\ndare et non computare sumptum;\npugnare et non curare vulnera;\nlaborare et non quaerere requiem;\noperari et non petere mercedem,\nnisi id scire\nnos voluntatem tuam facere.\nAmen.`}},
+
+{id:105,cat:'special',
+ title:{en:'Prayer for God\'s Mercy',pt:'Oração pela Misericórdia de Deus',la:'Pro Misericordia Dei'},
+ text:{
+  en:`O Lord, whose mercy is without limit\nand whose love endures for ever,\nhave mercy on me, a sinner.\nRemember not my offenses\nbut remember me in Your love.\nCleanse me of all my sins,\nrenew my heart,\nand fill me with Your Holy Spirit.\nMay I experience Your mercy\nand share it with others.\nAmen.`,
+  pt:`Senhor, cuja misericórdia não tem limites\ne cujo amor dura eternamente,\ntende piedade de mim, pecador.\nNão Vos lembreis das minhas ofensas\nmas lembrai-vos de mim no Vosso amor.\nLimpai-me de todos os meus pecados,\nrenovai meu coração\ne enchei-me de Vosso Espírito Santo.\nQue eu experencie Vossa misericórdia\ne a compartilhe com os outros.\nAmém.`,
+  la:`Domine, cuius misericordia sine fine est\net amor in aeternum manet,\nmiserere mei peccatoris.\nNe meminisse offensarum mearum\nverum mei in amore tuo memento.\nA peccatis omnibus me purga,\ncor meum rénova\net Spiritu Sancto tuo me imple.\nMisericordiam tuam experiar\neamque cum aliis communicem.\nAmen.`}},
+
+// ── NOVAS ORAÇÕES (106-120) ──────────────────────────────────────
+{id:106,cat:'basic',
+ title:{en:'Come Holy Spirit (Veni Sancte Spiritus)',pt:'Vinde, Espírito Santo',la:'Veni Sancte Spiritus'},
+ text:{
+  en:`Come, Holy Spirit, fill the hearts of your faithful\nand kindle in them the fire of your love.\nSend forth your Spirit and they shall be created,\nand you shall renew the face of the earth.\n\nO God, who by the light of the Holy Spirit\ndid instruct the hearts of your faithful,\ngrant us in the same Spirit to be truly wise,\nand ever to rejoice in His consolation.\nThrough Christ our Lord.\nAmen.`,
+  pt:`Vinde, Espírito Santo,\nenchei os corações dos Vossos fiéis\ne acendei neles o fogo do Vosso amor.\nEnviai o Vosso Espírito e serão criados,\ne renovareis a face da terra.\n\nÓ Deus, que iluminastes os corações dos fiéis\npela luz do Espírito Santo,\nconcedei-nos que pelo mesmo Espírito\npossamos saber o que é reto\ne sempre nos alegrarmos\ncom o Seu consolo.\nPelo Cristo Nosso Senhor.\nAmém.`,
+  la:`Veni, Sancte Spiritus,\nreple tuorum corda fidelium,\net tui amoris in eis ignem accende.\nEmitte Spiritum tuum et creabuntur,\net renovabis faciem terrae.\n\nDeus, qui corda fidelium\nSancti Spiritus illustratione docuisti,\nda nobis in eodem Spiritu\nrecta sapere\net de eius semper consolatione gaudere.\nPer Christum Dominum nostrum.\nAmen.`}},
+
+{id:107,cat:'special',
+ title:{en:'Prayer Before Confession',pt:'Oração Antes da Confissão',la:'Ante Confessionem'},
+ text:{
+  en:`O Lord Jesus Christ,\nYou are the Good Shepherd who came to seek the lost.\nI come to You in the Sacrament of Reconciliation,\nhumbly asking for Your mercy.\nGrant me a contrite heart,\na clear mind to confess my sins completely,\nand the grace of true conversion.\nMay this sacrament restore me to full communion\nwith You and Your Church.\nAmen.`,
+  pt:`Senhor Jesus Cristo,\nVós sois o Bom Pastor que veio buscar a ovelha perdida.\nVenho a Vós no Sacramento da Reconciliação,\npedindo humildemente Vossa misericórdia.\nConcedei-me um coração contrito,\numa mente clara para confesar completamente meus pecados\ne a graça da verdadeira conversão.\nFazei que este sacramento me restaure\nà plena comunhão convosco e com Vossa Igreja.\nAmém.`,
+  la:`Domine Iesu Christe,\ntu es Pastor bonus qui periisse quaesivisti.\nAd te venio in Sacramento Reconciliationis,\nhumiliter misericordiam tuam implorans.\nDa mihi cor contritum,\nmentem claram ad peccata mea plene confitenda\net gratiam verae conversionis.\nHoc sacramentum me in plenam communionem\ntecum et Ecclesia tua restituat.\nAmen.`}},
+
+{id:108,cat:'special',
+ title:{en:'Prayer After Confession',pt:'Oração Após a Confissão',la:'Post Confessionem'},
+ text:{
+  en:`Lord Jesus, thank You for the gift of Your forgiveness.\nI believe in Your mercy which has cleansed me\nfrom all my sins.\nGrant me the grace to sin no more\nand to avoid the near occasions of sin.\nStrengthen my will to follow Your commandments\nand to live in Your grace.\nMay I always be grateful\nfor the gift of reconciliation.\nAmen.`,
+  pt:`Senhor Jesus, obrigado pelo dom do Vosso perdão.\nCreio na Vossa misericórdia que me purificou\nde todos os meus pecados.\nConcedei-me a graça de não mais pecar\ne de evitar as ocasiões próximas de pecado.\nFortificai a minha vontade para seguir\nVossos mandamentos e viver na Vossa graça.\nFazei que eu seja sempre grato\npelo dom da reconciliação.\nAmém.`,
+  la:`Domine Iesu, gratias tibi pro dono veniae tuae.\nCredo in misericordiam tuam quae me purgavit\nab omnibus peccatis meis.\nDa mihi gratiam ne amplius peccem\net occasiones peccati proximas evitem.\nVoluntatem meam firma ut mandata tua sequar\net in gratia tua vivam.\nFac me semper gratum\npro dono reconciliationis.\nAmen.`}},
+
+{id:109,cat:'virtue',
+ title:{en:'Litany of Humility',pt:'Ladainha da Humildade',la:'Litania Humilitatis'},
+ text:{
+  en:`O Jesus, meek and humble of heart, hear me.\nFrom the desire of being esteemed — deliver me.\nFrom the desire of being loved — deliver me.\nFrom the desire of being praised — deliver me.\nFrom the desire of being preferred — deliver me.\nFrom the desire of being consulted — deliver me.\nFrom the fear of being humiliated — deliver me.\nFrom the fear of being despised — deliver me.\nFrom the fear of being forgotten — deliver me.\nThat others may be esteemed more than I — grant this.\nThat others may be loved more than I — grant this.\nThat others may be praised and I forgotten — grant this.\nThat I may become holier than I am — grant this.\nJesus, grant me the grace to desire it.\nAmen.`,
+  pt:`Ó Jesus, manso e humilde de coração, ouvi-me.\nDo desejo de ser estimado — livrai-me.\nDo desejo de ser amado — livrai-me.\nDo desejo de ser elogiado — livrai-me.\nDo desejo de ser preferido — livrai-me.\nDo temor de ser humilhado — livrai-me.\nDo temor de ser desprezado — livrai-me.\nDo temor de ser esquecido — livrai-me.\nQue os outros sejam mais estimados que eu — concedei-me.\nQue os outros sejam mais amados que eu — concedei-me.\nQue os outros sejam elogiados e eu esquecido — concedei-me.\nQue eu me torne mais santo do que sou — concedei-me.\nJesus, dai-me a graça de desejá-lo.\nAmém.`,
+  la:`O Iesu, mitis et humilis corde, exaudi me.\nA desiderio aestimandi — libera me.\nA desiderio amandi — libera me.\nA desiderio laudandi — libera me.\nA desiderio praeferendi — libera me.\nA timore humiliandi — libera me.\nA timore contemnendi — libera me.\nA timore oblivionis — libera me.\nUt alii aestimentur plus quam ego — da mihi.\nUt alii amentur plus quam ego — da mihi.\nUt alii laudentur et ego obliviscar — da mihi.\nUt sanctior fiam quam sum — da mihi.\nIesu, da mihi gratiam id desiderandi.\nAmen.`}},
+
+{id:110,cat:'special',
+ title:{en:'Consecration to the Sacred Heart',pt:'Consagração ao Sagrado Coração',la:'Ad Cor Sacratissimum Consecratio'},
+ text:{
+  en:`O Sacred Heart of Jesus,\nto whom I owe everything,\nI consecrate and dedicate myself\nentirely and forever.\nI give you my heart, my mind, my soul, my body,\nmy joys and my sorrows,\nmy merits and my faults.\nBe my strength in temptation,\nmy refuge in sorrow,\nmy consolation in every moment.\nSacred Heart of Jesus, I trust in You.\nAmen.`,
+  pt:`Ó Sagrado Coração de Jesus,\na quem tudo devo,\nconsagro-me e dedico-me\ninteiramente e para sempre.\nDou-Vos meu coração, mente, alma e corpo,\nminhas alegrias e sofrimentos,\nmeus méritos e faltas.\nSedeis minha força na tentação,\nmeu refúgio na dor,\nminha consolação em todo momento.\nSagrado Coração de Jesus, eu confio em Vós!\nAmém.`,
+  la:`O Cor Sacratissimum Iesu,\ncui omnia debeo,\nme totum et in perpetuum\ntibi consecro et dedico.\nCor meum, mentem, animam, corpus tibi do,\ngaudia et dolores,\nmerita et culpas.\nSis fortitudo mea in tentatione,\nrefugium in dolore,\nsolatium in omni momento.\nCor Sacratissimum Iesu, in te confido.\nAmen.`}},
+
+{id:111,cat:'marian',
+ title:{en:'Prayer to Our Lady of Perpetual Help',pt:'Oração a Nossa Senhora do Perpétuo Socorro',la:'Ad Dominam Nostram Perpetui Auxilii'},
+ text:{
+  en:`O Mother of Perpetual Help,\ngrant that I may ever invoke\nyour most powerful name,\nwhich is the safeguard of the living\nand the salvation of the dying.\nPurest Mary, let your name henceforth be\nunceasingly on my lips.\nBe my strength in temptation.\nArise and come to my assistance.\nOur Lady of Perpetual Help, never let me lose\nyou through my own fault.\nAmen.`,
+  pt:`Ó Mãe do Perpétuo Socorro,\nconcedei que eu invoque sempre\nvosso poderoso nome,\nque é salvaguarda dos vivos\ne salvação dos moribundos.\nPuríssima Maria, que vosso nome esteja\nde agora em diante incessantemente em meus lábios.\nSedeis minha força na tentação.\nLevantai-vos e vinde em meu auxílio.\nNossa Senhora do Perpétuo Socorro,\nnunca permitais que eu vos perca por minha culpa.\nAmém.`,
+  la:`O Mater Perpetui Auxilii,\nda mihi ut nomen tuum potentissimum\nsemper invocarem,\nquod est tutela viventium\net salvatio morientium.\nPurissima Maria, nomen tuum\nde cetero iugiter in labiis meis sit.\nSis fortitudo mea in tentatione.\nSurge et veni ad auxilium meum.\nDomina Nostra Perpetui Auxilii,\nnunquam permittas me te per culpam meam amittere.\nAmen.`}},
+
+{id:112,cat:'saints',
+ title:{en:'Prayer to the Infant Jesus of Prague',pt:'Oração ao Menino Jesus de Praga',la:'Ad Infantem Iesum Pragensem'},
+ text:{
+  en:`O Infant Jesus of Prague,\nyou who said: "The more you honor me,\nthe more I will bless you,"\nI humbly come before your image\nto invoke your powerful intercession.\nHeal what is sick in me,\nstrengthen what is weak,\nand guide me in the way of your peace.\nInfant Jesus of Prague, have mercy on me.\nAmen.`,
+  pt:`Ó Menino Jesus de Praga,\nVós que dissestes: "Quanto mais me honrardes,\nmais vos abençoarei,"\nvenho humildemente diante de Vossa imagem\npara invocar Vossa poderosa intercessão.\nCurai o que em mim está doente,\nfortificai o que está fraco\ne guiai-me pelo caminho de Vossa paz.\nMenino Jesus de Praga, tende misericórdia de mim.\nAmém.`,
+  la:`O Infante Iesu Pragensi,\nqui dixisti: "Quanto magis me honoratis,\ntanto magis vos benedicam,"\nhumiliter coram imagine tua venio\nut potenti intercessioni tuae supplicem.\nSana quod in me aegrotat,\nrobora quod infirmum est,\net in via pacis tuae me duc.\nInfans Iesu Pragensis, miserere mei.\nAmen.`}},
+
+{id:113,cat:'saints',
+ title:{en:'Prayer to St. John Paul II',pt:'Oração a São João Paulo II',la:'Ad Sanctum Ioannem Paulum II'},
+ text:{
+  en:`Blessed John Paul II,\nPilgrim of hope and herald of the New Evangelization,\nyou crossed the thresholds of nations\nproclaiming: "Be not afraid!"\nObtain for us from God\nthe grace to open our hearts to Christ,\nto make of our lives\na total gift to Him and to others,\nand to work with courage\nfor a civilization of love.\nAmen.`,
+  pt:`São João Paulo II,\nperegrino da esperança e arauto da Nova Evangelização,\nvós cruzastes os limiares das nações\nproclamando: "Não tenhais medo!"\nObtende para nós de Deus\na graça de abrir nossos corações a Cristo,\nde fazer de nossas vidas\numa doação total a Ele e aos outros\ne trabalhar com coragem\npor uma civilização do amor.\nAmém.`,
+  la:`Beate Ioannes Paule II,\nperegrine spei et nuntius Novae Evangelizationis,\nper limina nationum transisti\nclamans: "Nolite timere!"\nImpetres nobis a Deo\ngratiam corda nostra Christo aperire,\nvitas nostras\ntotalem donationem Illi et aliis facere\net pro civilizatione amoris\nanimose laborare.\nAmen.`}},
+
+{id:114,cat:'virtue',
+ title:{en:'Act of Reparation',pt:'Ato de Reparação',la:'Actus Reparationis'},
+ text:{
+  en:`O most Holy Trinity,\nI adore You! My God, my God,\nI love You in the Most Blessed Sacrament.\nI love You!\nFor all those who do not adore You,\nfor all those who do not love You,\nfor all those who have offended You,\nfor all those who do not believe in You —\nI adore, I love, I believe and I hope.\nAmen.`,
+  pt:`Ó Santíssima Trindade,\nadoro-Vos! Meu Deus, meu Deus,\namo-Vos no Santíssimo Sacramento.\nAmo-Vos!\nPor todos os que não Vos adoram,\npor todos os que não Vos amam,\npor todos os que Vos ofenderam,\npor todos os que não acreditam em Vós —\nadoro, amo, creio e espero.\nAmém.`,
+  la:`O Sanctissima Trinitas,\nte adoro! Deus meus, Deus meus,\nte in Sanctissimo Sacramento diligo.\nAmo te!\nPro omnibus qui te non adorant,\npro omnibus qui te non amant,\npro omnibus qui te offenderunt,\npro omnibus qui in te non credunt —\nadoro, amo, credo et spero.\nAmen.`}},
+
+{id:115,cat:'special',
+ title:{en:'Prayer for Priests',pt:'Oração pelos Sacerdotes',la:'Pro Sacerdotibus'},
+ text:{
+  en:`Lord Jesus Christ, eternal High Priest,\npreserve your priests within the shelter of Your Sacred Heart,\nwhere none may touch them.\nKeep unstained their anointed hands,\nwhich daily touch Your Sacred Body.\nKeep unsullied their lips, daily purpled with Your Precious Blood.\nKeep pure and unearthly their hearts,\nsealed with the sublime mark of the priesthood.\nAmen.`,
+  pt:`Senhor Jesus Cristo, eterno Sumo Sacerdote,\nprotegei Vossos sacerdotes no abrigo do Vosso Sagrado Coração,\nonده nenhum os possa tocar.\nConservai imaculadas as mãos ungidas\nque diariamente tocam Vosso Sagrado Corpo.\nConservai imaculados os lábios\ndiariamente purpurados com Vosso Precioso Sangue.\nConservai puros e sublimes seus corações,\nselo com a marca sublime do sacerdócio.\nAmém.`,
+  la:`Domine Iesu Christe, Pontifex aeterne,\nsacerdotes tuos in praesidio Cordis tui Sacratissimi conserva,\nubi nemo eos tangere possit.\nManus unctas incontaminatas serva\nquae quotidie Corpus tuum Sacratissimum tangunt.\nLabia purpurata Sanguine tuo Pretiosissimo immaculata serva.\nCorda eorum pura et sublimia conserva,\nsigno sublime sacerdotii obsignata.\nAmen.`}},
+
+{id:116,cat:'daily',
+ title:{en:'Prayer for Wisdom',pt:'Oração pela Sabedoria',la:'Pro Sapientia'},
+ text:{
+  en:`O God, source of all wisdom,\ngive me the grace to know Your will\nand the courage to follow it.\nMake me wise enough to recognize the truth,\nhonest enough to live by it,\nand humble enough to acknowledge\nhow much I still have to learn.\nFill me with Your Holy Spirit\nthat I may grow in wisdom every day.\nAmen.`,
+  pt:`Ó Deus, fonte de toda sabedoria,\ndai-me a graça de conhecer Vossa vontade\ne a coragem de segui-la.\nFazei-me suficientemente sábio para reconhecer a verdade,\nhonesto para viver por ela\ne humilde para reconhecer\nquanto ainda tenho a aprender.\nEnchai-me do Vosso Espírito Santo\npara que eu cresça em sabedoria a cada dia.\nAmém.`,
+  la:`Deus, fons omnis sapientiae,\nda mihi gratiam voluntatem tuam cognoscendi\net animum eam sequendi.\nFac me satis sapientem ut veritatem agnoscam,\nsatis honestum ut per eam vivam\net satis humilem ut agnoscam\nquantum adhuc discendum sit.\nImple me Spiritu tuo Sancto\nut in sapientia quotidie crescam.\nAmen.`}},
+
+{id:117,cat:'special',
+ title:{en:'Prayer for a New Beginning',pt:'Oração por um Novo Começo',la:'Pro Novo Initio'},
+ text:{
+  en:`Lord God, You who make all things new,\ngrant me the grace to begin again.\nFree me from the weight of past failures,\nfrom bitterness and regret.\nFill my heart with fresh hope\nand my soul with renewed purpose.\nAs each morning brings new mercy,\nso let this day bring me\ncloser to You and to the person\nYou call me to be.\nAmen.`,
+  pt:`Senhor Deus, Vós que renovais todas as coisas,\nconcedei-me a graça de recomeçar.\nLibertai-me do peso dos fracassos passados,\nda amargura e do arrependimento.\nEnchai meu coração de nova esperança\ne minha alma de propósito renovado.\nAssim como cada manhã traz nova misericórdia,\nfazei que este dia me traga\nmais perto de Vós e da pessoa\nque me chamais a ser.\nAmém.`,
+  la:`Domine Deus, qui omnia nova facis,\nda mihi gratiam de novo incipiendi.\nLibera me a pondere praeteritorum malorum,\nab amaritudine et paenitentia.\nNova spe cor meum imple\net proposito renovato animam meam.\nSicut quaeque aurora novam affert misericordiam,\nita haec dies me\npropius tibi et personae\nquam me esse vocas adducat.\nAmen.`}},
+
+{id:118,cat:'daily',
+ title:{en:'Prayer to the Holy Spirit for Guidance',pt:'Ao Espírito Santo por Orientação',la:'Ad Spiritum Sanctum Pro Directione'},
+ text:{
+  en:`Come, Holy Spirit,\nguide my thoughts, my words, and my actions today.\nHelp me to see with Your eyes,\nhear with Your ears,\nand love with Your heart.\nWhen I am uncertain, be my clarity.\nWhen I am afraid, be my courage.\nWhen I am weary, be my strength.\nLet everything I do today\ngive glory to the Father\nthrough the Son.\nAmen.`,
+  pt:`Vinde, Espírito Santo,\nguiai meus pensamentos, minhas palavras e ações hoje.\nAjudai-me a ver com Vossos olhos,\nouvir com Vossos ouvidos\ne amar com Vosso coração.\nQuando estiver incerto, sedeis minha clareza.\nQuando estiver com medo, sedeis minha coragem.\nQuando estiver cansado, sedeis minha força.\nFazei que tudo o que eu faça hoje\ndê glória ao Pai\npor meio do Filho.\nAmém.`,
+  la:`Veni, Sancte Spiritus,\ncogitata, verba et opera mea hodie dirige.\nAdiuva me oculis tuis videre,\nauribus tuis audire\net corde tuo amare.\nUbi incertus sum, sis claritas mea.\nUbi timeo, sis fortitudo mea.\nUbi fessus sum, sis robur meum.\nFac ut omnia quae hodie facio\nPatri gloriam dent\nper Filium.\nAmen.`}},
+
+{id:119,cat:'rosary',
+ title:{en:'Rosary for the Dead',pt:'Rosário pelos Defuntos',la:'Rosarium Pro Defunctis'},
+ text:{
+  en:`O God of mercy and compassion,\nwe offer this Rosary for the souls of the faithful departed,\nespecially those most forgotten and abandoned.\nBy the merits of Our Lord's Passion\nand the intercession of the Blessed Virgin Mary,\ngrant them rest from all their sufferings.\nMay the perpetual light shine upon them\nand may they rest in peace.\nAmen.\n\n(Pray the complete Rosary with this intention,\noffering each decade for a different soul or group of souls)`,
+  pt:`Ó Deus de misericórdia e compaixão,\nofertamos este Rosário pelas almas dos fiéis defuntos,\nespecialmente pelos mais esquecidos e abandonados.\nPelos méritos da Paixão de Nosso Senhor\ne pela intercessão da Santíssima Virgem Maria,\nconcedei-lhes o repouso de todos os seus sofrimentos.\nBrilhe sobre eles a luz perpétua\ne descansem em paz.\nAmém.\n\n(Rezar o Rosário completo com esta intenção,\nofertando cada dezena por uma alma ou grupo diferente)`,
+  la:`Deus misericordiae et pietatis,\nhoc Rosarium animabus fidelium defunctorum offerimus,\npraesertim maxime oblitis et derelictis.\nPer merita Passionis Domini nostri\net intercessionem Beatissimae Virginis Mariae,\nda eis requiem ab omnibus doloribus suis.\nLux perpetua eis luceat\net in pace requiescant.\nAmen.\n\n(Rosarium integrum cum hac intentione recitetur,\nsingulas decades variis animabus offerendo)`}},
+
+{id:120,cat:'saints',
+ title:{en:'Prayer to St. Faustina',pt:'Oração a Santa Faustina',la:'Ad Sanctam Faustinам'},
+ text:{
+  en:`O Saint Faustina,\nvessел of God's mercy,\nyou who experienced the great ocean of divine love,\nbe our intercessor before the Lord of Mercy.\nObtain for us faith in His mercy,\nhope in His forgiveness,\nand love for our neighbors.\nTeach us to say with you:\n"Jesus, I trust in You."\nAmen.`,
+  pt:`Ó Santa Faustina,\nvaso da misericórdia de Deus,\nvós que viveu o grande oceano do amor divino,\nsedeis nossa intercessora diante do Senhor da Misericórdia.\nAlcançai para nós fé em Sua misericórdia,\nesperança em Seu perdão\ne amor ao próximo.\nEnsina-nos a dizer convosco:\n"Jesus, eu confio em Vós."\nAmém.`,
+  la:`O Sancta Faustina,\nvas misericordiae Dei,\nquae magnum oceanum divini amoris experieris,\nesto nostra intercessrix ante Dominum Misericordiae.\nImpetres nobis fidem in misericordia eius,\nspem in indulgentia eius\net amorem proximi.\nDoce nos tecum dicere:\n"Iesu, in te confido."\nAmen.`}},
+]; // end PRAYERS
+
+// =====================================================================
+// ROSARY GUIDE DATA
+// =====================================================================
+const MYSTERIES_DATA = {
+  gozosos: {
+    pt:'Mistérios Gozosos', en:'Joyful Mysteries', la:'Mysteria Gaudiosa',
+    day:{pt:'Segunda e Sábado',en:'Mon & Sat'},
+    prayerId:44,
+    list:[
+      {pt:'A Anunciação',en:'The Annunciation'},
+      {pt:'A Visitação',en:'The Visitation'},
+      {pt:'O Nascimento de Jesus',en:'The Nativity'},
+      {pt:'A Apresentação no Templo',en:'Presentation in the Temple'},
+      {pt:'O Menino Jesus no Templo',en:'Finding in the Temple'},
+    ]
+  },
+  dolorosos: {
+    pt:'Mistérios Dolorosos', en:'Sorrowful Mysteries', la:'Mysteria Dolorosa',
+    day:{pt:'Terça e Sexta',en:'Tue & Fri'},
+    prayerId:45,
+    list:[
+      {pt:'A Agonia no Horto',en:'Agony in the Garden'},
+      {pt:'A Flagelação',en:'The Scourging'},
+      {pt:'A Coroação de Espinhos',en:'Crowning with Thorns'},
+      {pt:'Carregar a Cruz',en:'Carrying the Cross'},
+      {pt:'A Crucificação',en:'The Crucifixion'},
+    ]
+  },
+  gloriosos: {
+    pt:'Mistérios Gloriosos', en:'Glorious Mysteries', la:'Mysteria Gloriosa',
+    day:{pt:'Quarta e Domingo',en:'Wed & Sun'},
+    prayerId:46,
+    list:[
+      {pt:'A Ressurreição',en:'The Resurrection'},
+      {pt:'A Ascensão',en:'The Ascension'},
+      {pt:'A Vinda do Espírito Santo',en:'Descent of the Holy Spirit'},
+      {pt:'A Assunção de Maria',en:'The Assumption'},
+      {pt:'A Coroação de Maria',en:'Coronation of Mary'},
+    ]
+  },
+  luminosos: {
+    pt:'Mistérios Luminosos', en:'Luminous Mysteries', la:'Mysteria Luminosa',
+    day:{pt:'Quinta-feira',en:'Thursday'},
+    prayerId:47,
+    list:[
+      {pt:'O Batismo no Jordão',en:'Baptism in the Jordan'},
+      {pt:'As Bodas de Caná',en:'Wedding at Cana'},
+      {pt:'O Anúncio do Reino',en:'Proclamation of the Kingdom'},
+      {pt:'A Transfiguração',en:'The Transfiguration'},
+      {pt:'A Instituição da Eucaristia',en:'Institution of the Eucharist'},
+    ]
+  }
+};
+
+// =====================================================================
+// APP STATE
+// =====================================================================
+let currentLang = 'pt';
+let currentCat = 'all';
+let currentView = 'all'; // 'all' | 'rosary' | 'favorites'
+let currentRosaryMystery = 'gozosos';
+let currentPrayerId = null;
+let detailLang = 'pt';
+let searchText = '';
+let favorites = JSON.parse(localStorage.getItem('catholic-favs')||'[]');
+let synth = window.speechSynthesis;
+let currentUtterance = null;
+let isPlaying = false;
+let progressInterval = null;
+
+// =====================================================================
+// INIT
+// =====================================================================
+function init() {
+  renderCategories();
+  filterPrayers();
+  document.getElementById('totalCount').textContent = PRAYERS.length;
+  updateFavBadge();
+  document.addEventListener('keydown', e => {
+    if(e.key==='Escape') closeDetail();
+    if(currentPrayerId!==null){
+      if(e.key==='ArrowRight') navigatePrayer(1);
+      if(e.key==='ArrowLeft') navigatePrayer(-1);
+    }
+  });
+}
+
+// =====================================================================
+// VIEW MANAGEMENT (Bottom Nav)
+// =====================================================================
+function setView(v){
+  currentView = v;
+  ['all','rosary','favorites'].forEach(x=>{
+    const btn = document.getElementById('bnav-'+x);
+    if(btn) btn.classList.toggle('active', x===v);
+  });
+  // cats button never stays active
+  document.getElementById('bnav-cats').classList.remove('active');
+
+  const prayerList = document.getElementById('prayerList');
+  const rosaryGuide = document.getElementById('rosaryGuide');
+  const topbarTitle = document.getElementById('topbarTitle');
+
+  if(v==='rosary'){
+    prayerList.style.display='none';
+    rosaryGuide.style.display='flex';
+    topbarTitle.innerHTML = '<span>O Rosário Completo</span>';
+    renderRosaryGuide();
+  } else {
+    prayerList.style.display='grid';
+    rosaryGuide.style.display='none';
+    if(v==='favorites'){
+      topbarTitle.innerHTML = '♥ <span>Minhas Favoritas</span>';
+      renderFavorites();
+    } else {
+      updateTopbar();
+      filterPrayers();
+    }
+  }
+}
+
+function toggleSidebar(){
+  const s = document.getElementById('sidebar');
+  const isHidden = s.style.display==='none' || getComputedStyle(s).display==='none';
+  s.style.display = isHidden ? 'flex' : 'none';
+}
+
+// =====================================================================
+// CATEGORIES & TOPBAR
+// =====================================================================
+function renderCategories() {
+  const list = document.getElementById('catList');
+  list.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const count = cat.id==='all' ? PRAYERS.length : PRAYERS.filter(p=>p.cat===cat.id).length;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn' + (cat.id===currentCat?' active':'');
+    btn.onclick = () => {
+      currentCat = cat.id;
+      setView('all');
+      renderCategories();
+    };
+    btn.innerHTML = `<span class="cat-icon">${cat.icon}</span>
+      <span class="cat-name">${cat[currentLang]||cat.pt}</span>
+      <span class="cat-count">${count}</span>`;
+    list.appendChild(btn);
+  });
+}
+
+function updateTopbar(){
+  const cat = CATEGORIES.find(c=>c.id===currentCat);
+  const el = document.getElementById('topbarTitle');
+  el.innerHTML = cat ? `<span>${cat[currentLang]||cat.pt}</span>` : 'Todas as <span>Orações</span>';
+}
+
+// =====================================================================
+// PRAYER CARDS
+// =====================================================================
+function renderCard(p){
+  const t = p.title[currentLang]||p.title.pt;
+  const sub = p.title[currentLang==='pt'?'en':(currentLang==='en'?'la':'pt')]||'';
+  const preview = (p.text[currentLang]||p.text.pt).split('\n').slice(0,2).join(' ');
+  const cat = CATEGORIES.find(c=>c.id===p.cat);
+  const isFav = favorites.includes(p.id);
+  const hl = v => searchText ? v.replace(new RegExp(searchText.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'), m=>`<mark>${m}</mark>`) : v;
+  return `<div class="prayer-card ${p.id===currentPrayerId?'selected':''}" onclick="openPrayer(${p.id})">
+    <button class="card-fav ${isFav?'is-fav':''}" onclick="event.stopPropagation();toggleFavorite(${p.id})" title="${isFav?'Remover dos favoritos':'Adicionar aos favoritos'}">${isFav?'♥':'♡'}</button>
+    <div class="card-num">Nº ${String(p.id).padStart(3,'0')}</div>
+    <div class="card-title">${hl(t)}</div>
+    <div class="card-sub">${hl(sub)}</div>
+    <div class="card-preview">${hl(preview)}…</div>
+    ${cat?`<span class="card-tag">${cat.icon} ${cat[currentLang]||cat.pt}</span>`:''}
+  </div>`;
+}
+
+function filterPrayers(){
+  searchText = document.getElementById('searchInput').value.toLowerCase();
+  const list = document.getElementById('prayerList');
+  let filtered = PRAYERS.filter(p => {
+    const matchCat = currentCat==='all' || p.cat===currentCat;
+    const matchSearch = !searchText ||
+      p.title.en.toLowerCase().includes(searchText) ||
+      p.title.pt.toLowerCase().includes(searchText) ||
+      p.title.la.toLowerCase().includes(searchText) ||
+      p.text.en.toLowerCase().includes(searchText) ||
+      p.text.pt.toLowerCase().includes(searchText);
+    return matchCat && matchSearch;
+  });
+
+  if(filtered.length===0){
+    list.innerHTML = `<div class="empty">
+      <div class="empty-icon">✝</div>
+      <div class="empty-text">Nenhuma oração encontrada · No prayers found</div>
+    </div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(renderCard).join('');
+}
+
+function renderFavorites(){
+  const list = document.getElementById('prayerList');
+  const favPrayers = PRAYERS.filter(p => favorites.includes(p.id));
+  if(favPrayers.length===0){
+    list.innerHTML = `<div class="empty">
+      <div class="empty-icon">♡</div>
+      <div class="empty-text">Nenhuma oração favorita ainda<br><small style="font-size:12px;opacity:0.6">Toque ♡ em qualquer oração para salvar</small></div>
+    </div>`;
+    return;
+  }
+  list.innerHTML = favPrayers.map(renderCard).join('');
+}
+
+function setGlobalLang(lang){
+  currentLang = lang;
+  ['pt','en','la'].forEach(l => {
+    document.getElementById('gtab-'+l).classList.toggle('active', l===lang);
+  });
+  renderCategories();
+  if(currentView==='favorites') renderFavorites();
+  else if(currentView==='rosary') renderRosaryGuide();
+  else filterPrayers();
+  updateTopbar();
+  if(currentPrayerId!==null){
+    detailLang = lang;
+    updateDetailLang();
+  }
+}
+
+// =====================================================================
+// FAVORITES
+// =====================================================================
+function toggleFavorite(id){
+  const idx = favorites.indexOf(id);
+  if(idx===-1) favorites.push(id);
+  else favorites.splice(idx,1);
+  localStorage.setItem('catholic-favs', JSON.stringify(favorites));
+  updateFavBadge();
+  // refresh current view cards
+  if(currentView==='favorites') renderFavorites();
+  else if(currentView==='all') filterPrayers();
+  // update modal button if open
+  if(currentPrayerId===id) updateFavButton();
+}
+
+function toggleFavoriteModal(){
+  if(currentPrayerId) toggleFavorite(currentPrayerId);
+}
+
+function updateFavButton(){
+  const btn = document.getElementById('detailFav');
+  if(!btn || currentPrayerId===null) return;
+  const isFav = favorites.includes(currentPrayerId);
+  btn.textContent = isFav ? '♥' : '♡';
+  btn.classList.toggle('is-fav', isFav);
+}
+
+function updateFavBadge(){
+  const badge = document.getElementById('favBadge');
+  if(!badge) return;
+  if(favorites.length>0){
+    badge.textContent = favorites.length > 99 ? '99+' : favorites.length;
+    badge.classList.add('show');
+  } else {
+    badge.classList.remove('show');
+  }
+}
+
+// =====================================================================
+// PRAYER DETAIL
+// =====================================================================
+function openPrayer(id){
+  stopAudio();
+  currentPrayerId = id;
+  detailLang = currentLang;
+  const p = PRAYERS.find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('detailNum').textContent = `Oração Nº ${String(id).padStart(3,'0')} · ${(CATEGORIES.find(c=>c.id===p.cat)||{}).pt||''}`;
+  document.getElementById('detailTitle').textContent = p.title[detailLang]||p.title.pt;
+  document.getElementById('detailSubtitle').textContent =
+    [p.title.en, p.title.pt, p.title.la].filter((v,i)=>(i===0?'en':i===1?'pt':'la')!==detailLang).join(' · ');
+  updateDetailLang();
+  updateFavButton();
+  document.getElementById('detailModal').style.display='flex';
+  document.body.style.overflow='hidden';
+
+  // Navigation within current filtered/view set
+  const pool = currentView==='favorites'
+    ? PRAYERS.filter(p=>favorites.includes(p.id))
+    : (currentView==='rosary' ? PRAYERS : PRAYERS.filter(p2=>currentCat==='all'||p2.cat===currentCat));
+  const idx = pool.findIndex(x=>x.id===id);
+  document.getElementById('prevBtn').disabled = idx<=0;
+  document.getElementById('nextBtn').disabled = idx>=pool.length-1;
+}
+
+function updateDetailLang(){
+  const p = PRAYERS.find(x=>x.id===currentPrayerId);
+  if(!p) return;
+  ['pt','en','la'].forEach(l=>{
+    document.getElementById('dtab-'+l).classList.toggle('active',l===detailLang);
+  });
+  const textEl = document.getElementById('detailText');
+  textEl.textContent = p.text[detailLang]||p.text.pt;
+  textEl.className = 'prayer-text' + (detailLang==='la'?' latin':'');
+  document.getElementById('detailTitle').textContent = p.title[detailLang]||p.title.pt;
+  const langs = {pt:'Português (pt-BR)',en:'English (en-US)',la:'Latim (la)'};
+  document.getElementById('audioLangLabel').textContent = langs[detailLang]||detailLang;
+  stopAudio();
+}
+
+function setDetailLang(lang){
+  detailLang = lang;
+  updateDetailLang();
+}
+
+function closeDetail(){
+  stopAudio();
+  document.getElementById('detailModal').style.display='none';
+  document.body.style.overflow='';
+  currentPrayerId = null;
+}
+
+function handleModalClick(e){
+  if(e.target.id==='detailModal') closeDetail();
+}
+
+function navigatePrayer(dir){
+  const pool = currentView==='favorites'
+    ? PRAYERS.filter(p=>favorites.includes(p.id))
+    : (currentView==='rosary' ? PRAYERS : PRAYERS.filter(p=>currentCat==='all'||p.cat===currentCat));
+  const idx = pool.findIndex(x=>x.id===currentPrayerId);
+  const next = pool[idx+dir];
+  if(next) openPrayer(next.id);
+}
+
+// =====================================================================
+// ROSARY GUIDE
+// =====================================================================
+function renderRosaryGuide(){
+  const guide = document.getElementById('rosaryGuide');
+  const m = MYSTERIES_DATA[currentRosaryMystery];
+  const l = currentLang;
+
+  // Build mystery selector
+  const tabs = Object.entries(MYSTERIES_DATA).map(([k,v])=>`
+    <button class="mys-tab ${k===currentRosaryMystery?'active':''}" onclick="selectMystery('${k}')">
+      ${v[l]||v.pt}
+      <span class="mys-day">${v.day[l]||v.day.pt}</span>
+    </button>`).join('');
+
+  // Helper to make a clickable prayer step
+  const step = (icon, name, sub, prayerId, count='')=>`
+    <div class="rosary-step ${prayerId?'clickable':''}" ${prayerId?`onclick="openPrayer(${prayerId})"`:''}>
+      <span class="step-icon">${icon}</span>
+      <div class="step-body">
+        <div class="step-name">${name}</div>
+        ${sub?`<div class="step-sub">${sub}</div>`:''}
+      </div>
+      ${count?`<span class="step-count">${count}</span>`:''}
+      ${prayerId?`<span class="step-arr">›</span>`:''}
+    </div>`;
+
+  const intro = (txt)=>`<div class="rosary-step instruction"><span class="step-icon">📜</span><div class="step-body"><div class="step-name" style="font-style:italic;opacity:.7;font-size:13px">${txt}</div></div></div>`;
+
+  const mysteries = m.list.map((ms,i)=>`
+    <div class="rosary-step mystery-hdr">
+      <span class="step-icon">${i+1}°</span>
+      <div class="step-body"><div class="step-name" style="font-family:var(--font-title);font-size:13px;color:var(--gold2)">${ms[l]||ms.pt}</div></div>
+    </div>
+    ${step('📖', l==='en'?'Our Father':'Pai Nosso', l==='en'?'Say 1 time':'Rezar 1 vez', 1, '×1')}
+    ${step('🌹', l==='en'?'Hail Mary':'Ave Maria', l==='en'?'Say 10 times':'Rezar 10 vezes', 2, '×10')}
+    ${step('✨', l==='en'?'Glory Be':'Glória ao Pai', l==='en'?'Say 1 time':'Rezar 1 vez', 3, '×1')}
+    ${step('🕊', l==='en'?'Fatima Prayer':'Oração de Fátima', l==='en'?'O my Jesus…':'Ó meu Jesus…', 43, '×1')}`
+  ).join('');
+
+  guide.innerHTML = `
+    <div class="mystery-selector">${tabs}</div>
+    <div class="rosary-scroll">
+      <div class="rosary-section-head">⛪ ${l==='en'?'Opening':'Início do Rosário'}</div>
+      ${step('✝', l==='en'?'Sign of the Cross':'Sinal da Cruz', l==='en'?'In the name of the Father…':'Em nome do Pai…', null)}
+      ${intro(l==='en'?'Hold the Crucifix and recite:':'Segure o Crucifixo e recite:')}
+      ${step('📖', l==='en'?"Apostles' Creed":'Credo dos Apóstolos', l==='en'?'I believe in God…':'Creio em Deus Pai…', 4, '×1')}
+      ${step('📖', l==='en'?'Our Father':'Pai Nosso', l==='en'?'On the first large bead':'Na primeira conta grande', 1, '×1')}
+      ${step('🌹', l==='en'?'Hail Mary (×3)':'Ave Maria (×3)', l==='en'?'For Faith, Hope, Charity':'Por Fé, Esperança, Caridade', 2, '×3')}
+      ${step('✨', l==='en'?'Glory Be':'Glória ao Pai', '', 3, '×1')}
+
+      <div class="rosary-section-head">📿 ${m[l]||m.pt} — ${l==='en'?'5 Decades':'5 Dezenas'}</div>
+      ${intro(l==='en'?'For each decade: announce the mystery, meditate, then pray:':'Para cada dezena: anuncie o mistério, medite e reze:')}
+      ${mysteries}
+
+      <div class="rosary-section-head">🌹 ${l==='en'?'Closing Prayers':'Orações Finais'}</div>
+      ${step('👑', l==='en'?'Hail Holy Queen':'Salve Rainha', l==='en'?'Salve Regina…':'Salve, Rainha, Mãe de Misericórdia…', 16, '×1')}
+      ${step('🙏', l==='en'?'Rosary Closing Prayer':'Oração Final do Rosário', l==='en'?'O God, whose Only-begotten Son…':'Ó Deus, cujo Filho Unigênito…', 91, '×1')}
+      ${step('✝', l==='en'?'Sign of the Cross':'Sinal da Cruz', l==='en'?'Conclude with the Sign':'Conclua com o Sinal', null)}
+
+      <div class="rosary-section-head">📅 ${l==='en'?'Traditional Schedule':'Calendário Tradicional'}</div>
+      ${Object.entries(MYSTERIES_DATA).map(([k,v])=>`
+        <div class="rosary-step instruction">
+          <span class="step-icon">📿</span>
+          <div class="step-body">
+            <div class="step-name" style="font-size:13px">${v[l]||v.pt}</div>
+            <div class="step-sub">${v.day[l]||v.day.pt}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function selectMystery(key){
+  currentRosaryMystery = key;
+  renderRosaryGuide();
+}
+
+// =====================================================================
+// AUDIO (Web Speech API)
+// =====================================================================
+const LANG_CODES = {pt:'pt-BR', en:'en-US', la:'la'};
+
+function toggleAudio(){
+  if(isPlaying){ stopAudio(); return; }
+  playAudio();
+}
+
+function playAudio(){
+  if(!synth || !currentPrayerId) return;
+  stopAudio();
+  const p = PRAYERS.find(x=>x.id===currentPrayerId);
+  if(!p) return;
+  const text = p.text[detailLang]||p.text.pt;
+  const rate = parseFloat(document.getElementById('rateSelect').value);
+  currentUtterance = new SpeechSynthesisUtterance(text);
+  currentUtterance.lang = LANG_CODES[detailLang]||'pt-BR';
+  currentUtterance.rate = rate;
+  currentUtterance.pitch = 0.9;
+  const voices = synth.getVoices();
+  const langCode = LANG_CODES[detailLang];
+  const match = voices.find(v=>v.lang===langCode)||voices.find(v=>v.lang.startsWith(langCode.split('-')[0]));
+  if(match) currentUtterance.voice = match;
+  currentUtterance.onstart = () => {
+    isPlaying = true;
+    document.getElementById('audioPlay').textContent = '⏸';
+    document.getElementById('audioPlay').classList.add('playing');
+    startProgressBar(text.length);
+  };
+  currentUtterance.onend = currentUtterance.onerror = () => {
+    isPlaying = false;
+    document.getElementById('audioPlay').textContent = '▶';
+    document.getElementById('audioPlay').classList.remove('playing');
+    clearProgressBar();
+  };
+  synth.speak(currentUtterance);
+}
+
+function stopAudio(){
+  if(synth) synth.cancel();
+  isPlaying = false;
+  const btn = document.getElementById('audioPlay');
+  if(btn){ btn.textContent='▶'; btn.classList.remove('playing'); }
+  clearProgressBar();
+}
+
+function startProgressBar(len){
+  const dur = (len/15)*(1/parseFloat(document.getElementById('rateSelect').value))*1000;
+  const start = Date.now();
+  progressInterval = setInterval(()=>{
+    const elapsed = Date.now()-start;
+    const pct = Math.min((elapsed/dur)*100,100);
+    document.getElementById('audioBar').style.width = pct+'%';
+    if(pct>=100) clearProgressBar();
+  },100);
+}
+
+function clearProgressBar(){
+  clearInterval(progressInterval);
+  const bar = document.getElementById('audioBar');
+  if(bar) bar.style.width='0%';
+}
+
+// Init app
+window.addEventListener('DOMContentLoaded', init);
+window.addEventListener('load', ()=>{ if(synth) synth.getVoices(); });
+</script>
+</body>
+</html>
